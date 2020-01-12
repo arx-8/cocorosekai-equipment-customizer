@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4f1df9d7-b583-4624-ae46-0ad615b8c769/deploy-status)](https://app.netlify.com/sites/cocorosekai-equipment-customizer/deploys)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
