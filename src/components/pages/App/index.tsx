@@ -1,6 +1,6 @@
 import React from "react"
-import "src/App.css"
-import logo from "src/logo.svg"
+import logo from "src/assets/logo.svg"
+import "./index.css"
 
 export const App: React.FC = () => {
   return (

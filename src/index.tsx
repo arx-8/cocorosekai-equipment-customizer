@@ -1,8 +1,8 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { App } from "src/App"
-import "src/index.css"
+import { App } from "src/components/pages/App"
 import * as serviceWorker from "src/serviceWorker"
+import "./index.css"
 
 ReactDOM.render(<App />, document.getElementById("root"))
 
