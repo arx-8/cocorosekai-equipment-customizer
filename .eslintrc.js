@@ -78,6 +78,7 @@ module.exports = {
     "@typescript-eslint/no-non-null-assertion": "off",
 
     // Other
+    "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-misused-promises": "error",
     "@typescript-eslint/prefer-readonly": "error",
 
