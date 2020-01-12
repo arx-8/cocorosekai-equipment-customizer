@@ -1,30 +1,44 @@
-import React from "react"
+import React, { Fragment } from "react"
 import {
-  Column,
   ColumnInstance,
   useBlockLayout,
+  useFilters,
+  UseFiltersColumnOptions,
+  UseFiltersColumnProps,
   useSortBy,
   UseSortByColumnProps,
+  UseSortByOptions,
   useTable,
+  UseTableColumnOptions,
 } from "react-table"
 import { data } from "src/assets/data"
 import { Equipment, SpecialEffect } from "src/domain/model/Equipment"
-import { FixMeAny } from "src/types/Utils.ts/Utils"
 
 type OwnProps = {
   children?: never
-  // columns: Column<Equipment>[]
-  // data: Equipment[]
 }
 
-const columns: Column<Equipment>[] = [
+/**
+ * 使う PluginHook によって、型を合成する必要がある
+ */
+type ColumnInstanceOverride = ColumnInstance<Equipment> &
+  UseFiltersColumnProps<Equipment> &
+  UseSortByColumnProps<Equipment>
+
+type ColumnOptionsOverride = UseTableColumnOptions<Equipment> &
+  UseFiltersColumnOptions<Equipment> &
+  UseSortByOptions<Equipment>
+
+const columns: ColumnOptionsOverride[] = [
   {
     Header: "ID",
     accessor: "id",
+    width: 40,
   },
   {
     Header: "名前",
     accessor: "rawName",
+    width: 300,
   },
   {
     Header: "装備コスト",
@@ -57,6 +71,7 @@ const columns: Column<Equipment>[] = [
   {
     Header: "特殊効果",
     accessor: "specialEffects",
+    // TODO Array なので sort できない
     Cell: (p) => {
       const v = p.cell.value as SpecialEffect[]
       return v.map((e) => e.rawText).join(",")
@@ -64,12 +79,11 @@ const columns: Column<Equipment>[] = [
   },
 ]
 
-/**
- * 使う PluginHook によって、型を合成する必要がある
- */
-type TableColumn = {} & ColumnInstance<Equipment> &
-  UseSortByColumnProps<Equipment>
-// UseFiltersColumnProps<Equipment> {}
+const defaultColumn: Partial<ColumnOptionsOverride> = {
+  // defaultCanFilter が必ず true (必ず Filter が描画される) バグがあるっぽい
+  // そのため、 default で Filter を定義しておく
+  Filter: <Fragment />,
+}
 
 export const Table: React.FC<OwnProps> = () => {
   // Use the state and functions returned from useTable to build your UI
@@ -83,8 +97,10 @@ export const Table: React.FC<OwnProps> = () => {
     {
       columns,
       data,
+      defaultColumn,
     },
     useBlockLayout,
+    useFilters,
     useSortBy
   )
 
@@ -95,15 +111,19 @@ export const Table: React.FC<OwnProps> = () => {
         {headerGroups.map((headerGroup) => (
           // eslint-disable-next-line react/jsx-key
           <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(((column: TableColumn) => (
-              // eslint-disable-next-line react/jsx-key
-              <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                {column.render("Header")}
-                <span>
-                  {column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}
-                </span>
-              </th>
-            )) as FixMeAny)}
+            {headerGroup.headers.map((_column) => {
+              const column = _column as ColumnInstanceOverride
+              return (
+                // eslint-disable-next-line react/jsx-key
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  {column.render("Header")}
+                  <span>
+                    {column.isSorted && (column.isSortedDesc ? " 🔽" : " 🔼")}
+                  </span>
+                  {column.canFilter && <div>{column.render("Filter")}</div>}
+                </th>
+              )
+            })}
           </tr>
         ))}
       </thead>
