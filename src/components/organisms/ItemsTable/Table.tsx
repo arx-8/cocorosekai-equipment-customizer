@@ -1,7 +1,15 @@
 import React from "react"
-import { Column, useBlockLayout, useTable } from "react-table"
+import {
+  Column,
+  ColumnInstance,
+  useBlockLayout,
+  useSortBy,
+  UseSortByColumnProps,
+  useTable,
+} from "react-table"
 import { data } from "src/assets/data"
 import { Equipment, SpecialEffect } from "src/domain/model/Equipment"
+import { FixMeAny } from "src/types/Utils.ts/Utils"
 
 type OwnProps = {
   children?: never
@@ -56,6 +64,13 @@ const columns: Column<Equipment>[] = [
   },
 ]
 
+/**
+ * 使う PluginHook によって、型を合成する必要がある
+ */
+type TableColumn = {} & ColumnInstance<Equipment> &
+  UseSortByColumnProps<Equipment>
+// UseFiltersColumnProps<Equipment> {}
+
 export const Table: React.FC<OwnProps> = () => {
   // Use the state and functions returned from useTable to build your UI
   const {
@@ -64,12 +79,13 @@ export const Table: React.FC<OwnProps> = () => {
     headerGroups,
     prepareRow,
     rows,
-  } = useTable(
+  } = useTable<Equipment>(
     {
       columns,
       data,
     },
-    useBlockLayout
+    useBlockLayout,
+    useSortBy
   )
 
   // Render the UI for your table
@@ -79,10 +95,15 @@ export const Table: React.FC<OwnProps> = () => {
         {headerGroups.map((headerGroup) => (
           // eslint-disable-next-line react/jsx-key
           <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
+            {headerGroup.headers.map(((column: TableColumn) => (
               // eslint-disable-next-line react/jsx-key
-              <th {...column.getHeaderProps()}>{column.render("Header")}</th>
-            ))}
+              <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                {column.render("Header")}
+                <span>
+                  {column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}
+                </span>
+              </th>
+            )) as FixMeAny)}
           </tr>
         ))}
       </thead>
