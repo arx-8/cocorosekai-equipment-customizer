@@ -2,24 +2,45 @@
   "name": "cocorosekai-equipment-customizer",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=12",
+    "npm": ">=6"
+  },
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
-    "@testing-library/user-event": "^7.2.1",
-    "@types/jest": "^24.0.25",
-    "@types/node": "^12.12.24",
-    "@types/react": "^16.9.17",
-    "@types/react-dom": "^16.9.4",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
+    "react": "16.12.0",
+    "react-dom": "16.12.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "4.2.4",
+    "@testing-library/react": "9.4.0",
+    "@testing-library/user-event": "7.2.1",
+    "@types/jest": "24.0.25",
+    "@types/node": "12.12.24",
+    "@types/react": "16.9.17",
+    "@types/react-dom": "16.9.4",
+    "eslint-config-prettier": "6.9.0",
+    "eslint-config-standard": "14.1.0",
+    "eslint-plugin-jest": "23.4.0",
+    "eslint-plugin-node": "11.0.0",
+    "eslint-plugin-only-error": "1.0.2",
+    "eslint-plugin-prettier": "3.1.2",
+    "eslint-plugin-promise": "4.2.1",
+    "eslint-plugin-standard": "4.0.1",
+    "npm-run-all": "4.1.5",
+    "prettier": "1.19.1",
     "react-scripts": "3.3.0",
-    "typescript": "^3.7.4"
+    "typescript": "3.7.4"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eslint-print-config": "eslint --print-config src/index.tsx > misc/eslint-print-config.json",
+    "lint-dry": "npm-run-all --parallel --continue-on-error lint:eslint-dry lint:tsc",
+    "lint:eslint-dry": "eslint -c .eslintrc.js --ext .ts,.tsx,.js src",
+    "lint:eslint": "eslint -c .eslintrc.js --fix --ext .ts,.tsx,.js src",
+    "lint:tsc": "tsc --noEmit",
+    "lint": "npm-run-all --parallel --continue-on-error lint:eslint lint:tsc",
+    "start": "react-scripts start",
+    "test": "react-scripts test"
   },
   "eslintConfig": {
     "extends": "react-app"
