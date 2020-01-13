@@ -6,6 +6,7 @@ import {
   createStore,
   Store,
 } from "redux"
+import persistState from "redux-localstorage"
 import thunkMiddleWare from "redux-thunk"
 import { isDevelopment } from "src/constants/env"
 import { customizeReducer, CustomizeState } from "src/store/customize"
@@ -37,7 +38,10 @@ export const configureStore = (
   const store = createStore(
     rootReducer,
     initialState,
-    composeEnhancers(applyMiddleware(...middleWares))
+    composeEnhancers(
+      applyMiddleware(...middleWares),
+      persistState(["customizeState"])
+    )
   )
   return store
 }

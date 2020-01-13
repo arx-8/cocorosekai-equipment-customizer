@@ -17,6 +17,7 @@
     "react-table": "7.0.0-rc.15",
     "redux": "4.0.5",
     "redux-immutable-state-invariant": "2.1.0",
+    "redux-localstorage": "0.4.1",
     "typescript-fsa": "3.0.0",
     "typescript-fsa-reducers": "1.2.1"
   },
