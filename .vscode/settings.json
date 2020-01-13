@@ -20,7 +20,8 @@
   /** dbaeumer.vscode-eslint */
   "editor.codeActionsOnSaveTimeout": 2000,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": true,
+    "source.organizeImports": true
   },
   "eslint.validate": [
     "javascript",
