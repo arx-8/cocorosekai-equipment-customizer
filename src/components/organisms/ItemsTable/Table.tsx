@@ -13,6 +13,7 @@ import {
 } from "react-table"
 import { data } from "src/assets/data"
 import { CellOfActions } from "src/components/organisms/ItemsTable/CellOfActions"
+import { CellOfAttrs } from "src/components/organisms/ItemsTable/CellOfAttrs"
 import { Equipment, SpecialEffect } from "src/domain/model/Equipment"
 
 type OwnProps = {
@@ -53,6 +54,7 @@ const columns: ColumnOptionsOverride[] = [
   {
     Header: "属性",
     accessor: "attribute",
+    Cell: CellOfAttrs,
   },
   {
     Header: "HP",

@@ -10,10 +10,10 @@ import {
   UseTableColumnOptions,
 } from "react-table"
 import { CellOfActions } from "src/components/organisms/CustomizeTable/CellOfActions"
+import { CellOfAttrs } from "src/components/organisms/CustomizeTable/CellOfAttrs"
 import { CellOfCustomize } from "src/components/organisms/CustomizeTable/CellOfCustomize"
 import { CellOfSpecialEffects } from "src/components/organisms/CustomizeTable/CellOfSpecialEffects"
 import { CustomizeRecord } from "src/domain/model/CustomizeRecord"
-import { Attribute } from "src/domain/model/Equipment"
 import { customizeSelectors } from "src/store/customize"
 
 type OwnProps = {
@@ -55,10 +55,7 @@ const createColumnOptionsOuter = (): ColumnOptionsOverride[] => {
       Header: "属性",
       accessor: "mixedAttributes",
       // TODO Array なので sort できない
-      Cell: (p) => {
-        const v = p.cell.value as Attribute[]
-        return v.join(",")
-      },
+      Cell: CellOfAttrs,
     },
     {
       Header: "装備コスト",
