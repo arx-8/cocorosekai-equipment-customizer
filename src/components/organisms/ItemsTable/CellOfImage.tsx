@@ -3,7 +3,7 @@ import { css, jsx } from "@emotion/core"
 import React from "react"
 import { useDispatch } from "react-redux"
 import { CellProps } from "react-table"
-import NoImageImg from "src/assets/NoImage.jpg"
+import { EquipmentImg } from "src/components/atoms/EquipmentImg"
 import { Equipment } from "src/domain/model/Equipment"
 import { customizeOperations } from "src/store/customize"
 
@@ -22,15 +22,7 @@ export const CellOfImage: React.FC<OwnProps> = ({ row }) => {
           dispatch(customizeOperations.selectEquipment(row.original.id))
         }
       >
-        {row.original.imageUrl == null ? (
-          <img css={imgCss} src={NoImageImg} alt="NoImageImg" />
-        ) : (
-          <img
-            css={imgCss}
-            src={row.original.imageUrl}
-            alt={row.original.rawName}
-          />
-        )}
+        <EquipmentImg equipment={row.original} />
       </button>
     </div>
   )
@@ -41,8 +33,4 @@ const root = css``
 const imgWrapper = css`
   cursor: pointer;
   padding: unset;
-`
-
-const imgCss = css`
-  width: 56px;
 `

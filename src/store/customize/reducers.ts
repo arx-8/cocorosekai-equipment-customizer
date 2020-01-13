@@ -66,4 +66,12 @@ export const reducer = reducerWithInitialState(initialState)
       }
     })
   })
+  .case(actions.removeEquipment, (state, payload) => {
+    return produce(state, (draft) => {
+      draft.records[payload.rowIndex].equippedIds[payload.colIndex] = undefined
+
+      // 連続選択しやすくするため、削除したセルに移動させる
+      draft.selectedCell = payload
+    })
+  })
   .build()

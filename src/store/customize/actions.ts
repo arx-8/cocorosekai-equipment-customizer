@@ -5,10 +5,11 @@ import actionCreatorFactory from "typescript-fsa"
 
 export const ActionTypes = {
   addRow: "customize/addRow",
+  copyRow: "customize/copyRow",
   deleteRow: "customize/deleteRow",
   selectEquipmentCell: "customize/selectEquipmentCell",
   selectEquipment: "customize/selectEquipment",
-  copyRow: "customize/copyRow",
+  removeEquipment: "customize/removeEquipment",
 } as const
 
 const create = actionCreatorFactory(APP_NAME)
@@ -30,3 +31,5 @@ export const selectEquipmentCell = create<CellIndex>(
 )
 
 export const selectEquipment = create<EquipmentId>(ActionTypes.selectEquipment)
+
+export const removeEquipment = create<CellIndex>(ActionTypes.removeEquipment)

@@ -9,3 +9,5 @@ export const deleteRow = actions.deleteRow
 export const selectEquipmentCell = actions.selectEquipmentCell
 
 export const selectEquipment = actions.selectEquipment
+
+export const removeEquipment = actions.removeEquipment

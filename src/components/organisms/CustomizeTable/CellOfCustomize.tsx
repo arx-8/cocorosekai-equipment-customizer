@@ -3,8 +3,8 @@ import { css, jsx } from "@emotion/core"
 import React, { useCallback } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { CellProps } from "react-table"
-import NoImageImg from "src/assets/NoImage.jpg"
 import SetAreaImg from "src/assets/SetArea.jpg"
+import { EquipmentImg } from "src/components/atoms/EquipmentImg"
 import {
   CellColIndex,
   CellIndex,
@@ -42,42 +42,45 @@ export const CellOfCustomize: React.FC<OwnProps> = ({ row }) => {
         const equipment = eId == null ? null : findEquipmentStrict(eId)
 
         return (
-          <button
-            key={colIndex}
-            css={[
-              imgWrapper,
-              isSelected({
-                colIndex,
-                rowIndex: row.index,
-              }) && selectedCss,
-            ]}
-            onClick={() =>
-              dispatch(
-                customizeOperations.selectEquipmentCell({
+          <div css={btnWrapper} key={colIndex}>
+            <button
+              css={[
+                imgWrapper,
+                isSelected({
                   colIndex,
                   rowIndex: row.index,
-                })
-              )
-            }
-          >
-            {equipment == null ? (
-              <img css={imgCss} src={SetAreaImg} alt="SetAreaImg" />
-            ) : equipment.imageUrl == null ? (
-              <img
-                css={imgCss}
-                src={NoImageImg}
-                alt={`${eId}:${equipment.rawName}`}
-                title={`${eId}:${equipment.rawName}`}
-              />
-            ) : (
-              <img
-                css={imgCss}
-                src={equipment.imageUrl}
-                alt={`${eId}:${equipment.rawName}`}
-                title={`${eId}:${equipment.rawName}`}
-              />
-            )}
-          </button>
+                }) && selectedCss,
+              ]}
+              onClick={() =>
+                dispatch(
+                  customizeOperations.selectEquipmentCell({
+                    colIndex,
+                    rowIndex: row.index,
+                  })
+                )
+              }
+            >
+              {equipment == null ? (
+                <img css={imgCss} src={SetAreaImg} alt="SetAreaImg" />
+              ) : (
+                <EquipmentImg equipment={equipment} />
+              )}
+            </button>
+
+            <button
+              css={remove}
+              onClick={() =>
+                dispatch(
+                  customizeOperations.removeEquipment({
+                    colIndex,
+                    rowIndex: row.index,
+                  })
+                )
+              }
+            >
+              ×
+            </button>
+          </div>
         )
       })}
     </div>
@@ -100,4 +103,18 @@ const selectedCss = css`
 
 const imgCss = css`
   width: 56px;
+`
+
+const btnWrapper = css`
+  position: relative;
+`
+
+const remove = css`
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 20px;
+  height: 20px;
+  font-weight: bolder;
 `
