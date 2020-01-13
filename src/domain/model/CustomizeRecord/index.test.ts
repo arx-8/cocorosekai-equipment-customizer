@@ -39,6 +39,7 @@ describe("calcCustomizeRecord", () => {
         },
         enhancementsNum: 0,
         equipCost: 12 as EquipCost,
+        imageUrl: "https://example.com/",
         specialEffects: [
           {
             rawText: "受ける魔法ダメージ5%軽減",
@@ -71,6 +72,7 @@ describe("calcCustomizeRecord", () => {
         },
         enhancementsNum: 1,
         equipCost: 100_000 as EquipCost,
+        imageUrl: null,
         specialEffects: [
           {
             rawText: "effect 1",
@@ -91,6 +93,7 @@ describe("calcCustomizeRecord", () => {
         },
         enhancementsNum: 2,
         equipCost: 2_000_000 as EquipCost,
+        imageUrl: null,
         specialEffects: [],
       },
       {
@@ -107,6 +110,7 @@ describe("calcCustomizeRecord", () => {
         },
         enhancementsNum: 2,
         equipCost: 30_000_000 as EquipCost,
+        imageUrl: "https://example.com/",
         specialEffects: [
           {
             rawText: "effect 300",
