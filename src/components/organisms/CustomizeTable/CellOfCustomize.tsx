@@ -1,12 +1,16 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
-import React from "react"
-import { useDispatch } from "react-redux"
+import React, { Fragment, useCallback } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { CellProps } from "react-table"
 import NoImageImg from "src/assets/NoImage.jpg"
 import SetAreaImg from "src/assets/SetArea.jpg"
-import { CellColIndex, CustomizeRecord } from "src/domain/model/CustomizeRecord"
-import { customizeOperations } from "src/store/customize"
+import {
+  CellColIndex,
+  CellIndex,
+  CustomizeRecord,
+} from "src/domain/model/CustomizeRecord"
+import { customizeOperations, customizeSelectors } from "src/store/customize"
 
 type OwnProps = CellProps<CustomizeRecord> & {
   children?: never
@@ -14,6 +18,19 @@ type OwnProps = CellProps<CustomizeRecord> & {
 
 export const CellOfCustomize: React.FC<OwnProps> = ({ row }) => {
   const dispatch = useDispatch()
+  const currentSelected = useSelector(
+    customizeSelectors.getCurrentSelectedCellIndex
+  )
+
+  const isSelected = useCallback(
+    (cellIndex: CellIndex): boolean => {
+      return (
+        currentSelected.colIndex === cellIndex.colIndex &&
+        currentSelected.rowIndex === cellIndex.rowIndex
+      )
+    },
+    [currentSelected.colIndex, currentSelected.rowIndex]
+  )
 
   const equippedIds = row.original.equippedIds
 
@@ -33,16 +50,24 @@ export const CellOfCustomize: React.FC<OwnProps> = ({ row }) => {
               )
             }
           >
-            {eId == null ? (
-              <div>
+            <div
+              css={
+                isSelected({
+                  colIndex,
+                  rowIndex: row.index,
+                }) && imgWrapper
+              }
+            >
+              {eId == null ? (
                 <img css={imgCss} src={SetAreaImg} alt="SetAreaImg" />
-              </div>
-            ) : (
-              <div>
-                <img css={imgCss} src={NoImageImg} alt="NoImageImg" />
-                {eId}
-              </div>
-            )}
+              ) : (
+                <Fragment>
+                  <img css={imgCss} src={NoImageImg} alt="NoImageImg" />
+                  {/* TODO for debug */}
+                  {eId}
+                </Fragment>
+              )}
+            </div>
           </button>
         )
       })}
@@ -53,6 +78,10 @@ export const CellOfCustomize: React.FC<OwnProps> = ({ row }) => {
 const root = css`
   display: flex;
   justify-content: space-around;
+`
+
+const imgWrapper = css`
+  border: solid 1px red;
 `
 
 const imgCss = css`

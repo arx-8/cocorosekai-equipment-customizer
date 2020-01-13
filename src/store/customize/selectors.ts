@@ -1,6 +1,7 @@
 import { findEquipmentStrict } from "src/assets/data"
 import {
   calcCustomizeRecord,
+  CellIndex,
   CustomizeRecord,
 } from "src/domain/model/CustomizeRecord"
 import { EquipmentId } from "src/domain/model/Equipment"
@@ -24,4 +25,11 @@ export const getCustomizeRecords = (
   })
 
   return recList
+}
+
+export const getCurrentSelectedCellIndex = (
+  rootState: RootState
+): CellIndex => {
+  const state = rootState.customizeState
+  return state.selectedCell
 }
