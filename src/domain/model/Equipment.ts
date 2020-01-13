@@ -1,7 +1,7 @@
 import { Brand } from "src/types/Utils.ts/Utils"
 
 export type Equipment = {
-  id: number
+  id: EquipmentId
   name: string
   rawName: string
   equipCost: EquipCost
@@ -19,8 +19,11 @@ export type Equipment = {
   enhancementsNum: 0 | 1 | 2
 }
 
+/** 装備 ID (内部ロジック用) */
+export type EquipmentId = Brand<number, "EquipmentId">
+
 /** 属性 */
-type Attribute =
+export type Attribute =
   // 無
   | "void"
   // 火
@@ -35,25 +38,25 @@ type Attribute =
   | "darkness"
 
 /** 装備のためのコスト */
-type EquipCost = Brand<number, "Cost">
+export type EquipCost = Brand<number, "Cost">
 
 /** 物理 攻撃 (数値) */
-type PhysicalAttackNum = Brand<number, "PhysicalAttackNum">
+export type PhysicalAttackNum = Brand<number, "PhysicalAttackNum">
 
 /** 魔法 攻撃 (数値) */
-type MagicAttackNum = Brand<number, "MagicAttackNum">
+export type MagicAttackNum = Brand<number, "MagicAttackNum">
 
 /** 物理 防御 (数値) */
-type PhysicalDefenseNum = Brand<number, "PhysicalDefenseNum">
+export type PhysicalDefenseNum = Brand<number, "PhysicalDefenseNum">
 
 /** 魔法 防御 (数値) */
-type MagicDefenseNum = Brand<number, "MagicDefenseNum">
+export type MagicDefenseNum = Brand<number, "MagicDefenseNum">
 
 /** 体力 (数値) */
-type HitPointNum = Brand<number, "HitPointNum">
+export type HitPointNum = Brand<number, "HitPointNum">
 
 /** % */
-type Rate = Brand<number, "Rate">
+// type Rate = Brand<number, "Rate">
 
 /** 特殊効果・ステータスに影響を与えるもの */
 // type SpecialEffect_EffectStatuses = {
