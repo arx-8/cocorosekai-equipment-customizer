@@ -36,6 +36,7 @@ export type CustomizeRecord = {
  * 1 編成あたりに装備できる数は決まっているため
  */
 export type CellColIndex = 0 | 1 | 2 | 3 | 4
+export const MAX_EQUIPMENTS_NUM = 4
 
 export type CellIndex = {
   rowIndex: number

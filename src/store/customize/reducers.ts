@@ -1,6 +1,7 @@
 import produce from "immer"
 import {
   CellIndex,
+  MAX_EQUIPMENTS_NUM,
   SelectedEquipmentIds,
 } from "src/domain/model/CustomizeRecord"
 import { reducerWithInitialState } from "typescript-fsa-reducers"
@@ -58,6 +59,11 @@ export const reducer = reducerWithInitialState(initialState)
       draft.records[draft.selectedCell.rowIndex].equippedIds[
         draft.selectedCell.colIndex
       ] = payload
+
+      // 連続選択しやすくするため、隣のセルに移動させる
+      if (draft.selectedCell.colIndex !== MAX_EQUIPMENTS_NUM) {
+        draft.selectedCell.colIndex += 1
+      }
     })
   })
   .build()
