@@ -1,11 +1,8 @@
 import { Equipment } from "src/domain/model/Equipment"
 import { CastAny } from "src/types/tsUtils"
 
-// TODO to prod
 const host =
-  "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/feature/prototype/src/assets/equipments/"
-// const host =
-//   "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/"
+  "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/"
 
 export const data: Equipment[] = [
   {
