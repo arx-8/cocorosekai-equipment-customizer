@@ -1,10 +1,9 @@
-import { findEquipmentStrict } from "src/assets/data"
 import {
   calcCustomizeRecord,
   CellIndex,
   CustomizeRecord,
 } from "src/domain/model/CustomizeRecord"
-import { EquipmentId } from "src/domain/model/Equipment"
+import { EquipmentId, findEquipmentStrict } from "src/domain/model/Equipment"
 import { RootState } from "src/store/store"
 
 export const getCustomizeRecords = (

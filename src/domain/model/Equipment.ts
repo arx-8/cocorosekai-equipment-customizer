@@ -1,3 +1,4 @@
+import { data } from "src/assets/data"
 import { Brand } from "src/types/tsUtils"
 
 export type Equipment = {
@@ -71,3 +72,14 @@ type SpecialEffect_Other = {
 /** 特殊効果 */
 // type SpecialEffect = SpecialEffect_EffectStatuses | SpecialEffect_Other
 export type SpecialEffect = SpecialEffect_Other
+
+/**
+ * @throws 装備が存在しなかった場合
+ */
+export const findEquipmentStrict = (equipmentId: EquipmentId): Equipment => {
+  const found = data.find((e) => e.id === equipmentId)
+  if (found == null) {
+    throw new Error(`Logic failure. equipmentId: ${equipmentId} not found.`)
+  }
+  return found
+}
