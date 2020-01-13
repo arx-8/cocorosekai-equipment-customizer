@@ -6,8 +6,8 @@ import {
   UseFiltersColumnOptions,
   UseFiltersColumnProps,
   useSortBy,
+  UseSortByColumnOptions,
   UseSortByColumnProps,
-  UseSortByOptions,
   useTable,
   UseTableColumnOptions,
 } from "react-table"
@@ -24,12 +24,12 @@ type OwnProps = {
  * 使う PluginHook によって、型を合成する必要がある
  */
 type ColumnInstanceOverride = ColumnInstance<Equipment> &
-  UseFiltersColumnProps<Equipment> &
-  UseSortByColumnProps<Equipment>
+  UseSortByColumnProps<Equipment> &
+  UseFiltersColumnProps<Equipment>
 
 type ColumnOptionsOverride = UseTableColumnOptions<Equipment> &
   UseFiltersColumnOptions<Equipment> &
-  UseSortByOptions<Equipment>
+  UseSortByColumnOptions<Equipment>
 
 const columns: ColumnOptionsOverride[] = [
   {
@@ -99,6 +99,7 @@ const defaultColumn: Partial<ColumnOptionsOverride> = {
   // defaultCanFilter が必ず true (必ず Filter が描画される) バグがあるっぽい
   // そのため、 default で Filter を定義しておく
   Filter: <Fragment />,
+  sortDescFirst: true,
 }
 
 export const Table: React.FC<OwnProps> = () => {

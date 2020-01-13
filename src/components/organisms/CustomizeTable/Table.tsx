@@ -4,8 +4,8 @@ import {
   ColumnInstance,
   useBlockLayout,
   useSortBy,
+  UseSortByColumnOptions,
   UseSortByColumnProps,
-  UseSortByOptions,
   useTable,
   UseTableColumnOptions,
 } from "react-table"
@@ -27,7 +27,7 @@ type ColumnInstanceOverride = ColumnInstance<CustomizeRecord> &
   UseSortByColumnProps<CustomizeRecord>
 
 type ColumnOptionsOverride = UseTableColumnOptions<CustomizeRecord> &
-  UseSortByOptions<CustomizeRecord>
+  UseSortByColumnOptions<CustomizeRecord>
 
 const createColumnOptionsOuter = (): ColumnOptionsOverride[] => {
   return [
@@ -99,7 +99,9 @@ const createColumnOptionsOuter = (): ColumnOptionsOverride[] => {
   ]
 }
 
-const defaultColumn: Partial<ColumnOptionsOverride> = {}
+const defaultColumn: Partial<ColumnOptionsOverride> = {
+  sortDescFirst: true,
+}
 
 export const Table: React.FC<OwnProps> = () => {
   const data = useSelector(customizeSelectors.getCustomizeRecords)
