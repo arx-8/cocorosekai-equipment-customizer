@@ -42,7 +42,7 @@ Object {
 }
 `;
 
-exports[`calcCustomizeRecord list length 4, some specialEffects 1`] = `
+exports[`calcCustomizeRecord list some length 1`] = `
 Object {
   "equippedIds": Array [
     1,
