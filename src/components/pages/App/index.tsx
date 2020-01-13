@@ -11,6 +11,7 @@ type OwnProps = {
 export const App: React.FC<OwnProps> = () => {
   return (
     <div css={root}>
+      ©2019 Summer Vacation Inc. All rights reserved.
       <ItemsTable />
       <CustomizeTable />
     </div>

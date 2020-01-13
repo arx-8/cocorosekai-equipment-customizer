@@ -16,6 +16,8 @@ export const ItemsTable: React.FC<OwnProps> = () => {
 }
 
 const root = css`
+  padding-top: 16px;
+
   table {
     border: 1px solid black;
   }
