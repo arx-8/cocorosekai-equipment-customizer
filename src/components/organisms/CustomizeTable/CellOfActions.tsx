@@ -27,7 +27,4 @@ export const CellOfActions: React.FC<OwnProps> = ({ row }) => {
   )
 }
 
-const root = css`
-  display: flex;
-  justify-content: space-around;
-`
+const root = css``

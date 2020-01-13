@@ -51,12 +51,13 @@ export const CellOfCustomize: React.FC<OwnProps> = ({ row }) => {
             }
           >
             <div
-              css={
+              css={[
+                imgWrapper,
                 isSelected({
                   colIndex,
                   rowIndex: row.index,
-                }) && imgWrapper
-              }
+                }) && selectedCss,
+              ]}
             >
               {eId == null ? (
                 <img css={imgCss} src={SetAreaImg} alt="SetAreaImg" />
@@ -81,7 +82,11 @@ const root = css`
 `
 
 const imgWrapper = css`
-  border: solid 1px red;
+  cursor: pointer;
+`
+
+const selectedCss = css`
+  border: solid 2px red;
 `
 
 const imgCss = css`

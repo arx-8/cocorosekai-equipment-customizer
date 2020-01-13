@@ -29,7 +29,7 @@ const root = css`
     overflow-x: hidden;
     overflow-y: scroll;
     /* テーブル全体の高さ */
-    height: 300px;
+    height: 320px;
   }
 
   th,

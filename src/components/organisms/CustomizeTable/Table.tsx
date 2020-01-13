@@ -33,13 +33,13 @@ const createColumnOptionsOuter = (): ColumnOptionsOverride[] => {
   return [
     {
       Header: "No.",
-      Cell: (p) => p.row.id,
+      Cell: (p) => p.row.index + 1,
       width: 40,
     },
     {
       Header: "操作",
       Cell: CellOfActions,
-      width: 128,
+      width: 72,
     },
     {
       Header: "装備編成",
@@ -47,45 +47,54 @@ const createColumnOptionsOuter = (): ColumnOptionsOverride[] => {
       width: 440,
       Cell: CellOfCustomize,
     },
-    {
-      Header: "参考総合値",
-      accessor: "totalSpecValue",
-    },
+    // {
+    //   Header: "参考総合値",
+    //   accessor: "totalSpecValue",
+    //   width: 56,
+    // },
     {
       Header: "属性",
       accessor: "mixedAttributes",
       // TODO Array なので sort できない
       Cell: CellOfAttrs,
+      width: 56,
     },
     {
       Header: "装備コスト",
       accessor: "totalEquipCost",
+      width: 56,
     },
     {
       Header: "HP",
       accessor: "totalStatuses.hp",
+      width: 56,
     },
     {
       Header: "物理 攻撃",
       accessor: "totalStatuses.physicalAtk",
+      width: 56,
     },
     {
       Header: "物理 防御",
       accessor: "totalStatuses.physicalDef",
+      width: 56,
     },
     {
       Header: "魔法 攻撃",
       accessor: "totalStatuses.magicAtk",
+      width: 56,
     },
     {
       Header: "魔法 防御",
       accessor: "totalStatuses.magicDef",
+      width: 56,
     },
     {
       Header: "特殊効果",
       accessor: "mixedSpecialEffects",
       // TODO Array なので sort できない
       Cell: CellOfSpecialEffects,
+      width: 240,
     },
   ]
 }

@@ -45,36 +45,43 @@ const columns: ColumnOptionsOverride[] = [
   {
     Header: "名前",
     accessor: "rawName",
-    width: 300,
+    width: 240,
   },
   {
     Header: "装備コスト",
     accessor: "equipCost",
+    width: 56,
   },
   {
     Header: "属性",
     accessor: "attribute",
     Cell: CellOfAttrs,
+    width: 56,
   },
   {
     Header: "HP",
     accessor: "statuses.hp",
+    width: 56,
   },
   {
     Header: "物理 攻撃",
     accessor: "statuses.physicalAtk",
+    width: 56,
   },
   {
     Header: "物理 防御",
     accessor: "statuses.physicalDef",
+    width: 56,
   },
   {
     Header: "魔法 攻撃",
     accessor: "statuses.magicAtk",
+    width: 56,
   },
   {
     Header: "魔法 防御",
     accessor: "statuses.magicDef",
+    width: 56,
   },
   {
     Header: "特殊効果",
@@ -84,6 +91,7 @@ const columns: ColumnOptionsOverride[] = [
       const v = p.cell.value as SpecialEffect[]
       return v.map((e) => e.rawText).join(",")
     },
+    width: 240,
   },
 ]
 

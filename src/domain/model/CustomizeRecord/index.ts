@@ -64,10 +64,12 @@ export const calcCustomizeRecord = (
             curr.statuses.physicalDef) as PhysicalDefenseNum,
         },
         mixedAttributes: toUniq([...acc.mixedAttributes, curr.attribute]),
-        mixedSpecialEffects: [
-          ...acc.mixedSpecialEffects,
-          ...curr.specialEffects,
-        ],
+        mixedSpecialEffects: toUniq([
+          ...acc.mixedSpecialEffects.map((e) => e.rawText),
+          ...curr.specialEffects.map((e) => e.rawText),
+        ]).map((rawText) => {
+          return { rawText }
+        }),
       }
     },
     {

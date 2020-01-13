@@ -14,15 +14,17 @@ export const CustomizeTable: React.FC<OwnProps> = () => {
 
   return (
     <div css={root}>
-      <Table />
       <button onClick={() => dispatch(customizeOperations.addRow())}>
         追加
       </button>
+      <Table />
     </div>
   )
 }
 
 const root = css`
+  padding-top: 16px;
+
   table {
     border: 1px solid black;
   }
