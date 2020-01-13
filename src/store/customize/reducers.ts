@@ -4,6 +4,7 @@ import {
   MAX_EQUIPMENTS_NUM,
   SelectedEquipmentIds,
 } from "src/domain/model/CustomizeRecord"
+import { range } from "src/utils/arrayUtils"
 import { reducerWithInitialState } from "typescript-fsa-reducers"
 import * as actions from "./actions"
 
@@ -17,7 +18,7 @@ export type State = Readonly<{
 }>
 
 const initRecord: Record = {
-  equippedIds: [undefined, undefined, undefined, undefined, undefined],
+  equippedIds: range(0, MAX_EQUIPMENTS_NUM).map((_) => undefined),
 }
 
 export const initialState: State = {
@@ -61,7 +62,7 @@ export const reducer = reducerWithInitialState(initialState)
       ] = payload
 
       // 連続選択しやすくするため、隣のセルに移動させる
-      if (draft.selectedCell.colIndex !== MAX_EQUIPMENTS_NUM) {
+      if (draft.selectedCell.colIndex !== MAX_EQUIPMENTS_NUM - 1) {
         draft.selectedCell.colIndex += 1
       }
     })
