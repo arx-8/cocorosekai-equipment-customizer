@@ -1,15 +1,19 @@
 import React from "react"
 import ReactDOM from "react-dom"
+import { Provider as ReduxProvider } from "react-redux"
 import { App } from "src/components/pages/App"
 import { GlobalStyles } from "src/components/styles/GlobalStyles"
 import * as serviceWorker from "src/serviceWorker"
+import { configureStore } from "src/store/store"
+
+const reduxStore = configureStore()
 
 const Root: React.FC = () => {
   return (
-    <React.Fragment>
+    <ReduxProvider store={reduxStore}>
       <GlobalStyles />
       <App />
-    </React.Fragment>
+    </ReduxProvider>
   )
 }
 
