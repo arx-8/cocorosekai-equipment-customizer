@@ -44,7 +44,7 @@ const createColumnOptionsOuter = (): ColumnOptionsOverride[] => {
     {
       Header: "装備編成",
       accessor: "customize",
-      width: 440,
+      width: 400,
       Cell: CellOfCustomize,
     },
     // {

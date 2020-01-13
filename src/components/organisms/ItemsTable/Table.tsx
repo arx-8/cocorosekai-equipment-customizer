@@ -12,8 +12,8 @@ import {
   UseTableColumnOptions,
 } from "react-table"
 import { data } from "src/assets/data"
-import { CellOfActions } from "src/components/organisms/ItemsTable/CellOfActions"
 import { CellOfAttrs } from "src/components/organisms/ItemsTable/CellOfAttrs"
+import { CellOfImage } from "src/components/organisms/ItemsTable/CellOfImage"
 import { Equipment, SpecialEffect } from "src/domain/model/Equipment"
 
 type OwnProps = {
@@ -38,9 +38,9 @@ const columns: ColumnOptionsOverride[] = [
     width: 40,
   },
   {
-    Header: "操作",
-    Cell: CellOfActions,
-    width: 56,
+    Header: "選択",
+    Cell: CellOfImage,
+    width: 64,
   },
   {
     Header: "名前",

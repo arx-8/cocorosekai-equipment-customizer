@@ -14,6 +14,7 @@ export type Equipment = {
     physicalAtk: PhysicalAttackNum
     physicalDef: PhysicalDefenseNum
   }
+  imageUrl: string | null
   specialEffects: SpecialEffect[]
   // image:
   /** 強化回数 (+ の数) */
