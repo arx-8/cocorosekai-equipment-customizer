@@ -12,6 +12,7 @@ import {
   UseTableColumnOptions,
 } from "react-table"
 import { data } from "src/assets/data"
+import { CellOfActions } from "src/components/organisms/ItemsTable/CellOfActions"
 import { Equipment, SpecialEffect } from "src/domain/model/Equipment"
 
 type OwnProps = {
@@ -34,6 +35,11 @@ const columns: ColumnOptionsOverride[] = [
     Header: "ID",
     accessor: "id",
     width: 40,
+  },
+  {
+    Header: "操作",
+    Cell: CellOfActions,
+    width: 56,
   },
   {
     Header: "名前",

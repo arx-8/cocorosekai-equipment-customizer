@@ -1,4 +1,5 @@
-import React from "react"
+import React, { useMemo } from "react"
+import { useSelector } from "react-redux"
 import {
   ColumnInstance,
   useBlockLayout,
@@ -13,46 +14,7 @@ import { CellOfCustomize } from "src/components/organisms/CustomizeTable/CellOfC
 import { CellOfSpecialEffects } from "src/components/organisms/CustomizeTable/CellOfSpecialEffects"
 import { CustomizeRecord } from "src/domain/model/CustomizeRecord"
 import { Attribute } from "src/domain/model/Equipment"
-import { FixMeAny } from "src/types/tsUtils"
-
-// TODO def
-const data: CustomizeRecord[] = [
-  {
-    equippedIds: [1, 2] as FixMeAny,
-    totalSpecValue: 10000,
-    totalEquipCost: 100 as FixMeAny,
-    mixedAttributes: ["darkness"],
-    totalStatuses: {
-      hp: 100,
-      magicAtk: 0,
-      magicDef: 0,
-      physicalAtk: 100,
-      physicalDef: 10,
-    } as FixMeAny,
-    mixedSpecialEffects: [
-      {
-        rawText: "なんたら",
-      },
-      {
-        rawText: "かんたら",
-      },
-    ],
-  },
-  {
-    equippedIds: [1, 2, 3] as FixMeAny,
-    totalSpecValue: 11000,
-    totalEquipCost: 200 as FixMeAny,
-    mixedAttributes: [],
-    totalStatuses: {
-      hp: 500,
-      magicAtk: 0,
-      magicDef: 0,
-      physicalAtk: 100,
-      physicalDef: 10,
-    } as FixMeAny,
-    mixedSpecialEffects: [],
-  },
-]
+import { customizeSelectors } from "src/store/customize"
 
 type OwnProps = {
   children?: never
@@ -67,70 +29,79 @@ type ColumnInstanceOverride = ColumnInstance<CustomizeRecord> &
 type ColumnOptionsOverride = UseTableColumnOptions<CustomizeRecord> &
   UseSortByOptions<CustomizeRecord>
 
-const columns: ColumnOptionsOverride[] = [
-  {
-    Header: "操作",
-    Cell: CellOfActions,
-  },
-  {
-    Header: "No.",
-    Cell: (p) => p.row.id,
-    width: 40,
-  },
-  {
-    Header: "装備編成",
-    accessor: "customize",
-    width: 300,
-    Cell: CellOfCustomize,
-  },
-  {
-    Header: "参考総合値",
-    accessor: "totalSpecValue",
-  },
-  {
-    Header: "属性",
-    accessor: "mixedAttributes",
-    // TODO Array なので sort できない
-    Cell: (p) => {
-      const v = p.cell.value as Attribute[]
-      return v.join(",")
+const createColumnOptionsOuter = (): ColumnOptionsOverride[] => {
+  return [
+    {
+      Header: "No.",
+      Cell: (p) => p.row.id,
+      width: 40,
     },
-  },
-  {
-    Header: "装備コスト",
-    accessor: "totalEquipCost",
-  },
-  {
-    Header: "HP",
-    accessor: "totalStatuses.hp",
-  },
-  {
-    Header: "物理 攻撃",
-    accessor: "totalStatuses.physicalAtk",
-  },
-  {
-    Header: "物理 防御",
-    accessor: "totalStatuses.physicalDef",
-  },
-  {
-    Header: "魔法 攻撃",
-    accessor: "totalStatuses.magicAtk",
-  },
-  {
-    Header: "魔法 防御",
-    accessor: "totalStatuses.magicDef",
-  },
-  {
-    Header: "特殊効果",
-    accessor: "mixedSpecialEffects",
-    // TODO Array なので sort できない
-    Cell: CellOfSpecialEffects,
-  },
-]
+    {
+      Header: "操作",
+      Cell: CellOfActions,
+      width: 128,
+    },
+    {
+      Header: "装備編成",
+      accessor: "customize",
+      width: 440,
+      Cell: CellOfCustomize,
+    },
+    {
+      Header: "参考総合値",
+      accessor: "totalSpecValue",
+    },
+    {
+      Header: "属性",
+      accessor: "mixedAttributes",
+      // TODO Array なので sort できない
+      Cell: (p) => {
+        const v = p.cell.value as Attribute[]
+        return v.join(",")
+      },
+    },
+    {
+      Header: "装備コスト",
+      accessor: "totalEquipCost",
+    },
+    {
+      Header: "HP",
+      accessor: "totalStatuses.hp",
+    },
+    {
+      Header: "物理 攻撃",
+      accessor: "totalStatuses.physicalAtk",
+    },
+    {
+      Header: "物理 防御",
+      accessor: "totalStatuses.physicalDef",
+    },
+    {
+      Header: "魔法 攻撃",
+      accessor: "totalStatuses.magicAtk",
+    },
+    {
+      Header: "魔法 防御",
+      accessor: "totalStatuses.magicDef",
+    },
+    {
+      Header: "特殊効果",
+      accessor: "mixedSpecialEffects",
+      // TODO Array なので sort できない
+      Cell: CellOfSpecialEffects,
+    },
+  ]
+}
 
 const defaultColumn: Partial<ColumnOptionsOverride> = {}
 
 export const Table: React.FC<OwnProps> = () => {
+  const data = useSelector(customizeSelectors.getCustomizeRecords)
+
+  const columns = useMemo(() => {
+    return createColumnOptionsOuter()
+  }, [])
+
   // Use the state and functions returned from useTable to build your UI
   const {
     getTableBodyProps,

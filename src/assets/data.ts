@@ -1,5 +1,16 @@
-import { Equipment } from "src/domain/model/Equipment"
+import { Equipment, EquipmentId } from "src/domain/model/Equipment"
 import { CastAny } from "src/types/tsUtils"
+
+/**
+ * @throws 装備が存在しなかった場合
+ */
+export const findEquipmentStrict = (equipmentId: EquipmentId): Equipment => {
+  const found = data.find((e) => e.id === equipmentId)
+  if (found == null) {
+    throw new Error(`Logic failure. equipmentId: ${equipmentId} not found.`)
+  }
+  return found
+}
 
 export const data: Equipment[] = [
   {

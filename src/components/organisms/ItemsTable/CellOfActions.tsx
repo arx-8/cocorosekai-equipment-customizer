@@ -3,10 +3,10 @@ import { css, jsx } from "@emotion/core"
 import React from "react"
 import { useDispatch } from "react-redux"
 import { CellProps } from "react-table"
-import { CustomizeRecord } from "src/domain/model/CustomizeRecord"
+import { Equipment } from "src/domain/model/Equipment"
 import { customizeOperations } from "src/store/customize"
 
-type OwnProps = CellProps<CustomizeRecord> & {
+type OwnProps = CellProps<Equipment> & {
   children?: never
 }
 
@@ -16,12 +16,11 @@ export const CellOfActions: React.FC<OwnProps> = ({ row }) => {
   return (
     <div css={root}>
       <button
-        onClick={() => dispatch(customizeOperations.deleteRow(row.index))}
+        onClick={() =>
+          dispatch(customizeOperations.selectEquipment(row.original.id))
+        }
       >
-        削除
-      </button>
-      <button onClick={() => dispatch(customizeOperations.copyRow(row.index))}>
-        コピー
+        装備する
       </button>
     </div>
   )

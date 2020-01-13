@@ -12,8 +12,10 @@ export const CellOfSpecialEffects: React.FC<OwnProps> = ({ row }) => {
   const v = row.original.mixedSpecialEffects
   return (
     <div css={root}>
-      {v.map((e) => (
-        <div key={e.rawText}>{e.rawText}</div>
+      {v.map((e, index) => (
+        // 他にユニーク値がないため
+        // eslint-disable-next-line react/no-array-index-key
+        <div key={index}>{e.rawText}</div>
       ))}
     </div>
   )

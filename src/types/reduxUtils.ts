@@ -1,10 +1,18 @@
 import { Action, AnyAction } from "redux"
-import { ThunkAction } from "redux-thunk"
+import { ThunkAction, ThunkDispatch } from "redux-thunk"
 import { RootState } from "src/store/store"
 
 /**
  * Type utility for redux
  */
+
+/**
+ * redux-thunk dispatch shorthand for this application.
+ *
+ * State と extraArgument は、applyMiddleware の時点で決定するため、決め打ち
+ * Action は型定義するコスパが悪い(ActionCreatorを使うため、タイポや未定義の可能性は低い)ため、AnyAction
+ */
+export type AppThunkDispatch = ThunkDispatch<RootState, void, AnyAction>
 
 /**
  * redux-thunk action shorthand for this application.
