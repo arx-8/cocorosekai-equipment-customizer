@@ -11,6 +11,7 @@ export const CustomizeTable: React.FC<OwnProps> = () => {
   return (
     <div css={root}>
       <Table />
+      <button>追加</button>
     </div>
   )
 }

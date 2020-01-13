@@ -3,12 +3,12 @@ import { css, jsx } from "@emotion/core"
 import React from "react"
 import { CellProps } from "react-table"
 import SetAreaImg from "src/assets/SetArea.jpg"
-import { CustomizeResult } from "src/domain/model/CustomizeResult"
+import { CustomizeRecord } from "src/domain/model/CustomizeRecord"
 import { range } from "src/utils/arrayUtils"
 
 const MAX_EQUIPMENTS = 5
 
-type OwnProps = CellProps<CustomizeResult> & {
+type OwnProps = CellProps<CustomizeRecord> & {
   children?: never
 }
 

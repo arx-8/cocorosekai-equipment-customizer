@@ -8,3 +8,7 @@ export const range = (from: number, to: number): readonly number[] => {
   }
   return ret
 }
+
+export const toUniq = <T extends number | string>(array: T[]): T[] => {
+  return [...new Set(array)]
+}

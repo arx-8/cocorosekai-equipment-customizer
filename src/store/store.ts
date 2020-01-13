@@ -4,21 +4,21 @@ import {
   combineReducers,
   compose,
   createStore,
-  DeepPartial,
   Store,
 } from "redux"
 import thunkMiddleWare from "redux-thunk"
 import { isDevelopment } from "src/constants/env"
+import { customizeReducer, CustomizeState } from "src/store/customize"
 
 export type RootState = Readonly<{
-  // TODO impl
+  customizeState: CustomizeState
 }>
 
 export const configureStore = (
-  initialState: DeepPartial<RootState> = {}
+  initialState: Partial<RootState> = {}
 ): Store<RootState, AnyAction> => {
   const rootReducer = combineReducers<RootState>({
-    // TODO impl
+    customizeState: customizeReducer,
   })
 
   // Connect Chrome Redux DevTools, if installed.

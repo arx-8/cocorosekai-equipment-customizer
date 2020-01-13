@@ -2,9 +2,9 @@
 import { css, jsx } from "@emotion/core"
 import React from "react"
 import { CellProps } from "react-table"
-import { CustomizeResult } from "src/domain/model/CustomizeResult"
+import { CustomizeRecord } from "src/domain/model/CustomizeRecord"
 
-type OwnProps = CellProps<CustomizeResult> & {
+type OwnProps = CellProps<CustomizeRecord> & {
   children?: never
 }
 

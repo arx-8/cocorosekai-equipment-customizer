@@ -8,16 +8,16 @@ import {
   useTable,
   UseTableColumnOptions,
 } from "react-table"
+import { CellOfActions } from "src/components/organisms/CustomizeTable/CellOfActions"
 import { CellOfCustomize } from "src/components/organisms/CustomizeTable/CellOfCustomize"
 import { CellOfSpecialEffects } from "src/components/organisms/CustomizeTable/CellOfSpecialEffects"
-import { CustomizeResult } from "src/domain/model/CustomizeResult"
+import { CustomizeRecord } from "src/domain/model/CustomizeRecord"
 import { Attribute } from "src/domain/model/Equipment"
 import { FixMeAny } from "src/types/tsUtils"
 
 // TODO def
-const data: CustomizeResult[] = [
+const data: CustomizeRecord[] = [
   {
-    rowNo: 10 as FixMeAny,
     equippedIds: [1, 2] as FixMeAny,
     totalSpecValue: 10000,
     totalEquipCost: 100 as FixMeAny,
@@ -39,7 +39,6 @@ const data: CustomizeResult[] = [
     ],
   },
   {
-    rowNo: 22 as FixMeAny,
     equippedIds: [1, 2, 3] as FixMeAny,
     totalSpecValue: 11000,
     totalEquipCost: 200 as FixMeAny,
@@ -62,16 +61,20 @@ type OwnProps = {
 /**
  * 使う PluginHook によって、型を合成する必要がある
  */
-type ColumnInstanceOverride = ColumnInstance<CustomizeResult> &
-  UseSortByColumnProps<CustomizeResult>
+type ColumnInstanceOverride = ColumnInstance<CustomizeRecord> &
+  UseSortByColumnProps<CustomizeRecord>
 
-type ColumnOptionsOverride = UseTableColumnOptions<CustomizeResult> &
-  UseSortByOptions<CustomizeResult>
+type ColumnOptionsOverride = UseTableColumnOptions<CustomizeRecord> &
+  UseSortByOptions<CustomizeRecord>
 
 const columns: ColumnOptionsOverride[] = [
   {
+    Header: "操作",
+    Cell: CellOfActions,
+  },
+  {
     Header: "No.",
-    accessor: "rowNo",
+    Cell: (p) => p.row.id,
     width: 40,
   },
   {
@@ -135,7 +138,7 @@ export const Table: React.FC<OwnProps> = () => {
     headerGroups,
     prepareRow,
     rows,
-  } = useTable<CustomizeResult>(
+  } = useTable<CustomizeRecord>(
     {
       columns,
       data,

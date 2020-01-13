@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`calcCustomizeRecord list length 0 1`] = `
+Object {
+  "equippedIds": Array [],
+  "mixedAttributes": Array [],
+  "mixedSpecialEffects": Array [],
+  "totalEquipCost": 0,
+  "totalSpecValue": 0,
+  "totalStatuses": Object {
+    "hp": 0,
+    "magicAtk": 0,
+    "magicDef": 0,
+    "physicalAtk": 0,
+    "physicalDef": 0,
+  },
+}
+`;
+
+exports[`calcCustomizeRecord list length 1 1`] = `
+Object {
+  "equippedIds": Array [
+    0,
+  ],
+  "mixedAttributes": Array [
+    "light",
+  ],
+  "mixedSpecialEffects": Array [
+    Object {
+      "rawText": "受ける魔法ダメージ5%軽減",
+    },
+  ],
+  "totalEquipCost": 12,
+  "totalSpecValue": 0,
+  "totalStatuses": Object {
+    "hp": 72,
+    "magicAtk": 43,
+    "magicDef": 0,
+    "physicalAtk": 14,
+    "physicalDef": 0,
+  },
+}
+`;
+
+exports[`calcCustomizeRecord list length 4, some specialEffects 1`] = `
+Object {
+  "equippedIds": Array [
+    1,
+    20,
+    300,
+  ],
+  "mixedAttributes": Array [
+    "darkness",
+    "light",
+  ],
+  "mixedSpecialEffects": Array [
+    Object {
+      "rawText": "effect 1",
+    },
+    Object {
+      "rawText": "effect 300",
+    },
+  ],
+  "totalEquipCost": 32100000,
+  "totalSpecValue": 0,
+  "totalStatuses": Object {
+    "hp": 321,
+    "magicAtk": 3210,
+    "magicDef": 32100,
+    "physicalAtk": 321000,
+    "physicalDef": 3210000,
+  },
+}
+`;
