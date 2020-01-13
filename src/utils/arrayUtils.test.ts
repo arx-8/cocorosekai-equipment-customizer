@@ -1,4 +1,4 @@
-import { range } from "./ArrayUtils"
+import { range } from "./arrayUtils"
 
 describe("range", () => {
   it("できる", () => {

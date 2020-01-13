@@ -9,7 +9,7 @@ import {
   PhysicalDefenseNum,
   SpecialEffect,
 } from "src/domain/model/Equipment"
-import { Brand } from "src/types/Utils.ts/Utils"
+import { Brand } from "src/types/tsUtils"
 
 export type CustomizeResult = {
   rowNo: CustomizeResultRowNo

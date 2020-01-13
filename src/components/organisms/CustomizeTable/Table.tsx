@@ -12,7 +12,7 @@ import { CellOfCustomize } from "src/components/organisms/CustomizeTable/CellOfC
 import { CellOfSpecialEffects } from "src/components/organisms/CustomizeTable/CellOfSpecialEffects"
 import { CustomizeResult } from "src/domain/model/CustomizeResult"
 import { Attribute } from "src/domain/model/Equipment"
-import { FixMeAny } from "src/types/Utils.ts/Utils"
+import { FixMeAny } from "src/types/tsUtils"
 
 // TODO def
 const data: CustomizeResult[] = [
@@ -43,7 +43,7 @@ const data: CustomizeResult[] = [
     equippedIds: [1, 2, 3] as FixMeAny,
     totalSpecValue: 11000,
     totalEquipCost: 200 as FixMeAny,
-    mixedAttributes: ["fire", "light"],
+    mixedAttributes: [],
     totalStatuses: {
       hp: 500,
       magicAtk: 0,

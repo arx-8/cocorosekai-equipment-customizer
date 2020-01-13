@@ -1,5 +1,5 @@
 import { Equipment } from "src/domain/model/Equipment"
-import { CastAny } from "src/types/Utils.ts/Utils"
+import { CastAny } from "src/types/tsUtils"
 
 export const data: Equipment[] = [
   {

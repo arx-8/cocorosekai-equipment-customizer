@@ -1,4 +1,4 @@
-import { Brand } from "src/types/Utils.ts/Utils"
+import { Brand } from "src/types/tsUtils"
 
 export type Equipment = {
   id: EquipmentId

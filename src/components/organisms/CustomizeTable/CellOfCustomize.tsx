@@ -4,7 +4,7 @@ import React from "react"
 import { CellProps } from "react-table"
 import SetAreaImg from "src/assets/SetArea.jpg"
 import { CustomizeResult } from "src/domain/model/CustomizeResult"
-import { range } from "src/utils/ArrayUtils"
+import { range } from "src/utils/arrayUtils"
 
 const MAX_EQUIPMENTS = 5
 
