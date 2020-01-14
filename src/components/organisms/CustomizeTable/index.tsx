@@ -24,14 +24,4 @@ export const CustomizeTable: React.FC<OwnProps> = () => {
 
 const root = css`
   padding-top: 16px;
-
-  table {
-    border: 1px solid black;
-  }
-
-  th,
-  td {
-    border-right: 1px solid black;
-    border-bottom: 1px solid black;
-  }
 `
