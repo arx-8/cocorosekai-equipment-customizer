@@ -1,3 +1,4 @@
+import { MouseEventHandler } from "react"
 import {
   ColumnInstance,
   TableInstance,
@@ -35,4 +36,19 @@ export type ColumnOptionsOverride<TData extends object> = UseTableColumnOptions<
 
 export type FilterRendererProps<TData extends object = {}> = {
   column: ColumnInstance<TData> & UseFiltersColumnProps<TData>
+}
+
+/**
+ * console.log で確認した型
+ * たぶん d.ts の方が間違ってるため定義
+ */
+export type TableHeaderPropsReal = {
+  key: React.Key
+  colSpan: number
+  style?: React.CSSProperties
+  /**
+   * useSortBy 組込時には、ソートの toggle を実行してくれる
+   */
+  onClick: MouseEventHandler
+  title: string
 }

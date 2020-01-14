@@ -10,6 +10,7 @@ import { Equipment, SpecialEffect } from "src/domain/model/Equipment"
 import {
   ColumnInstanceOverride,
   ColumnOptionsOverride,
+  TableHeaderPropsReal,
   TableInstanceOverride,
 } from "src/types/reactTableUtils"
 
@@ -128,13 +129,22 @@ export const Table: React.FC<OwnProps> = () => {
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((_column) => {
               const column = _column as ColumnInstanceOverride<Equipment>
+
+              // <th> 全体が onClick に反応すると邪魔なため
+              const { onClick, key, ...rest } = column.getHeaderProps(
+                column.getSortByToggleProps()
+              ) as TableHeaderPropsReal
+
               return (
-                // eslint-disable-next-line react/jsx-key
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render("Header")}
-                  <span>
-                    {column.isSorted && (column.isSortedDesc ? " 🔽" : " 🔼")}
-                  </span>
+                <th key={key} {...rest}>
+                  {/* TODO どう正しく解消すべきかわからん */}
+                  {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
+                  <div onClick={onClick} role="button" tabIndex={-1}>
+                    {column.render("Header")}
+                    <span>
+                      {column.isSorted && (column.isSortedDesc ? " 🔽" : " 🔼")}
+                    </span>
+                  </div>
                   {column.canFilter && <div>{column.render("Filter")}</div>}
                 </th>
               )
