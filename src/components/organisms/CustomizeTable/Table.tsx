@@ -1,35 +1,28 @@
-import React, { useMemo } from "react"
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core"
+import React, { Fragment, useMemo } from "react"
 import { useSelector } from "react-redux"
-import {
-  ColumnInstance,
-  useBlockLayout,
-  useSortBy,
-  UseSortByColumnOptions,
-  UseSortByColumnProps,
-  useTable,
-  UseTableColumnOptions,
-} from "react-table"
+import { useBlockLayout, useFilters, useSortBy, useTable } from "react-table"
+import { NumberRangeColumnFilter } from "src/components/molecules/NumberRangeColumnFilter"
 import { CellOfActions } from "src/components/organisms/CustomizeTable/CellOfActions"
 import { CellOfAttrs } from "src/components/organisms/CustomizeTable/CellOfAttrs"
 import { CellOfCustomize } from "src/components/organisms/CustomizeTable/CellOfCustomize"
 import { CellOfSpecialEffects } from "src/components/organisms/CustomizeTable/CellOfSpecialEffects"
 import { CustomizeRecord } from "src/domain/model/CustomizeRecord"
 import { customizeSelectors } from "src/store/customize"
+import {
+  ColumnInstanceOverride,
+  ColumnOptionsOverride,
+  TableInstanceOverride,
+} from "src/types/reactTableUtils"
 
 type OwnProps = {
   children?: never
 }
 
-/**
- * 使う PluginHook によって、型を合成する必要がある
- */
-type ColumnInstanceOverride = ColumnInstance<CustomizeRecord> &
-  UseSortByColumnProps<CustomizeRecord>
-
-type ColumnOptionsOverride = UseTableColumnOptions<CustomizeRecord> &
-  UseSortByColumnOptions<CustomizeRecord>
-
-const createColumnOptionsOuter = (): ColumnOptionsOverride[] => {
+const createColumnOptionsOuter = (): ColumnOptionsOverride<
+  CustomizeRecord
+>[] => {
   return [
     {
       Header: "No.",
@@ -62,32 +55,44 @@ const createColumnOptionsOuter = (): ColumnOptionsOverride[] => {
     {
       Header: "装備コスト",
       accessor: "totalEquipCost",
-      width: 56,
+      width: 64,
+      Filter: NumberRangeColumnFilter,
+      filter: "between",
     },
     {
       Header: "HP",
       accessor: "totalStatuses.hp",
-      width: 56,
+      width: 64,
+      Filter: NumberRangeColumnFilter,
+      filter: "between",
     },
     {
       Header: "物理 攻撃",
       accessor: "totalStatuses.physicalAtk",
-      width: 56,
+      width: 64,
+      Filter: NumberRangeColumnFilter,
+      filter: "between",
     },
     {
       Header: "物理 防御",
       accessor: "totalStatuses.physicalDef",
-      width: 56,
+      width: 64,
+      Filter: NumberRangeColumnFilter,
+      filter: "between",
     },
     {
       Header: "魔法 攻撃",
       accessor: "totalStatuses.magicAtk",
-      width: 56,
+      width: 64,
+      Filter: NumberRangeColumnFilter,
+      filter: "between",
     },
     {
       Header: "魔法 防御",
       accessor: "totalStatuses.magicDef",
-      width: 56,
+      width: 64,
+      Filter: NumberRangeColumnFilter,
+      filter: "between",
     },
     {
       Header: "特殊効果",
@@ -99,7 +104,10 @@ const createColumnOptionsOuter = (): ColumnOptionsOverride[] => {
   ]
 }
 
-const defaultColumn: Partial<ColumnOptionsOverride> = {
+const defaultColumn: Partial<ColumnOptionsOverride<CustomizeRecord>> = {
+  // defaultCanFilter が必ず true (必ず Filter が描画される) バグがあるっぽい
+  // そのため、 default で Filter を定義しておく
+  Filter: <Fragment />,
   sortDescFirst: true,
 }
 
@@ -112,30 +120,32 @@ export const Table: React.FC<OwnProps> = () => {
 
   // Use the state and functions returned from useTable to build your UI
   const {
+    flatColumns,
     getTableBodyProps,
     getTableProps,
     headerGroups,
     prepareRow,
     rows,
-  } = useTable<CustomizeRecord>(
+  } = useTable(
     {
       columns,
       data,
       defaultColumn,
     },
     useBlockLayout,
+    useFilters,
     useSortBy
-  )
+  ) as TableInstanceOverride<CustomizeRecord>
 
   // Render the UI for your table
   return (
-    <table {...getTableProps()}>
+    <table {...getTableProps()} css={root}>
       <thead>
         {headerGroups.map((headerGroup) => (
           // eslint-disable-next-line react/jsx-key
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((_column) => {
-              const column = _column as ColumnInstanceOverride
+              const column = _column as ColumnInstanceOverride<CustomizeRecord>
               return (
                 // eslint-disable-next-line react/jsx-key
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
@@ -143,12 +153,19 @@ export const Table: React.FC<OwnProps> = () => {
                   <span>
                     {column.isSorted && (column.isSortedDesc ? " 🔽" : " 🔼")}
                   </span>
+                  {column.canFilter && <div>{column.render("Filter")}</div>}
                 </th>
               )
             })}
           </tr>
         ))}
+        <tr>
+          <th colSpan={flatColumns.length} css={recordsCounter}>
+            Hits: {rows.length}
+          </th>
+        </tr>
       </thead>
+
       <tbody {...getTableBodyProps()}>
         {rows.map((row) => {
           prepareRow(row)
@@ -166,3 +183,19 @@ export const Table: React.FC<OwnProps> = () => {
     </table>
   )
 }
+
+const root = css`
+  table {
+    border: 1px solid black;
+  }
+
+  th,
+  td {
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+  }
+`
+
+const recordsCounter = css`
+  text-align: left;
+`
