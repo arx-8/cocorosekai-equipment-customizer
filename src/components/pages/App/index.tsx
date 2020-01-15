@@ -18,4 +18,7 @@ export const App: React.FC<OwnProps> = () => {
   )
 }
 
-const root = css``
+const root = css`
+  padding-top: 8px;
+  padding-left: 8px;
+`

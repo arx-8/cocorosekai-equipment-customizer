@@ -5,10 +5,13 @@ import {
   UseFiltersColumnOptions,
   UseFiltersColumnProps,
   UseFiltersInstanceProps,
+  UseFiltersOptions,
   UseSortByColumnOptions,
   UseSortByColumnProps,
   UseSortByInstanceProps,
+  UseSortByOptions,
   UseTableColumnOptions,
+  UseTableOptions,
 } from "react-table"
 
 /**
@@ -52,3 +55,9 @@ export type TableHeaderPropsReal = {
   onClick: MouseEventHandler
   title: string
 }
+
+export type TableOptionsOverride<TData extends object> = UseTableOptions<
+  TData
+> &
+  UseSortByOptions<TData> &
+  UseFiltersOptions<TData>
