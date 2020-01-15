@@ -12,6 +12,7 @@ import {
   ColumnOptionsOverride,
   TableHeaderPropsReal,
   TableInstanceOverride,
+  TableOptionsOverride,
 } from "src/types/reactTableUtils"
 
 type OwnProps = {
@@ -114,7 +115,9 @@ export const Table: React.FC<OwnProps> = () => {
       columns,
       data,
       defaultColumn,
-    },
+      autoResetFilters: false,
+      autoResetSortBy: false,
+    } as TableOptionsOverride<Equipment>,
     useBlockLayout,
     useFilters,
     useSortBy
