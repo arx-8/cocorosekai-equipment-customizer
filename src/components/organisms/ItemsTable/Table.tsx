@@ -9,6 +9,7 @@ import {
   useTable,
 } from "react-table"
 import { data } from "src/assets/data"
+import { AttributeColumnFilter } from "src/components/molecules/AttributeColumnFilter"
 import { NumberRangeColumnFilter } from "src/components/molecules/NumberRangeColumnFilter"
 import { TextColumnFilter } from "src/components/molecules/TextColumnFilter"
 import { CellOfAttrs } from "src/components/organisms/ItemsTable/CellOfAttrs"
@@ -22,7 +23,10 @@ import {
   TableInstanceOverride,
   TableOptionsOverride,
 } from "src/types/reactTableUtils"
-import { fuzzyTextFilterFn } from "src/utils/reactTableUtils"
+import {
+  fuzzyTextFilter,
+  itemsTableAttributeFilter,
+} from "src/utils/reactTableUtils"
 
 type OwnProps = {
   children?: never
@@ -51,7 +55,7 @@ const columns: ColumnOptionsOverride<ItemsTableRow>[] = [
     accessor: "rawName",
     width: 240,
     Filter: TextColumnFilter,
-    filter: "fuzzyText",
+    filter: "fuzzyTextFilter",
   },
   {
     Header: "装備コスト",
@@ -65,6 +69,8 @@ const columns: ColumnOptionsOverride<ItemsTableRow>[] = [
     accessor: "attribute",
     Cell: CellOfAttrs,
     width: 64,
+    Filter: AttributeColumnFilter,
+    filter: "attributeFilter",
   },
   {
     Header: "HP",
@@ -106,7 +112,7 @@ const columns: ColumnOptionsOverride<ItemsTableRow>[] = [
     accessor: "specialEffectsText",
     width: 240,
     Filter: TextColumnFilter,
-    filter: "fuzzyText",
+    filter: "fuzzyTextFilter",
   },
 ]
 
@@ -118,7 +124,8 @@ const defaultColumn: Partial<ColumnOptionsOverride<ItemsTableRow>> = {
 }
 
 const filterTypes: FilterTypes<ItemsTableRow> = {
-  fuzzyText: fuzzyTextFilterFn,
+  attributeFilter: itemsTableAttributeFilter,
+  fuzzyTextFilter: fuzzyTextFilter,
 }
 
 // 今は data は不変のため、 memo 化のためにも render の外で宣言する

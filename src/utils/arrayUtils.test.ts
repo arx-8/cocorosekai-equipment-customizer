@@ -1,4 +1,4 @@
-import { range } from "./arrayUtils"
+import { range, toggleValues } from "./arrayUtils"
 
 describe("range", () => {
   it("できる", () => {
@@ -24,5 +24,39 @@ describe("range", () => {
     expect(() => {
       range(3, 2)
     }).toThrow()
+  })
+})
+
+describe("toggleValues", () => {
+  it("増える", () => {
+    // ## Arrange ##
+    // ## Act ##
+    const result = toggleValues([], "value")
+    // ## Assert ##
+    expect(result).toStrictEqual(["value"])
+  })
+
+  it("増える 2", () => {
+    // ## Arrange ##
+    // ## Act ##
+    const result = toggleValues(["value"], "value2")
+    // ## Assert ##
+    expect(result).toStrictEqual(["value", "value2"])
+  })
+
+  it("減る", () => {
+    // ## Arrange ##
+    // ## Act ##
+    const result = toggleValues(["value"], "value")
+    // ## Assert ##
+    expect(result).toStrictEqual([])
+  })
+
+  it("減る 2", () => {
+    // ## Arrange ##
+    // ## Act ##
+    const result = toggleValues(["v1", "v2", "v3"], "v2")
+    // ## Assert ##
+    expect(result).toStrictEqual(["v1", "v3"])
   })
 })

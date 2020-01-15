@@ -12,3 +12,10 @@ export const range = (from: number, to: number): readonly number[] => {
 export const toUniq = <T extends number | string>(array: T[]): T[] => {
   return [...new Set(array)]
 }
+
+export const toggleValues = <T extends string>(source: T[], value: T): T[] => {
+  if (source.includes(value)) {
+    return source.filter((s) => s !== value)
+  }
+  return [...source, value]
+}

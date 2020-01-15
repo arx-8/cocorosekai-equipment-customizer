@@ -39,6 +39,15 @@ export type Attribute =
   // 闇
   | "darkness"
 
+export const AttributeValues: Readonly<Record<Attribute, Attribute>> = {
+  void: "void",
+  fire: "fire",
+  water: "water",
+  wind: "wind",
+  light: "light",
+  darkness: "darkness",
+}
+
 /** 装備のためのコスト */
 export type EquipCost = Brand<number, "Cost">
 
