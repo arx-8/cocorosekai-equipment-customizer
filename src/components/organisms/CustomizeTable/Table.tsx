@@ -142,6 +142,7 @@ export const Table: React.FC<OwnProps> = () => {
     headerGroups,
     prepareRow,
     rows,
+    setAllFilters,
   } = useTable(
     {
       columns,
@@ -158,61 +159,79 @@ export const Table: React.FC<OwnProps> = () => {
 
   // Render the UI for your table
   return (
-    <table {...getTableProps()} css={root}>
-      <thead>
-        {headerGroups.map((headerGroup) => (
-          // eslint-disable-next-line react/jsx-key
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((_column) => {
-              const column = _column as ColumnInstanceOverride<CustomizeRecord>
+    <div>
+      <button
+        onClick={() => {
+          setAllFilters((filters) => {
+            return filters.map(({ id }) => ({
+              id,
+              value: undefined,
+            }))
+          })
+        }}
+      >
+        絞込みリセット
+      </button>
 
-              // <th> 全体が onClick に反応すると邪魔なため
-              const { onClick, key, ...rest } = column.getHeaderProps(
-                column.getSortByToggleProps()
-              ) as TableHeaderPropsReal
-
-              return (
-                <th key={key} {...rest}>
-                  {/* TODO どう正しく解消すべきかわからん */}
-                  {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
-                  <div onClick={onClick} role="button" tabIndex={-1}>
-                    {column.render("Header")}
-                    <span>
-                      {column.isSorted && (column.isSortedDesc ? " 🔽" : " 🔼")}
-                    </span>
-                  </div>
-                  {column.canFilter && <div>{column.render("Filter")}</div>}
-                </th>
-              )
-            })}
-          </tr>
-        ))}
-        <tr>
-          <th colSpan={flatColumns.length} css={recordsCounter}>
-            Hits: {rows.length}
-          </th>
-        </tr>
-      </thead>
-
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row) => {
-          prepareRow(row)
-          return (
+      <table {...getTableProps()} css={tableCss}>
+        <thead>
+          {headerGroups.map((headerGroup) => (
             // eslint-disable-next-line react/jsx-key
-            <tr {...row.getRowProps()}>
-              {row.cells.map((cell) => (
-                // eslint-disable-next-line react/jsx-key
-                <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-              ))}
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((_column) => {
+                const column = _column as ColumnInstanceOverride<
+                  CustomizeRecord
+                >
+
+                // <th> 全体が onClick に反応すると邪魔なため
+                const { onClick, key, ...rest } = column.getHeaderProps(
+                  column.getSortByToggleProps()
+                ) as TableHeaderPropsReal
+
+                return (
+                  <th key={key} {...rest}>
+                    {/* TODO どう正しく解消すべきかわからん */}
+                    {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
+                    <div onClick={onClick} role="button" tabIndex={-1}>
+                      {column.render("Header")}
+                      <span>
+                        {column.isSorted &&
+                          (column.isSortedDesc ? " 🔽" : " 🔼")}
+                      </span>
+                    </div>
+                    {column.canFilter && <div>{column.render("Filter")}</div>}
+                  </th>
+                )
+              })}
             </tr>
-          )
-        })}
-      </tbody>
-    </table>
+          ))}
+          <tr>
+            <th colSpan={flatColumns.length} css={recordsCounter}>
+              Hits: {rows.length}
+            </th>
+          </tr>
+        </thead>
+
+        <tbody {...getTableBodyProps()}>
+          {rows.map((row) => {
+            prepareRow(row)
+            return (
+              // eslint-disable-next-line react/jsx-key
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell) => (
+                  // eslint-disable-next-line react/jsx-key
+                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                ))}
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    </div>
   )
 }
 
-const root = css`
+const tableCss = css`
   border: 1px solid black;
 
   th,
