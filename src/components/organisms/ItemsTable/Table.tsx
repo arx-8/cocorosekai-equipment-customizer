@@ -201,9 +201,7 @@ export const Table: React.FC<OwnProps> = () => {
 }
 
 const root = css`
-  table {
-    border: 1px solid black;
-  }
+  border: 1px solid black;
 
   thead,
   tbody {
@@ -219,7 +217,7 @@ const root = css`
 
   th,
   td {
-    border-right: 1px solid black;
+    border-left: 1px solid black;
     border-bottom: 1px solid black;
   }
 `
