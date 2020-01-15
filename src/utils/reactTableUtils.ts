@@ -1,6 +1,7 @@
 import matchSorter from "match-sorter"
 import { IdType, Row } from "react-table"
 import { ItemsTableRow } from "src/components/organisms/ItemsTable/Table"
+import { CustomizeRecord } from "src/domain/model/CustomizeRecord"
 import { Attribute, AttributeValues } from "src/domain/model/Equipment"
 
 /**
@@ -39,4 +40,22 @@ export const itemsTableAttributeFilter = (
   }
 
   return rows.filter((r) => filterValues.includes(r.original.attribute))
+}
+
+export const customizeTableAttributeFilter = (
+  rows: Row<CustomizeRecord>[],
+  _columnIds: IdType<CustomizeRecord>[],
+  filterValues: Attribute[]
+): Row<CustomizeRecord>[] => {
+  // 全選択 or 全未選択
+  if (
+    filterValues.length === Object.keys(AttributeValues).length ||
+    filterValues.length === 0
+  ) {
+    return rows
+  }
+
+  return rows.filter((r) =>
+    r.original.mixedAttributes.some((a) => filterValues.includes(a))
+  )
 }

@@ -2,7 +2,14 @@
 import { css, jsx } from "@emotion/core"
 import React, { Fragment, useMemo } from "react"
 import { useSelector } from "react-redux"
-import { useBlockLayout, useFilters, useSortBy, useTable } from "react-table"
+import {
+  FilterTypes,
+  useBlockLayout,
+  useFilters,
+  useSortBy,
+  useTable,
+} from "react-table"
+import { AttributeColumnFilter } from "src/components/molecules/AttributeColumnFilter"
 import { NumberRangeColumnFilter } from "src/components/molecules/NumberRangeColumnFilter"
 import { CellOfActions } from "src/components/organisms/CustomizeTable/CellOfActions"
 import { CellOfAttrs } from "src/components/organisms/CustomizeTable/CellOfAttrs"
@@ -17,6 +24,7 @@ import {
   TableInstanceOverride,
   TableOptionsOverride,
 } from "src/types/reactTableUtils"
+import { customizeTableAttributeFilter } from "src/utils/reactTableUtils"
 
 type OwnProps = {
   children?: never
@@ -53,6 +61,8 @@ const createColumnOptionsOuter = (): ColumnOptionsOverride<
       // TODO Array なので sort できない
       Cell: CellOfAttrs,
       width: 56,
+      Filter: AttributeColumnFilter,
+      filter: "attributeFilter",
     },
     {
       Header: "装備コスト",
@@ -113,6 +123,10 @@ const defaultColumn: Partial<ColumnOptionsOverride<CustomizeRecord>> = {
   sortDescFirst: true,
 }
 
+const filterTypes: FilterTypes<CustomizeRecord> = {
+  attributeFilter: customizeTableAttributeFilter,
+}
+
 export const Table: React.FC<OwnProps> = () => {
   const data = useSelector(customizeSelectors.getCustomizeRecords)
 
@@ -133,6 +147,7 @@ export const Table: React.FC<OwnProps> = () => {
       columns,
       data,
       defaultColumn,
+      filterTypes,
       autoResetFilters: false,
       autoResetSortBy: false,
     } as TableOptionsOverride<CustomizeRecord>,

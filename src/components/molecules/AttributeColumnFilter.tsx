@@ -17,12 +17,14 @@ export const AttributeColumnFilter: React.FC<OwnProps> = ({ column }) => {
   return (
     <div css={root}>
       {Object.values(AttributeValues).map((v) => {
+        // (不十分なユニーク値だが) 共通化してるため label for の衝突回避のための column.id
+        const labelFor = `${column.id}:${v}`
         const Attr = getAttrComponent(v)
         return (
           <div key={v}>
-            <label css={clickable} htmlFor={v}>
+            <label css={clickable} htmlFor={labelFor}>
               <input
-                id={v}
+                id={labelFor}
                 type="checkbox"
                 defaultChecked={filterValues.includes(v)}
                 onClick={() => {
