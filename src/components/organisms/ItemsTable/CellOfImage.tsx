@@ -4,12 +4,12 @@ import React from "react"
 import { useDispatch } from "react-redux"
 import { CellProps } from "react-table"
 import { EquipmentImg } from "src/components/atoms/EquipmentImg"
-import { Equipment } from "src/domain/model/Equipment"
+import { ItemsTableRow } from "src/components/organisms/ItemsTable/Table"
 import { customizeOperations } from "src/store/customize"
 
-type OwnProps = CellProps<Equipment> & {
+type OwnProps = {
   children?: never
-}
+} & CellProps<ItemsTableRow>
 
 export const CellOfImage: React.FC<OwnProps> = ({ row }) => {
   const dispatch = useDispatch()

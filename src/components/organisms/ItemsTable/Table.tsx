@@ -1,12 +1,20 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
 import React, { Fragment } from "react"
-import { useBlockLayout, useFilters, useSortBy, useTable } from "react-table"
+import {
+  FilterTypes,
+  useBlockLayout,
+  useFilters,
+  useSortBy,
+  useTable,
+} from "react-table"
 import { data } from "src/assets/data"
 import { NumberRangeColumnFilter } from "src/components/molecules/NumberRangeColumnFilter"
+import { TextColumnFilter } from "src/components/molecules/TextColumnFilter"
 import { CellOfAttrs } from "src/components/organisms/ItemsTable/CellOfAttrs"
 import { CellOfImage } from "src/components/organisms/ItemsTable/CellOfImage"
-import { Equipment, SpecialEffect } from "src/domain/model/Equipment"
+import { Equipment } from "src/domain/model/Equipment"
+import { convertToItemsTable } from "src/gateway/dataGateway"
 import {
   ColumnInstanceOverride,
   ColumnOptionsOverride,
@@ -14,12 +22,20 @@ import {
   TableInstanceOverride,
   TableOptionsOverride,
 } from "src/types/reactTableUtils"
+import { fuzzyTextFilterFn } from "src/utils/reactTableUtils"
 
 type OwnProps = {
   children?: never
 }
 
-const columns: ColumnOptionsOverride<Equipment>[] = [
+/**
+ * filter, sort に都合の悪い型を変換するため、Table用の型を追加している
+ */
+export type ItemsTableRow = Equipment & {
+  specialEffectsText: string
+}
+
+const columns: ColumnOptionsOverride<ItemsTableRow>[] = [
   {
     Header: "ID",
     accessor: "id",
@@ -34,6 +50,8 @@ const columns: ColumnOptionsOverride<Equipment>[] = [
     Header: "名前",
     accessor: "rawName",
     width: 240,
+    Filter: TextColumnFilter,
+    filter: "fuzzyText",
   },
   {
     Header: "装備コスト",
@@ -85,22 +103,26 @@ const columns: ColumnOptionsOverride<Equipment>[] = [
   },
   {
     Header: "特殊効果",
-    accessor: "specialEffects",
-    // TODO Array なので sort できない
-    Cell: (p) => {
-      const v = p.cell.value as SpecialEffect[]
-      return v.map((e) => e.rawText).join(",")
-    },
+    accessor: "specialEffectsText",
     width: 240,
+    Filter: TextColumnFilter,
+    filter: "fuzzyText",
   },
 ]
 
-const defaultColumn: Partial<ColumnOptionsOverride<Equipment>> = {
+const defaultColumn: Partial<ColumnOptionsOverride<ItemsTableRow>> = {
   // defaultCanFilter が必ず true (必ず Filter が描画される) バグがあるっぽい
   // そのため、 default で Filter を定義しておく
   Filter: <Fragment />,
   sortDescFirst: true,
 }
+
+const filterTypes: FilterTypes<ItemsTableRow> = {
+  fuzzyText: fuzzyTextFilterFn,
+}
+
+// 今は data は不変のため、 memo 化のためにも render の外で宣言する
+const tableData = convertToItemsTable(data)
 
 export const Table: React.FC<OwnProps> = () => {
   // Use the state and functions returned from useTable to build your UI
@@ -113,15 +135,16 @@ export const Table: React.FC<OwnProps> = () => {
   } = useTable(
     {
       columns,
-      data,
+      data: tableData,
       defaultColumn,
+      filterTypes,
       autoResetFilters: false,
       autoResetSortBy: false,
-    } as TableOptionsOverride<Equipment>,
+    } as TableOptionsOverride<ItemsTableRow>,
     useBlockLayout,
     useFilters,
     useSortBy
-  ) as TableInstanceOverride<Equipment>
+  ) as TableInstanceOverride<ItemsTableRow>
 
   // Render the UI for your table
   return (
@@ -131,7 +154,7 @@ export const Table: React.FC<OwnProps> = () => {
           // eslint-disable-next-line react/jsx-key
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((_column) => {
-              const column = _column as ColumnInstanceOverride<Equipment>
+              const column = _column as ColumnInstanceOverride<ItemsTableRow>
 
               // <th> 全体が onClick に反応すると邪魔なため
               const { onClick, key, ...rest } = column.getHeaderProps(
