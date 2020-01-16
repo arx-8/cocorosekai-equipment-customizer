@@ -98,7 +98,7 @@ const imgWrapper = css`
 `
 
 const selectedCss = css`
-  border: solid 2px red;
+  border: solid 4px red;
 `
 
 const imgCss = css`
