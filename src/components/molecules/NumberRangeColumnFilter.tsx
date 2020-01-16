@@ -40,9 +40,13 @@ export const NumberRangeColumnFilter: React.FC<OwnProps> = ({ column }) => {
     return [min, max]
   }, [id, preFilteredRows])
 
+  const hasMin = !!filterValue[0]
+  const hasMax = !!filterValue[1]
+
   return (
     <div css={root}>
       <input
+        css={hasMin && hasValue}
         value={filterValue[0] || ""}
         type="number"
         onChange={(e) => {
@@ -56,6 +60,7 @@ export const NumberRangeColumnFilter: React.FC<OwnProps> = ({ column }) => {
       />
       to
       <input
+        css={hasMax && hasValue}
         value={filterValue[1] || ""}
         type="number"
         onChange={(e) => {
@@ -74,7 +79,8 @@ export const NumberRangeColumnFilter: React.FC<OwnProps> = ({ column }) => {
 const root = css`
   display: flex;
   flex-direction: column;
+`
 
-  /* ヘッダーに実装する都合、sort 用の pointer スタイルが適用されるため、回避 */
-  cursor: auto;
+const hasValue = css`
+  background: yellow;
 `

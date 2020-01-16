@@ -12,7 +12,7 @@ export const TextColumnFilter: React.FC<OwnProps> = ({ column }) => {
 
   return (
     <input
-      css={root}
+      css={[root, filterValue && hasValue]}
       onChange={(e) => {
         // Set undefined to remove the filter entirely
         setFilter(e.target.value || undefined)
@@ -25,4 +25,8 @@ export const TextColumnFilter: React.FC<OwnProps> = ({ column }) => {
 
 const root = css`
   width: 90%;
+`
+
+const hasValue = css`
+  background: yellow;
 `

@@ -24,10 +24,10 @@ export const AttributeColumnFilter: React.FC<OwnProps> = ({ column }) => {
           <div key={v}>
             <label css={clickable} htmlFor={labelFor}>
               <input
-                id={labelFor}
                 type="checkbox"
-                defaultChecked={filterValues.includes(v)}
-                onClick={() => {
+                id={labelFor}
+                checked={filterValues.includes(v)}
+                onChange={() => {
                   setFilter(toggleValues(filterValues, v))
                 }}
               />
