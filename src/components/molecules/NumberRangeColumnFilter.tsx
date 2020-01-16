@@ -79,9 +79,6 @@ export const NumberRangeColumnFilter: React.FC<OwnProps> = ({ column }) => {
 const root = css`
   display: flex;
   flex-direction: column;
-
-  /* ヘッダーに実装する都合、sort 用の pointer スタイルが適用されるため、回避 */
-  cursor: auto;
 `
 
 const hasValue = css`

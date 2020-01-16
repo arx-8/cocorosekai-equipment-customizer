@@ -184,15 +184,26 @@ export const Table: React.FC<OwnProps> = () => {
                 >
 
                 // <th> 全体が onClick に反応すると邪魔なため
-                const { onClick, key, ...rest } = column.getHeaderProps(
+                const { onClick, key, style, ...rest } = column.getHeaderProps(
                   column.getSortByToggleProps()
                 ) as TableHeaderPropsReal
 
+                if (style) {
+                  // デフォルトだと Filter cell まで clickable な UI にされるため
+                  // clickable な場所は自分で決める
+                  delete style.cursor
+                }
+
                 return (
-                  <th key={key} {...rest}>
+                  <th key={key} style={style} {...rest}>
                     {/* TODO どう正しく解消すべきかわからん */}
                     {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
-                    <div onClick={onClick} role="button" tabIndex={-1}>
+                    <div
+                      css={column.canSort && headerSortCss}
+                      onClick={onClick}
+                      role="button"
+                      tabIndex={-1}
+                    >
                       {column.render("Header")}
                       <span>
                         {column.isSorted &&
@@ -243,4 +254,8 @@ const tableCss = css`
 
 const recordsCounter = css`
   text-align: left;
+`
+
+const headerSortCss = css`
+  cursor: pointer;
 `
