@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
-import React, { Fragment } from "react"
+import React, { Fragment, useCallback } from "react"
 import {
   FilterTypes,
   useBlockLayout,
@@ -8,6 +8,7 @@ import {
   useSortBy,
   useTable,
 } from "react-table"
+import { FixedSizeList, ListChildComponentProps } from "react-window"
 import { data } from "src/assets/data"
 import { HeartIcon } from "src/components/atoms/icons/HeartIcon"
 import { ShieldIcon } from "src/components/atoms/icons/ShieldIcon"
@@ -173,6 +174,7 @@ export const Table: React.FC<OwnProps> = () => {
     getTableProps,
     headerGroups,
     prepareRow,
+    totalColumnsWidth,
     rows,
     setAllFilters,
   } = useTable(
@@ -188,6 +190,29 @@ export const Table: React.FC<OwnProps> = () => {
     useFilters,
     useSortBy
   ) as TableInstanceOverride<ItemsTableRow>
+
+  // row
+  const rowsRenderer = useCallback(
+    ({ index, style }: ListChildComponentProps) => {
+      const row = rows[index]
+      prepareRow(row)
+
+      return (
+        <div {...row.getRowProps({ style })} css={rowCss}>
+          {row.cells.map((cell) => {
+            const isEvenColumn = cell.column.index % 2 === 0
+            return (
+              // eslint-disable-next-line react/jsx-key
+              <div {...cell.getCellProps()} css={isEvenColumn && evenColumn}>
+                {cell.render("Cell")}
+              </div>
+            )
+          })}
+        </div>
+      )
+    },
+    [prepareRow, rows]
+  )
 
   // Render the UI for your table
   return (
@@ -205,11 +230,17 @@ export const Table: React.FC<OwnProps> = () => {
         絞込みリセット
       </button>
 
-      <table {...getTableProps()} css={tableCss}>
-        <thead>
+      {/* table */}
+      <div
+        {...getTableProps()}
+        style={{ width: totalColumnsWidth }}
+        css={tableCss}
+      >
+        {/* header */}
+        <div>
           {headerGroups.map((headerGroup) => (
             // eslint-disable-next-line react/jsx-key
-            <tr {...headerGroup.getHeaderGroupProps()}>
+            <div {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((_column) => {
                 const column = _column as ColumnInstanceOverride<ItemsTableRow>
 
@@ -229,16 +260,16 @@ export const Table: React.FC<OwnProps> = () => {
                 const isEvenColumn = column.index % 2 === 0
 
                 return (
-                  <th
+                  <div
                     key={key}
                     style={style}
                     {...rest}
-                    css={[thCss, isEvenColumn && evenColumn]}
+                    css={[headerCell, isEvenColumn && evenColumn]}
                   >
                     {/* TODO どう正しく解消すべきかわからん */}
                     {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
                     <div
-                      css={column.canSort && headerSortCss}
+                      css={column.canSort && headerCellSortable}
                       onClick={onClick}
                       role="button"
                       tabIndex={-1}
@@ -250,90 +281,62 @@ export const Table: React.FC<OwnProps> = () => {
                       </span>
                     </div>
                     {column.canFilter && <div>{column.render("Filter")}</div>}
-                  </th>
+                  </div>
                 )
               })}
-            </tr>
+            </div>
           ))}
-          <tr>
-            <th css={recordsCounter}>Hits: {rows.length}</th>
-          </tr>
-        </thead>
 
-        <tbody {...getTableBodyProps()} css={tbodyCss}>
-          {rows.map((row) => {
-            prepareRow(row)
-            return (
-              // eslint-disable-next-line react/jsx-key
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  const isEvenColumn = cell.column.index % 2 === 0
-                  return (
-                    // eslint-disable-next-line react/jsx-key
-                    <td
-                      {...cell.getCellProps()}
-                      css={isEvenColumn && evenColumn}
-                    >
-                      {cell.render("Cell")}
-                    </td>
-                  )
-                })}
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+          {/* mid header */}
+          <div css={midHeader}>
+            <div>Hits: {rows.length}</div>
+          </div>
+        </div>
+
+        {/* body */}
+        <div {...getTableBodyProps()}>
+          <FixedSizeList
+            height={336}
+            itemCount={rows.length}
+            itemSize={51}
+            width={totalColumnsWidth}
+          >
+            {rowsRenderer}
+          </FixedSizeList>
+        </div>
+      </div>
     </div>
   )
 }
 
 const tableCss = css`
-  border: 1px solid black;
-
-  thead,
-  tbody {
-    display: block;
-  }
-
-  tbody {
-    overflow-x: hidden;
-    overflow-y: scroll;
-    /* テーブル全体の高さ */
-    height: 320px;
-  }
-
-  th,
-  td {
-    border-left: 1px solid black;
-    border-bottom: 1px solid black;
-  }
+  border: solid 1px black;
 `
 
-const recordsCounter = css`
-  text-align: left;
-
-  /* 
-  ヘッダのスクロール固定のため、blockにしている
-  そのせいで、<th colSpan={flatColumns.length} が効かない
-  そのため、ここだけ特別扱い
-   */
-  border: unset !important;
-`
-
-const thCss = css`
+const headerCell = css`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  font-weight: bold;
+  text-align: center;
+  padding: 2px;
 `
 
-const tbodyCss = css`
-  border-top: solid 1px black;
-`
-
-const headerSortCss = css`
+const headerCellSortable = css`
   cursor: pointer;
 `
 
 const evenColumn = css`
   background: #eee;
+`
+
+const midHeader = css`
+  font-weight: bold;
+  border-top: solid 1px black;
+  padding-left: 2px;
+`
+
+const rowCss = css`
+  border-top: solid 1px black;
 `
