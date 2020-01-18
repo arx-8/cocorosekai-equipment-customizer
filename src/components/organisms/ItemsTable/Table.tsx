@@ -187,10 +187,12 @@ export const Table: React.FC<OwnProps> = () => {
                   // デフォルトだと Filter cell まで clickable な UI にされるため
                   // clickable な場所は自分で決める
                   delete style.cursor
+                  // emotion css 側で決めるため
+                  delete style.display
                 }
 
                 return (
-                  <th key={key} style={style} {...rest}>
+                  <th key={key} style={style} {...rest} css={thCss}>
                     {/* TODO どう正しく解消すべきかわからん */}
                     {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
                     <div
@@ -266,6 +268,12 @@ const recordsCounter = css`
   そのため、ここだけ特別扱い
    */
   border: unset !important;
+`
+
+const thCss = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `
 
 const tbodyCss = css`
