@@ -249,8 +249,14 @@ export const Table: React.FC<OwnProps> = () => {
               {headerGroup.headers.map((_column) => {
                 const column = _column as ColumnInstanceOverride<ItemsTableRow>
 
-                // <th> 全体が onClick に反応すると邪魔なため
-                const { onClick, key, style, ...rest } = column.getHeaderProps(
+                // ヘッダーセル全体がソート用 (onClick など) として反応すると邪魔なため
+                const {
+                  key,
+                  onClick,
+                  style,
+                  title,
+                  ...rest
+                } = column.getHeaderProps(
                   column.getSortByToggleProps()
                 ) as TableHeaderPropsReal
 
@@ -278,6 +284,7 @@ export const Table: React.FC<OwnProps> = () => {
                       onClick={onClick}
                       role="button"
                       tabIndex={-1}
+                      title={title}
                     >
                       {column.render("Header")}
                       <span>
