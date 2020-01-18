@@ -19,9 +19,10 @@ export type SelectedEquipmentIds = (EquipmentId | undefined)[]
 
 export type CustomizeRecord = {
   equippedIds: SelectedEquipmentIds
-  totalSpecValue: number
-  totalEquipCost: EquipCost
   mixedAttributes: Attribute[]
+  mixedSpecialEffects: SpecialEffect[]
+  totalEquipCost: EquipCost
+  totalSpecValue: number
   totalStatuses: {
     hp: HitPointNum
     magicAtk: MagicAttackNum
@@ -29,7 +30,6 @@ export type CustomizeRecord = {
     physicalAtk: PhysicalAttackNum
     physicalDef: PhysicalDefenseNum
   }
-  mixedSpecialEffects: SpecialEffect[]
 }
 
 /**
@@ -39,8 +39,8 @@ export type CellColIndex = 0 | 1 | 2 | 3 | 4 | 5
 export const MAX_EQUIPMENTS_NUM = 6
 
 export type CellIndex = {
-  rowIndex: number
   colIndex: CellColIndex
+  rowIndex: number
 }
 
 export const calcCustomizeRecord = (

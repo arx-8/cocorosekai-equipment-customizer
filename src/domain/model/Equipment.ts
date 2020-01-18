@@ -2,11 +2,16 @@ import { data } from "src/assets/data"
 import { Brand } from "src/types/tsUtils"
 
 export type Equipment = {
+  attribute: Attribute
+  // image:
+  /** 強化回数 (+ の数) */
+  enhancementsNum: 0 | 1 | 2
+  equipCost: EquipCost
   id: EquipmentId
+  imageUrl: string | null
   name: string
   rawName: string
-  equipCost: EquipCost
-  attribute: Attribute
+  specialEffects: SpecialEffect[]
   statuses: {
     hp: HitPointNum
     magicAtk: MagicAttackNum
@@ -14,11 +19,6 @@ export type Equipment = {
     physicalAtk: PhysicalAttackNum
     physicalDef: PhysicalDefenseNum
   }
-  imageUrl: string | null
-  specialEffects: SpecialEffect[]
-  // image:
-  /** 強化回数 (+ の数) */
-  enhancementsNum: 0 | 1 | 2
 }
 
 /** 装備 ID (内部ロジック用) */
