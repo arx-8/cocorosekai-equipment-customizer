@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
-import React, { useCallback } from "react"
+import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { CellProps } from "react-table"
 import SetAreaImg from "src/assets/SetArea.jpg"
@@ -17,20 +17,17 @@ type OwnProps = CellProps<CustomizeRecord> & {
   children?: never
 }
 
+const isSelected = (currentSelected: CellIndex, target: CellIndex): boolean => {
+  return (
+    currentSelected.colIndex === target.colIndex &&
+    currentSelected.rowIndex === target.rowIndex
+  )
+}
+
 export const CellOfCustomize: React.FC<OwnProps> = ({ row }) => {
   const dispatch = useDispatch()
   const currentSelected = useSelector(
     customizeSelectors.getCurrentSelectedCellIndex
-  )
-
-  const isSelected = useCallback(
-    (cellIndex: CellIndex): boolean => {
-      return (
-        currentSelected.colIndex === cellIndex.colIndex &&
-        currentSelected.rowIndex === cellIndex.rowIndex
-      )
-    },
-    [currentSelected.colIndex, currentSelected.rowIndex]
   )
 
   const equippedIds = row.original.equippedIds
@@ -46,7 +43,7 @@ export const CellOfCustomize: React.FC<OwnProps> = ({ row }) => {
             <button
               css={[
                 imgWrapper,
-                isSelected({
+                isSelected(currentSelected, {
                   colIndex,
                   rowIndex: row.index,
                 }) && selectedCss,
