@@ -22,7 +22,7 @@ export const CellOfImage: React.FC<OwnProps> = ({ row }) => {
           dispatch(customizeOperations.selectEquipment(row.original.id))
         }
       >
-        <EquipmentImg equipment={row.original} />
+        <EquipmentImg imgCss={imgCss} equipment={row.original} />
       </button>
     </div>
   )
@@ -33,4 +33,8 @@ const root = css``
 const imgWrapper = css`
   cursor: pointer;
   padding: unset;
+`
+
+const imgCss = css`
+  width: 48px;
 `

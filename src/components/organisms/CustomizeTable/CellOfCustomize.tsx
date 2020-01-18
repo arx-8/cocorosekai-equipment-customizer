@@ -63,7 +63,7 @@ export const CellOfCustomize: React.FC<OwnProps> = ({ row }) => {
               {equipment == null ? (
                 <img css={imgCss} src={SetAreaImg} alt="SetAreaImg" />
               ) : (
-                <EquipmentImg equipment={equipment} />
+                <EquipmentImg imgCss={imgCss} equipment={equipment} />
               )}
             </button>
 
@@ -102,7 +102,7 @@ const selectedCss = css`
 `
 
 const imgCss = css`
-  width: 56px;
+  width: 48px;
 `
 
 const btnWrapper = css`

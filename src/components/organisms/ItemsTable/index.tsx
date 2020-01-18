@@ -16,5 +16,5 @@ export const ItemsTable: React.FC<OwnProps> = () => {
 }
 
 const root = css`
-  padding-top: 16px;
+  padding-top: 8px;
 `

@@ -40,7 +40,10 @@ export const AttributeColumnFilter: React.FC<OwnProps> = ({ column }) => {
   )
 }
 
-const root = css``
+const root = css`
+  /* ここの高さが他のヘッダー全体の高さを決めるほどデカいため */
+  font-size: small;
+`
 
 const clickable = css`
   cursor: pointer;
