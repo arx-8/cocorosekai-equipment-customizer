@@ -1,15 +1,15 @@
 import {
   AnyAction,
+  Store,
   applyMiddleware,
   combineReducers,
   compose,
   createStore,
-  Store,
 } from "redux"
 import persistState from "redux-localstorage"
 import thunkMiddleWare from "redux-thunk"
 import { isDevelopment } from "src/constants/env"
-import { customizeReducer, CustomizeState } from "src/store/customize"
+import { CustomizeState, customizeReducer } from "src/store/customize"
 
 export type RootState = Readonly<{
   customizeState: CustomizeState

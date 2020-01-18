@@ -8,6 +8,7 @@ import {
   PhysicalAttackNum,
   PhysicalDefenseNum,
 } from "src/domain/model/Equipment"
+
 import { calcCustomizeRecord } from "."
 
 describe("calcCustomizeRecord", () => {

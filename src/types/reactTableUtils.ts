@@ -46,13 +46,13 @@ export type FilterRendererProps<TData extends object = {}> = {
  * たぶん d.ts の方が間違ってるため定義
  */
 export type TableHeaderPropsReal = {
-  key: React.Key
   colSpan: number
-  style?: React.CSSProperties
+  key: React.Key
   /**
    * useSortBy 組込時には、ソートの toggle を実行してくれる
    */
   onClick: MouseEventHandler
+  style?: React.CSSProperties
   title: string
 }
 

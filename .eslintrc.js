@@ -20,6 +20,7 @@ module.exports = {
   plugins: [
     // CI で warn も検知可能にするため、全て error にする
     "only-error",
+    "typescript-sort-keys",
   ],
   rules: {
     "import/no-default-export": "error",
@@ -58,6 +59,9 @@ module.exports = {
         trailingComma: "es5",
       },
     ],
+
+    "typescript-sort-keys/interface": "error",
+    "typescript-sort-keys/string-enum": "error",
 
     // constructor のショートハンド（メンバーの省略記法）を許可
     "@typescript-eslint/explicit-member-accessibility": "off",
