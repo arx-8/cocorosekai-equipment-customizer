@@ -226,12 +226,19 @@ export const Table: React.FC<OwnProps> = () => {
                   delete style.display
                 }
 
+                const isEvenColumn = column.index % 2 === 0
+
                 return (
-                  <th key={key} style={style} {...rest} css={thCss}>
+                  <th
+                    key={key}
+                    style={style}
+                    {...rest}
+                    css={[thCss, isEvenColumn && evenColumn]}
+                  >
                     {/* TODO どう正しく解消すべきかわからん */}
                     {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
                     <div
-                      css={headerSortCss}
+                      css={column.canSort && headerSortCss}
                       onClick={onClick}
                       role="button"
                       tabIndex={-1}
@@ -259,10 +266,18 @@ export const Table: React.FC<OwnProps> = () => {
             return (
               // eslint-disable-next-line react/jsx-key
               <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => (
-                  // eslint-disable-next-line react/jsx-key
-                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                ))}
+                {row.cells.map((cell) => {
+                  const isEvenColumn = cell.column.index % 2 === 0
+                  return (
+                    // eslint-disable-next-line react/jsx-key
+                    <td
+                      {...cell.getCellProps()}
+                      css={isEvenColumn && evenColumn}
+                    >
+                      {cell.render("Cell")}
+                    </td>
+                  )
+                })}
               </tr>
             )
           })}
@@ -317,4 +332,8 @@ const tbodyCss = css`
 
 const headerSortCss = css`
   cursor: pointer;
+`
+
+const evenColumn = css`
+  background: #eee;
 `
