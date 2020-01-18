@@ -9,7 +9,12 @@ import {
   useSortBy,
   useTable,
 } from "react-table"
+import { HeartIcon } from "src/components/atoms/icons/HeartIcon"
+import { ShieldIcon } from "src/components/atoms/icons/ShieldIcon"
+import { SwordIcon } from "src/components/atoms/icons/SwordIcon"
+import { WandIcon } from "src/components/atoms/icons/WandIcon"
 import { AttributeColumnFilter } from "src/components/molecules/AttributeColumnFilter"
+import { HeaderCellWithIcon } from "src/components/molecules/HeaderCellWithIcon"
 import { NumberRangeColumnFilter } from "src/components/molecules/NumberRangeColumnFilter"
 import { PreWrapCell } from "src/components/molecules/PreWrapCell"
 import { TextColumnFilter } from "src/components/molecules/TextColumnFilter"
@@ -85,35 +90,65 @@ const createColumnOptionsOuter = (): ColumnOptionsOverride<
       filter: "between",
     },
     {
-      Header: "HP",
+      // eslint-disable-next-line react/display-name
+      Header: () => (
+        <HeaderCellWithIcon
+          headerName="HP"
+          icon={<HeartIcon width={20} height={20} color="limegreen" />}
+        />
+      ),
       accessor: "totalStatuses.hp",
       width: 64,
       Filter: NumberRangeColumnFilter,
       filter: "between",
     },
     {
-      Header: "物理 攻撃",
+      // eslint-disable-next-line react/display-name
+      Header: () => (
+        <HeaderCellWithIcon
+          headerName="物理 攻撃"
+          icon={<SwordIcon width={20} height={20} color="red" />}
+        />
+      ),
       accessor: "totalStatuses.physicalAtk",
       width: 64,
       Filter: NumberRangeColumnFilter,
       filter: "between",
     },
     {
-      Header: "物理 防御",
+      // eslint-disable-next-line react/display-name
+      Header: () => (
+        <HeaderCellWithIcon
+          headerName="物理 防御"
+          icon={<ShieldIcon width={20} height={20} color="red" />}
+        />
+      ),
       accessor: "totalStatuses.physicalDef",
       width: 64,
       Filter: NumberRangeColumnFilter,
       filter: "between",
     },
     {
-      Header: "魔法 攻撃",
+      // eslint-disable-next-line react/display-name
+      Header: () => (
+        <HeaderCellWithIcon
+          headerName="魔法 攻撃"
+          icon={<WandIcon width={20} height={20} color="blue" />}
+        />
+      ),
       accessor: "totalStatuses.magicAtk",
       width: 64,
       Filter: NumberRangeColumnFilter,
       filter: "between",
     },
     {
-      Header: "魔法 防御",
+      // eslint-disable-next-line react/display-name
+      Header: () => (
+        <HeaderCellWithIcon
+          headerName="魔法 防御"
+          icon={<ShieldIcon width={20} height={20} color="blue" />}
+        />
+      ),
       accessor: "totalStatuses.magicDef",
       width: 64,
       Filter: NumberRangeColumnFilter,

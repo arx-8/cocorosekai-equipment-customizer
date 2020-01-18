@@ -37,6 +37,8 @@
     "cocorosekai",
     "customizer",
     "esnext",
-    "immer"
+    "immer",
+    "localstorage",
+    "reduxjs"
   ]
 }
