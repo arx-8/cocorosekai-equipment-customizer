@@ -223,7 +223,7 @@ export const Table: React.FC<OwnProps> = () => {
           </tr>
         </thead>
 
-        <tbody {...getTableBodyProps()}>
+        <tbody {...getTableBodyProps()} css={tbodyCss}>
           {rows.map((row) => {
             prepareRow(row)
             return (
@@ -245,6 +245,18 @@ export const Table: React.FC<OwnProps> = () => {
 const tableCss = css`
   border: 1px solid black;
 
+  thead,
+  tbody {
+    display: block;
+  }
+
+  tbody {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    /* テーブル全体の高さ */
+    height: 320px;
+  }
+
   th,
   td {
     border-left: 1px solid black;
@@ -254,6 +266,17 @@ const tableCss = css`
 
 const recordsCounter = css`
   text-align: left;
+
+  /* 
+  ヘッダのスクロール固定のため、blockにしている
+  そのせいで、<th colSpan={flatColumns.length} が効かない
+  そのため、ここだけ特別扱い
+   */
+  border: unset !important;
+`
+
+const tbodyCss = css`
+  border-top: solid 1px black;
 `
 
 const headerSortCss = css`
