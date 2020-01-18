@@ -11,11 +11,13 @@ import {
 } from "react-table"
 import { AttributeColumnFilter } from "src/components/molecules/AttributeColumnFilter"
 import { NumberRangeColumnFilter } from "src/components/molecules/NumberRangeColumnFilter"
+import { PreWrapCell } from "src/components/molecules/PreWrapCell"
+import { TextColumnFilter } from "src/components/molecules/TextColumnFilter"
 import { CellOfActions } from "src/components/organisms/CustomizeTable/CellOfActions"
 import { CellOfAttrs } from "src/components/organisms/CustomizeTable/CellOfAttrs"
 import { CellOfCustomize } from "src/components/organisms/CustomizeTable/CellOfCustomize"
-import { CellOfSpecialEffects } from "src/components/organisms/CustomizeTable/CellOfSpecialEffects"
 import { CustomizeRecord } from "src/domain/model/CustomizeRecord"
+import { findEquipmentStrict } from "src/domain/model/Equipment"
 import { customizeSelectors } from "src/store/customize"
 import {
   ColumnInstanceOverride,
@@ -24,7 +26,10 @@ import {
   TableInstanceOverride,
   TableOptionsOverride,
 } from "src/types/reactTableUtils"
-import { customizeTableAttributeFilter } from "src/utils/reactTableUtils"
+import {
+  customizeTableAttributeFilter,
+  fuzzyTextFilter,
+} from "src/utils/reactTableUtils"
 
 type OwnProps = {
   children?: never
@@ -46,9 +51,17 @@ const createColumnOptionsOuter = (): ColumnOptionsOverride<
     },
     {
       Header: "装備編成",
-      accessor: "customize",
+      // sort, filter を可能にするため、string に変換
+      // 前と次の名が合体してあいまい検索に引っかかるのを防ぐため、"," で join
+      accessor: (originalRow) => {
+        return originalRow.equippedIds
+          .map((eId) => eId && findEquipmentStrict(eId).rawName)
+          .join(",")
+      },
       width: 336,
       Cell: CellOfCustomize,
+      Filter: TextColumnFilter,
+      filter: "fuzzyTextFilter",
     },
     // {
     //   Header: "参考総合値",
@@ -108,10 +121,14 @@ const createColumnOptionsOuter = (): ColumnOptionsOverride<
     },
     {
       Header: "特殊効果",
-      accessor: "mixedSpecialEffects",
-      // TODO Array なので sort できない
-      Cell: CellOfSpecialEffects,
+      // sort, filter を可能にするため、string に変換
+      accessor: (originalRow) => {
+        return originalRow.mixedSpecialEffects.map((e) => e.rawText).join("\n")
+      },
+      Cell: PreWrapCell,
       width: 240,
+      Filter: TextColumnFilter,
+      filter: "fuzzyTextFilter",
     },
   ]
 }
@@ -125,6 +142,7 @@ const defaultColumn: Partial<ColumnOptionsOverride<CustomizeRecord>> = {
 
 const filterTypes: FilterTypes<CustomizeRecord> = {
   attributeFilter: customizeTableAttributeFilter,
+  fuzzyTextFilter: fuzzyTextFilter,
 }
 
 export const Table: React.FC<OwnProps> = () => {
