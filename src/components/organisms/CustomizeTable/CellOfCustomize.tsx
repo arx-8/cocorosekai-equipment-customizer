@@ -80,6 +80,7 @@ export const CellOfCustomize: React.FC<OwnProps> = ({ row }) => {
             >
               ×
             </button>
+            <div css={name}>{equipment?.rawName}</div>
           </div>
         )
       })}
@@ -117,4 +118,8 @@ const remove = css`
   width: 20px;
   height: 20px;
   font-weight: bolder;
+`
+
+const name = css`
+  font-size: smaller;
 `
