@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { css, jsx, SerializedStyles } from "@emotion/core"
+import { SerializedStyles, css, jsx } from "@emotion/core"
 import React from "react"
 import NoImageImg from "src/assets/NoImage.jpg"
 import { Equipment } from "src/domain/model/Equipment"

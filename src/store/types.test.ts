@@ -1,4 +1,5 @@
 import { toUniq } from "src/utils/arrayUtils"
+
 import { ActionTypes as CustomizeActionTypes } from "./customize/actions"
 
 describe("ActionType", () => {

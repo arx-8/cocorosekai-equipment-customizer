@@ -6,6 +6,7 @@ import {
 } from "src/domain/model/CustomizeRecord"
 import { range } from "src/utils/arrayUtils"
 import { reducerWithInitialState } from "typescript-fsa-reducers"
+
 import * as actions from "./actions"
 
 type Record = {

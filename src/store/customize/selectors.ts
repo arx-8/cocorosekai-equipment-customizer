@@ -1,7 +1,7 @@
 import {
-  calcCustomizeRecord,
   CellIndex,
   CustomizeRecord,
+  calcCustomizeRecord,
 } from "src/domain/model/CustomizeRecord"
 import { EquipmentId, findEquipmentStrict } from "src/domain/model/Equipment"
 import { RootState } from "src/store/store"

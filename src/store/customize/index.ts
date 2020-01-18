@@ -1,5 +1,5 @@
 import * as operations from "./operations"
-import { reducer, State } from "./reducers"
+import { State, reducer } from "./reducers"
 import * as selectors from "./selectors"
 
 export const customizeOperations = operations
