@@ -9,13 +9,20 @@ import {
   useSortBy,
   useTable,
 } from "react-table"
+import { HeartIcon } from "src/components/atoms/icons/HeartIcon"
+import { ShieldIcon } from "src/components/atoms/icons/ShieldIcon"
+import { SwordIcon } from "src/components/atoms/icons/SwordIcon"
+import { WandIcon } from "src/components/atoms/icons/WandIcon"
 import { AttributeColumnFilter } from "src/components/molecules/AttributeColumnFilter"
+import { HeaderCellWithIcon } from "src/components/molecules/HeaderCellWithIcon"
 import { NumberRangeColumnFilter } from "src/components/molecules/NumberRangeColumnFilter"
+import { PreWrapCell } from "src/components/molecules/PreWrapCell"
+import { TextColumnFilter } from "src/components/molecules/TextColumnFilter"
 import { CellOfActions } from "src/components/organisms/CustomizeTable/CellOfActions"
 import { CellOfAttrs } from "src/components/organisms/CustomizeTable/CellOfAttrs"
 import { CellOfCustomize } from "src/components/organisms/CustomizeTable/CellOfCustomize"
-import { CellOfSpecialEffects } from "src/components/organisms/CustomizeTable/CellOfSpecialEffects"
 import { CustomizeRecord } from "src/domain/model/CustomizeRecord"
+import { findEquipmentStrict } from "src/domain/model/Equipment"
 import { customizeSelectors } from "src/store/customize"
 import {
   ColumnInstanceOverride,
@@ -24,7 +31,10 @@ import {
   TableInstanceOverride,
   TableOptionsOverride,
 } from "src/types/reactTableUtils"
-import { customizeTableAttributeFilter } from "src/utils/reactTableUtils"
+import {
+  customizeTableAttributeFilter,
+  fuzzyTextFilter,
+} from "src/utils/reactTableUtils"
 
 type OwnProps = {
   children?: never
@@ -46,9 +56,17 @@ const createColumnOptionsOuter = (): ColumnOptionsOverride<
     },
     {
       Header: "装備編成",
-      accessor: "customize",
-      width: 408,
+      // sort, filter を可能にするため、string に変換
+      // 前と次の名が合体してあいまい検索に引っかかるのを防ぐため、"," で join
+      accessor: (originalRow) => {
+        return originalRow.equippedIds
+          .map((eId) => eId && findEquipmentStrict(eId).rawName)
+          .join(",")
+      },
+      width: 336,
       Cell: CellOfCustomize,
+      Filter: TextColumnFilter,
+      filter: "fuzzyTextFilter",
     },
     // {
     //   Header: "参考総合値",
@@ -72,35 +90,65 @@ const createColumnOptionsOuter = (): ColumnOptionsOverride<
       filter: "between",
     },
     {
-      Header: "HP",
+      // eslint-disable-next-line react/display-name
+      Header: () => (
+        <HeaderCellWithIcon
+          headerName="HP"
+          icon={<HeartIcon width={20} height={20} color="limegreen" />}
+        />
+      ),
       accessor: "totalStatuses.hp",
       width: 64,
       Filter: NumberRangeColumnFilter,
       filter: "between",
     },
     {
-      Header: "物理 攻撃",
+      // eslint-disable-next-line react/display-name
+      Header: () => (
+        <HeaderCellWithIcon
+          headerName="物理 攻撃"
+          icon={<SwordIcon width={20} height={20} color="red" />}
+        />
+      ),
       accessor: "totalStatuses.physicalAtk",
       width: 64,
       Filter: NumberRangeColumnFilter,
       filter: "between",
     },
     {
-      Header: "物理 防御",
+      // eslint-disable-next-line react/display-name
+      Header: () => (
+        <HeaderCellWithIcon
+          headerName="物理 防御"
+          icon={<ShieldIcon width={20} height={20} color="red" />}
+        />
+      ),
       accessor: "totalStatuses.physicalDef",
       width: 64,
       Filter: NumberRangeColumnFilter,
       filter: "between",
     },
     {
-      Header: "魔法 攻撃",
+      // eslint-disable-next-line react/display-name
+      Header: () => (
+        <HeaderCellWithIcon
+          headerName="魔法 攻撃"
+          icon={<WandIcon width={20} height={20} color="blue" />}
+        />
+      ),
       accessor: "totalStatuses.magicAtk",
       width: 64,
       Filter: NumberRangeColumnFilter,
       filter: "between",
     },
     {
-      Header: "魔法 防御",
+      // eslint-disable-next-line react/display-name
+      Header: () => (
+        <HeaderCellWithIcon
+          headerName="魔法 防御"
+          icon={<ShieldIcon width={20} height={20} color="blue" />}
+        />
+      ),
       accessor: "totalStatuses.magicDef",
       width: 64,
       Filter: NumberRangeColumnFilter,
@@ -108,10 +156,14 @@ const createColumnOptionsOuter = (): ColumnOptionsOverride<
     },
     {
       Header: "特殊効果",
-      accessor: "mixedSpecialEffects",
-      // TODO Array なので sort できない
-      Cell: CellOfSpecialEffects,
+      // sort, filter を可能にするため、string に変換
+      accessor: (originalRow) => {
+        return originalRow.mixedSpecialEffects.map((e) => e.rawText).join("\n")
+      },
+      Cell: PreWrapCell,
       width: 240,
+      Filter: TextColumnFilter,
+      filter: "fuzzyTextFilter",
     },
   ]
 }
@@ -125,6 +177,7 @@ const defaultColumn: Partial<ColumnOptionsOverride<CustomizeRecord>> = {
 
 const filterTypes: FilterTypes<CustomizeRecord> = {
   attributeFilter: customizeTableAttributeFilter,
+  fuzzyTextFilter: fuzzyTextFilter,
 }
 
 export const Table: React.FC<OwnProps> = () => {
@@ -192,10 +245,19 @@ export const Table: React.FC<OwnProps> = () => {
                   // デフォルトだと Filter cell まで clickable な UI にされるため
                   // clickable な場所は自分で決める
                   delete style.cursor
+                  // emotion css 側で決めるため
+                  delete style.display
                 }
 
+                const isEvenColumn = column.index % 2 === 0
+
                 return (
-                  <th key={key} style={style} {...rest}>
+                  <th
+                    key={key}
+                    style={style}
+                    {...rest}
+                    css={[thCss, isEvenColumn && evenColumn]}
+                  >
                     {/* TODO どう正しく解消すべきかわからん */}
                     {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
                     <div
@@ -223,16 +285,24 @@ export const Table: React.FC<OwnProps> = () => {
           </tr>
         </thead>
 
-        <tbody {...getTableBodyProps()}>
+        <tbody {...getTableBodyProps()} css={tbodyCss}>
           {rows.map((row) => {
             prepareRow(row)
             return (
               // eslint-disable-next-line react/jsx-key
               <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => (
-                  // eslint-disable-next-line react/jsx-key
-                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                ))}
+                {row.cells.map((cell) => {
+                  const isEvenColumn = cell.column.index % 2 === 0
+                  return (
+                    // eslint-disable-next-line react/jsx-key
+                    <td
+                      {...cell.getCellProps()}
+                      css={isEvenColumn && evenColumn}
+                    >
+                      {cell.render("Cell")}
+                    </td>
+                  )
+                })}
               </tr>
             )
           })}
@@ -245,6 +315,18 @@ export const Table: React.FC<OwnProps> = () => {
 const tableCss = css`
   border: 1px solid black;
 
+  thead,
+  tbody {
+    display: block;
+  }
+
+  tbody {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    /* テーブル全体の高さ */
+    height: 320px;
+  }
+
   th,
   td {
     border-left: 1px solid black;
@@ -254,8 +336,29 @@ const tableCss = css`
 
 const recordsCounter = css`
   text-align: left;
+
+  /* 
+  ヘッダのスクロール固定のため、blockにしている
+  そのせいで、<th colSpan={flatColumns.length} が効かない
+  そのため、ここだけ特別扱い
+   */
+  border: unset !important;
+`
+
+const thCss = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`
+
+const tbodyCss = css`
+  border-top: solid 1px black;
 `
 
 const headerSortCss = css`
   cursor: pointer;
+`
+
+const evenColumn = css`
+  background: #eee;
 `

@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core"
+import { css, jsx, SerializedStyles } from "@emotion/core"
 import React from "react"
 import NoImageImg from "src/assets/NoImage.jpg"
 import { Equipment } from "src/domain/model/Equipment"
@@ -7,9 +7,10 @@ import { Equipment } from "src/domain/model/Equipment"
 type OwnProps = {
   children?: never
   equipment: Equipment
+  imgCss: SerializedStyles
 }
 
-export const EquipmentImg: React.FC<OwnProps> = ({ equipment }) => {
+export const EquipmentImg: React.FC<OwnProps> = ({ equipment, imgCss }) => {
   return (
     <div css={root}>
       {equipment.imageUrl == null ? (
@@ -34,8 +35,4 @@ const plus = css`
   color: #27279f;
   font-weight: bolder;
   font-size: x-large;
-`
-
-const imgCss = css`
-  width: 56px;
 `
