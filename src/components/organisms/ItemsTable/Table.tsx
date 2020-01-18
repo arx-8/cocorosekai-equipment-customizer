@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
-import React, { Fragment, useCallback } from "react"
+import React, { Fragment, useCallback, useMemo } from "react"
 import {
   FilterTypes,
   useBlockLayout,
@@ -173,10 +173,11 @@ export const Table: React.FC<OwnProps> = () => {
     getTableBodyProps,
     getTableProps,
     headerGroups,
+    preFilteredRows,
     prepareRow,
-    totalColumnsWidth,
     rows,
     setAllFilters,
+    totalColumnsWidth,
   } = useTable(
     {
       columns,
@@ -190,6 +191,10 @@ export const Table: React.FC<OwnProps> = () => {
     useFilters,
     useSortBy
   ) as TableInstanceOverride<ItemsTableRow>
+
+  const maxRowsCount = useMemo(() => preFilteredRows.length, [
+    preFilteredRows.length,
+  ])
 
   // row
   const rowsRenderer = useCallback(
@@ -289,7 +294,9 @@ export const Table: React.FC<OwnProps> = () => {
 
           {/* mid header */}
           <div css={midHeader}>
-            <div>Hits: {rows.length}</div>
+            <div>
+              Hits: {rows.length} / {maxRowsCount}
+            </div>
           </div>
         </div>
 

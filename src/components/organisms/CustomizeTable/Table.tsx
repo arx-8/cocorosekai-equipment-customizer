@@ -193,6 +193,7 @@ export const Table: React.FC<OwnProps> = () => {
     getTableBodyProps,
     getTableProps,
     headerGroups,
+    preFilteredRows,
     prepareRow,
     rows,
     setAllFilters,
@@ -210,6 +211,10 @@ export const Table: React.FC<OwnProps> = () => {
     useSortBy
   ) as TableInstanceOverride<CustomizeRecord>
 
+  const maxRowsCount = useMemo(() => preFilteredRows.length, [
+    preFilteredRows.length,
+  ])
+
   // Render the UI for your table
   return (
     <div>
@@ -226,7 +231,9 @@ export const Table: React.FC<OwnProps> = () => {
         絞込みリセット
       </button>
 
+      {/* table */}
       <table {...getTableProps()} css={tableCss}>
+        {/* header */}
         <thead>
           {headerGroups.map((headerGroup) => (
             // eslint-disable-next-line react/jsx-key
@@ -278,13 +285,16 @@ export const Table: React.FC<OwnProps> = () => {
               })}
             </tr>
           ))}
+
+          {/* mid header */}
           <tr>
             <th colSpan={flatColumns.length} css={recordsCounter}>
-              Hits: {rows.length}
+              Hits: {rows.length} / {maxRowsCount}
             </th>
           </tr>
         </thead>
 
+        {/* body */}
         <tbody {...getTableBodyProps()} css={tbodyCss}>
           {rows.map((row) => {
             prepareRow(row)
