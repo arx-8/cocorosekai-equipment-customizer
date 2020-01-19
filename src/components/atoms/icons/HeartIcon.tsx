@@ -8,8 +8,8 @@ type OwnProps = {
   children?: never
 } & React.SVGProps<CastAny>
 
-export const HeartIcon: React.FC<OwnProps> = (props) => {
-  return <Svg {...props} css={root} />
+export const HeartIcon: React.FC<OwnProps> = ({ color, ...rest }) => {
+  return <Svg {...rest} color={color || "limegreen"} css={root} />
 }
 
 const root = css`

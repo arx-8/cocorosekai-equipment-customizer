@@ -13,11 +13,11 @@ type OwnProps = {
 export const EquipmentImg: React.FC<OwnProps> = ({ equipment, imgCss }) => {
   return (
     <div css={root}>
-      {equipment.imageUrl == null ? (
-        <img css={imgCss} src={NoImageImg} alt="NoImageImg" />
-      ) : (
-        <img css={imgCss} src={equipment.imageUrl} alt={equipment.rawName} />
-      )}
+      <img
+        css={imgCss}
+        src={equipment.imageUrl || NoImageImg}
+        alt={equipment.rawName}
+      />
       <span css={plus}>{"+".repeat(equipment.enhancementsNum)}</span>
     </div>
   )

@@ -64,6 +64,14 @@ const columns: ColumnOptionsOverride<ItemsTableRow>[] = [
     filter: "fuzzyTextFilter",
   },
   {
+    Header: "属性",
+    accessor: "attribute",
+    Cell: CellOfAttrs,
+    width: 48,
+    Filter: AttributeColumnFilter,
+    filter: "attributeFilter",
+  },
+  {
     Header: "装備コスト",
     accessor: "equipCost",
     width: 64,
@@ -71,19 +79,11 @@ const columns: ColumnOptionsOverride<ItemsTableRow>[] = [
     filter: "between",
   },
   {
-    Header: "属性",
-    accessor: "attribute",
-    Cell: CellOfAttrs,
-    width: 64,
-    Filter: AttributeColumnFilter,
-    filter: "attributeFilter",
-  },
-  {
     // eslint-disable-next-line react/display-name
     Header: () => (
       <HeaderCellWithIcon
         headerName="HP"
-        icon={<HeartIcon width={20} height={20} color="limegreen" />}
+        icon={<HeartIcon width={20} height={20} />}
       />
     ),
     accessor: "statuses.hp",
@@ -96,7 +96,7 @@ const columns: ColumnOptionsOverride<ItemsTableRow>[] = [
     Header: () => (
       <HeaderCellWithIcon
         headerName="物理 攻撃"
-        icon={<SwordIcon width={20} height={20} color="red" />}
+        icon={<SwordIcon width={20} height={20} />}
       />
     ),
     accessor: "statuses.physicalAtk",
@@ -122,7 +122,7 @@ const columns: ColumnOptionsOverride<ItemsTableRow>[] = [
     Header: () => (
       <HeaderCellWithIcon
         headerName="魔法 攻撃"
-        icon={<WandIcon width={20} height={20} color="blue" />}
+        icon={<WandIcon width={20} height={20} />}
       />
     ),
     accessor: "statuses.magicAtk",
