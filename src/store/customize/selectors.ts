@@ -18,7 +18,7 @@ export const getCustomizeRecords = (
   const recList = state.records.map((r) => {
     // 存在するものだけで、CustomizeRecord を生成
     const eqList = r.equippedIds
-      .filter((eId): eId is EquipmentId => !!eId)
+      .filter((eId): eId is EquipmentId => eId != null)
       .map((eId) => findEquipmentStrict(eId))
     const record = calcCustomizeRecord(eqList)
 

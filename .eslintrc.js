@@ -77,6 +77,16 @@ module.exports = {
     ],
     "@typescript-eslint/consistent-type-definitions": ["error", "type"],
 
+    // バグの温床になりやすいコードを防ぐため
+    "@typescript-eslint/no-unused-expressions": [
+      "error",
+      {
+        allowShortCircuit: false,
+        allowTernary: false,
+        allowTaggedTemplates: false,
+      },
+    ],
+
     // 有用なケースがあるため
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
