@@ -21,6 +21,8 @@ export const deleteRow = (rowIndex: number): AppThunkAction => {
 
 export const toggleProtectRow = actions.toggleProtectRow
 
+export const sortAllCustomizedEquipments = actions.sortAllCustomizedEquipments
+
 export const selectEquipmentCell = actions.selectEquipmentCell
 
 export const selectEquipment = (equipmentId: EquipmentId): AppThunkAction => {

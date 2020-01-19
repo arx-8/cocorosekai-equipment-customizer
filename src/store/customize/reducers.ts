@@ -105,4 +105,11 @@ export const reducer = reducerWithInitialState(initialState)
       draft.records[payload.rowIndex].customizeMemo = payload.customizeMemo
     })
   })
+  .case(actions.sortAllCustomizedEquipments, (state) => {
+    return produce(state, (draft) => {
+      draft.records.forEach((r) => {
+        r.equippedIds.sort()
+      })
+    })
+  })
   .build()

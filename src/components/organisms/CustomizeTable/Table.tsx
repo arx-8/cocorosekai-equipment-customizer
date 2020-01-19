@@ -22,6 +22,7 @@ import { CellOfActions } from "src/components/organisms/CustomizeTable/CellOfAct
 import { CellOfAttrs } from "src/components/organisms/CustomizeTable/CellOfAttrs"
 import { CellOfCustomize } from "src/components/organisms/CustomizeTable/CellOfCustomize"
 import { CellOfMemo } from "src/components/organisms/CustomizeTable/CellOfMemo"
+import { GlobalActions } from "src/components/organisms/CustomizeTable/GlobalActions"
 import { isEqualData } from "src/components/organisms/CustomizeTable/helpers"
 import { CustomizeRecord } from "src/domain/model/CustomizeRecord"
 import { findEquipmentStrict } from "src/domain/model/Equipment"
@@ -219,8 +220,8 @@ export const Table: React.FC<OwnProps> = () => {
   // Render the UI for your table
   return (
     <div>
-      <button
-        onClick={() => {
+      <GlobalActions
+        onClearFilter={() => {
           setAllFilters((filters) => {
             return filters.map(({ id }) => ({
               id,
@@ -228,9 +229,7 @@ export const Table: React.FC<OwnProps> = () => {
             }))
           })
         }}
-      >
-        絞込みリセット
-      </button>
+      />
 
       {/* table */}
       <table {...getTableProps()} css={tableCss}>

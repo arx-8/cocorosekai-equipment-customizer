@@ -8,6 +8,7 @@ export const ActionTypes = {
   copyRow: "customize/copyRow",
   deleteRow: "customize/deleteRow",
   toggleProtectRow: "customize/toggleProtectRow",
+  sortAllCustomizedEquipments: "customize/sortAllCustomizedEquipments",
   selectEquipmentCell: "customize/selectEquipmentCell",
   selectEquipment: "customize/selectEquipment",
   removeEquipment: "customize/removeEquipment",
@@ -31,6 +32,10 @@ export const copyRow = create<number>(ActionTypes.copyRow)
 export const deleteRow = create<number>(ActionTypes.deleteRow)
 
 export const toggleProtectRow = create<number>(ActionTypes.toggleProtectRow)
+
+export const sortAllCustomizedEquipments = create(
+  ActionTypes.sortAllCustomizedEquipments
+)
 
 export const selectEquipmentCell = create<CellIndex>(
   ActionTypes.selectEquipmentCell
