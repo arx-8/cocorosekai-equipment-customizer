@@ -55,11 +55,12 @@ const columns: ColumnOptionsOverride<CustomizeRecord>[] = [
     width: 72,
   },
   {
-    // 入力のたび table 全体が render されるのを防ぐため、table data の外 (redux) で管理している
-    // 編成の選択値による計算値とは無関係のため問題ない
     Header: "メモ",
+    accessor: "customizeMemo",
     Cell: CellOfMemo,
     width: 144,
+    Filter: TextColumnFilter,
+    filter: "fuzzyTextFilter",
   },
   {
     Header: "装備編成",

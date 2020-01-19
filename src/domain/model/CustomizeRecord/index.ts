@@ -18,6 +18,7 @@ import { toUniq } from "src/utils/arrayUtils"
 export type SelectedEquipmentIds = (EquipmentId | undefined)[]
 
 export type CustomizeRecord = {
+  customizeMemo: string
   equippedIds: SelectedEquipmentIds
   mixedAttributes: Attribute[]
   mixedSpecialEffects: SpecialEffect[]
@@ -45,7 +46,7 @@ export type CellIndex = {
 
 export const calcCustomizeRecord = (
   equipments: Equipment[]
-): Omit<CustomizeRecord, "equippedIds"> => {
+): Omit<CustomizeRecord, "equippedIds" | "customizeMemo"> => {
   return equipments.reduce(
     (acc, curr) => {
       return {

@@ -29,6 +29,7 @@ export const getCustomizeRecords = (
     return {
       ...record,
       // state 内の値と data の結合
+      customizeMemo: r.customizeMemo,
       equippedIds: r.equippedIds,
     }
   })
