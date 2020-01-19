@@ -58,7 +58,7 @@ const columns: ColumnOptionsOverride<CustomizeRecord>[] = [
     // 編成の選択値による計算値とは無関係のため問題ない
     Header: "メモ",
     Cell: CellOfMemo,
-    width: 128,
+    width: 144,
   },
   {
     Header: "装備編成",

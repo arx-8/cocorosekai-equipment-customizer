@@ -62,3 +62,13 @@ export const getCurrentSelectedCellEquipment = (
 
   return findEquipmentStrict(eId)
 }
+
+export const isProtectedRow = (
+  rootState: RootState,
+  rowIndex: number
+): boolean => {
+  const state = rootState.customizeState
+
+  const target = state.records[rowIndex]
+  return target != null && target.isProtected
+}

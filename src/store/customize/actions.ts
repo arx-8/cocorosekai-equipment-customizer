@@ -7,6 +7,7 @@ export const ActionTypes = {
   addRow: "customize/addRow",
   copyRow: "customize/copyRow",
   deleteRow: "customize/deleteRow",
+  toggleProtectRow: "customize/toggleProtectRow",
   selectEquipmentCell: "customize/selectEquipmentCell",
   selectEquipment: "customize/selectEquipment",
   removeEquipment: "customize/removeEquipment",
@@ -28,6 +29,8 @@ export const copyRow = create<number>(ActionTypes.copyRow)
  * @param payload row index
  */
 export const deleteRow = create<number>(ActionTypes.deleteRow)
+
+export const toggleProtectRow = create<number>(ActionTypes.toggleProtectRow)
 
 export const selectEquipmentCell = create<CellIndex>(
   ActionTypes.selectEquipmentCell

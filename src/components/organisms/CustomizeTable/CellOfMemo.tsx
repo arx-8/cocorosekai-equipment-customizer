@@ -3,8 +3,9 @@ import { css, jsx } from "@emotion/core"
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { CellProps } from "react-table"
+import { disabledColor } from "src/components/styles/styles"
 import { CustomizeRecord } from "src/domain/model/CustomizeRecord"
-import { customizeOperations } from "src/store/customize"
+import { customizeOperations, customizeSelectors } from "src/store/customize"
 import { RootState } from "src/store/store"
 
 type OwnProps = CellProps<CustomizeRecord> & {
@@ -27,17 +28,18 @@ export const CellOfMemo: React.FC<OwnProps> = ({ row }) => {
   const customizeMemo = useSelector(
     (state: RootState) => state.customizeState.records[row.index].customizeMemo
   )
+  const isProtectedRow = useSelector((state: RootState) =>
+    customizeSelectors.isProtectedRow(state, row.index)
+  )
 
   return (
     <textarea
-      css={root}
+      css={[root, isProtectedRow && disabledCss]}
+      disabled={isProtectedRow}
       value={customizeMemo}
       onChange={(e) => {
         dispatch(
-          customizeOperations.onChangeCustomizeMemo({
-            customizeMemo: e.target.value,
-            rowIndex: row.index,
-          })
+          customizeOperations.onChangeCustomizeMemo(row.index, e.target.value)
         )
       }}
     />
@@ -49,4 +51,8 @@ const root = css`
   height: 100%;
   box-sizing: border-box;
   resize: vertical;
+`
+
+const disabledCss = css`
+  background: ${disabledColor};
 `
