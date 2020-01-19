@@ -43,7 +43,7 @@ export const configureStore = (
     initialState,
     composeEnhancers(
       applyMiddleware(...middleWares),
-      persistState(["customizeState"])
+      persistState(["customizeState", "userInfo"])
     )
   )
   return store
