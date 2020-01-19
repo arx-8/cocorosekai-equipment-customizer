@@ -14,6 +14,7 @@ type Record = {
 }
 
 export type State = Readonly<{
+  isMinimizedEquipmentDetailModal: boolean
   records: Record[]
   selectedCell: CellIndex
 }>
@@ -23,6 +24,7 @@ const initRecord: Record = {
 }
 
 export const initialState: State = {
+  isMinimizedEquipmentDetailModal: false,
   records: [initRecord],
   selectedCell: {
     rowIndex: 0,
@@ -78,6 +80,11 @@ export const reducer = reducerWithInitialState(initialState)
 
       // 連続選択しやすくするため、削除したセルに移動させる
       draft.selectedCell = payload
+    })
+  })
+  .case(actions.toggleIsMinimizedEquipmentDetailModal, (state) => {
+    return produce(state, (draft) => {
+      draft.isMinimizedEquipmentDetailModal = !draft.isMinimizedEquipmentDetailModal
     })
   })
   .build()

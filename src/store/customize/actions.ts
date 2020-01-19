@@ -10,6 +10,8 @@ export const ActionTypes = {
   selectEquipmentCell: "customize/selectEquipmentCell",
   selectEquipment: "customize/selectEquipment",
   removeEquipment: "customize/removeEquipment",
+  toggleIsMinimizedEquipmentDetailModal:
+    "customize/toggleIsMinimizedEquipmentDetailModal",
 } as const
 
 const create = actionCreatorFactory(APP_NAME)
@@ -33,3 +35,7 @@ export const selectEquipmentCell = create<CellIndex>(
 export const selectEquipment = create<EquipmentId>(ActionTypes.selectEquipment)
 
 export const removeEquipment = create<CellIndex>(ActionTypes.removeEquipment)
+
+export const toggleIsMinimizedEquipmentDetailModal = create(
+  ActionTypes.toggleIsMinimizedEquipmentDetailModal
+)

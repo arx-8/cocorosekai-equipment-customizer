@@ -3,7 +3,11 @@ import {
   CustomizeRecord,
   calcCustomizeRecord,
 } from "src/domain/model/CustomizeRecord"
-import { EquipmentId, findEquipmentStrict } from "src/domain/model/Equipment"
+import {
+  Equipment,
+  EquipmentId,
+  findEquipmentStrict,
+} from "src/domain/model/Equipment"
 import { RootState } from "src/store/store"
 
 export const getCustomizeRecords = (
@@ -31,4 +35,24 @@ export const getCurrentSelectedCellIndex = (
 ): CellIndex => {
   const state = rootState.customizeState
   return state.selectedCell
+}
+
+export const getCurrentSelectedCellEquipment = (
+  rootState: RootState
+): Equipment | undefined => {
+  const state = rootState.customizeState
+
+  const record = state.records[state.selectedCell.rowIndex]
+  // 行削除で選択位置が消えている場合があるため
+  if (record == null) {
+    return
+  }
+
+  const eId = record.equippedIds[state.selectedCell.colIndex]
+  // 未装備の欄の場合があるため
+  if (eId == null) {
+    return
+  }
+
+  return findEquipmentStrict(eId)
 }

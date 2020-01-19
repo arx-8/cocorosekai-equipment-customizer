@@ -3,6 +3,7 @@ import { css, jsx } from "@emotion/core"
 import React from "react"
 import { useDispatch } from "react-redux"
 import { Table } from "src/components/organisms/CustomizeTable/Table"
+import { EquipmentDetailModal } from "src/components/organisms/EquipmentDetailModal"
 import { customizeOperations } from "src/store/customize"
 
 type OwnProps = {
@@ -18,6 +19,7 @@ export const CustomizeTable: React.FC<OwnProps> = () => {
         追加
       </button>
       <Table />
+      <EquipmentDetailModal />
     </div>
   )
 }
