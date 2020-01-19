@@ -330,6 +330,7 @@ export const Table: React.FC<OwnProps> = () => {
 }
 
 const tableCss = css`
+  margin-top: 2px;
   border: 1px solid black;
 
   thead,

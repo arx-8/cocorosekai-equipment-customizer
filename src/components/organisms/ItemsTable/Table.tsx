@@ -337,6 +337,7 @@ export const Table: React.FC<OwnProps> = () => {
 }
 
 const tableCss = css`
+  margin-top: 2px;
   border: solid 1px black;
 `
 

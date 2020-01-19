@@ -18,6 +18,8 @@ export const CellOfImage: React.FC<OwnProps> = ({ row }) => {
     <div css={root}>
       <button
         css={imgWrapper}
+        // 「所持数」入力にのみ tab を当てて、簡単に入力できるようにするため
+        tabIndex={-1}
         onClick={() =>
           dispatch(customizeOperations.selectEquipment(row.original.id))
         }
