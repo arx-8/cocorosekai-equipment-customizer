@@ -10,7 +10,9 @@ import { reducerWithInitialState } from "typescript-fsa-reducers"
 import * as actions from "./actions"
 
 type Record = {
+  customizeMemo: string
   equippedIds: SelectedEquipmentIds
+  isProtected: boolean
 }
 
 export type State = Readonly<{
@@ -20,7 +22,9 @@ export type State = Readonly<{
 }>
 
 const initRecord: Record = {
+  customizeMemo: "",
   equippedIds: range(0, MAX_EQUIPMENTS_NUM).map((_) => undefined),
+  isProtected: false,
 }
 
 export const initialState: State = {
@@ -40,7 +44,11 @@ export const reducer = reducerWithInitialState(initialState)
   })
   .case(actions.copyRow, (state, payload) => {
     return produce(state, (draft) => {
-      draft.records.push(draft.records[payload])
+      const newRecord = produce(draft.records[payload], (record) => {
+        record.isProtected = false
+      })
+
+      draft.records.push(newRecord)
     })
   })
   .case(actions.deleteRow, (state, payload) => {
@@ -51,6 +59,11 @@ export const reducer = reducerWithInitialState(initialState)
       }
 
       draft.records = draft.records.filter((_, index) => index !== payload)
+    })
+  })
+  .case(actions.toggleProtectRow, (state, payload) => {
+    return produce(state, (draft) => {
+      draft.records[payload].isProtected = !draft.records[payload].isProtected
     })
   })
   .case(actions.selectEquipmentCell, (state, payload) => {
@@ -85,6 +98,18 @@ export const reducer = reducerWithInitialState(initialState)
   .case(actions.toggleIsMinimizedEquipmentDetailModal, (state) => {
     return produce(state, (draft) => {
       draft.isMinimizedEquipmentDetailModal = !draft.isMinimizedEquipmentDetailModal
+    })
+  })
+  .case(actions.changeCustomizeMemo, (state, payload) => {
+    return produce(state, (draft) => {
+      draft.records[payload.rowIndex].customizeMemo = payload.customizeMemo
+    })
+  })
+  .case(actions.sortAllCustomizedEquipments, (state) => {
+    return produce(state, (draft) => {
+      draft.records.forEach((r) => {
+        r.equippedIds.sort()
+      })
     })
   })
   .build()

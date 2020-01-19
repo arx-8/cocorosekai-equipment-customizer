@@ -21,6 +21,9 @@ import { TextColumnFilter } from "src/components/molecules/TextColumnFilter"
 import { CellOfActions } from "src/components/organisms/CustomizeTable/CellOfActions"
 import { CellOfAttrs } from "src/components/organisms/CustomizeTable/CellOfAttrs"
 import { CellOfCustomize } from "src/components/organisms/CustomizeTable/CellOfCustomize"
+import { CellOfMemo } from "src/components/organisms/CustomizeTable/CellOfMemo"
+import { isEqualData } from "src/components/organisms/CustomizeTable/helpers"
+import { TableActions } from "src/components/organisms/CustomizeTable/TableActions"
 import { CustomizeRecord } from "src/domain/model/CustomizeRecord"
 import { findEquipmentStrict } from "src/domain/model/Equipment"
 import { customizeSelectors } from "src/store/customize"
@@ -40,133 +43,137 @@ type OwnProps = {
   children?: never
 }
 
-const createColumnOptionsOuter = (): ColumnOptionsOverride<
-  CustomizeRecord
->[] => {
-  return [
-    {
-      Header: "No.",
-      Cell: (p) => p.row.index + 1,
-      width: 40,
+const columns: ColumnOptionsOverride<CustomizeRecord>[] = [
+  {
+    Header: "No.",
+    Cell: (p) => p.row.index + 1,
+    width: 40,
+  },
+  {
+    Header: "操作",
+    Cell: CellOfActions,
+    width: 72,
+  },
+  {
+    Header: "メモ",
+    accessor: "customizeMemo",
+    Cell: CellOfMemo,
+    width: 144,
+    Filter: TextColumnFilter,
+    filter: "fuzzyTextFilter",
+  },
+  {
+    Header: "装備編成",
+    // sort, filter を可能にするため、string に変換
+    // 前と次の名が合体してあいまい検索に引っかかるのを防ぐため、"," で join
+    accessor: (originalRow) => {
+      return originalRow.equippedIds
+        .map((eId) => eId && findEquipmentStrict(eId).rawName)
+        .join(",")
     },
-    {
-      Header: "操作",
-      Cell: CellOfActions,
-      width: 72,
+    width: 336,
+    Cell: CellOfCustomize,
+    Filter: TextColumnFilter,
+    filter: "fuzzyTextFilter",
+  },
+  // {
+  //   Header: "参考総合値",
+  //   accessor: "totalSpecValue",
+  //   width: 56,
+  // },
+  {
+    Header: "属性",
+    accessor: "mixedAttributes",
+    // TODO Array なので sort できない
+    Cell: CellOfAttrs,
+    width: 48,
+    Filter: AttributeColumnFilter,
+    filter: "attributeFilter",
+  },
+  {
+    Header: "装備コスト",
+    accessor: "totalEquipCost",
+    width: 64,
+    Filter: NumberRangeColumnFilter,
+    filter: "between",
+  },
+  {
+    // eslint-disable-next-line react/display-name
+    Header: () => (
+      <HeaderCellWithIcon
+        headerName="HP"
+        icon={<HeartIcon width={20} height={20} />}
+      />
+    ),
+    accessor: "totalStatuses.hp",
+    width: 64,
+    Filter: NumberRangeColumnFilter,
+    filter: "between",
+  },
+  {
+    // eslint-disable-next-line react/display-name
+    Header: () => (
+      <HeaderCellWithIcon
+        headerName="物理 攻撃"
+        icon={<SwordIcon width={20} height={20} />}
+      />
+    ),
+    accessor: "totalStatuses.physicalAtk",
+    width: 64,
+    Filter: NumberRangeColumnFilter,
+    filter: "between",
+  },
+  {
+    // eslint-disable-next-line react/display-name
+    Header: () => (
+      <HeaderCellWithIcon
+        headerName="物理 防御"
+        icon={<ShieldIcon width={20} height={20} color="red" />}
+      />
+    ),
+    accessor: "totalStatuses.physicalDef",
+    width: 64,
+    Filter: NumberRangeColumnFilter,
+    filter: "between",
+  },
+  {
+    // eslint-disable-next-line react/display-name
+    Header: () => (
+      <HeaderCellWithIcon
+        headerName="魔法 攻撃"
+        icon={<WandIcon width={20} height={20} />}
+      />
+    ),
+    accessor: "totalStatuses.magicAtk",
+    width: 64,
+    Filter: NumberRangeColumnFilter,
+    filter: "between",
+  },
+  {
+    // eslint-disable-next-line react/display-name
+    Header: () => (
+      <HeaderCellWithIcon
+        headerName="魔法 防御"
+        icon={<ShieldIcon width={20} height={20} color="blue" />}
+      />
+    ),
+    accessor: "totalStatuses.magicDef",
+    width: 64,
+    Filter: NumberRangeColumnFilter,
+    filter: "between",
+  },
+  {
+    Header: "特殊効果",
+    // sort, filter を可能にするため、string に変換
+    accessor: (originalRow) => {
+      return originalRow.mixedSpecialEffects.map((e) => e.rawText).join("\n")
     },
-    {
-      Header: "装備編成",
-      // sort, filter を可能にするため、string に変換
-      // 前と次の名が合体してあいまい検索に引っかかるのを防ぐため、"," で join
-      accessor: (originalRow) => {
-        return originalRow.equippedIds
-          .map((eId) => eId && findEquipmentStrict(eId).rawName)
-          .join(",")
-      },
-      width: 336,
-      Cell: CellOfCustomize,
-      Filter: TextColumnFilter,
-      filter: "fuzzyTextFilter",
-    },
-    // {
-    //   Header: "参考総合値",
-    //   accessor: "totalSpecValue",
-    //   width: 56,
-    // },
-    {
-      Header: "属性",
-      accessor: "mixedAttributes",
-      // TODO Array なので sort できない
-      Cell: CellOfAttrs,
-      width: 48,
-      Filter: AttributeColumnFilter,
-      filter: "attributeFilter",
-    },
-    {
-      Header: "装備コスト",
-      accessor: "totalEquipCost",
-      width: 64,
-      Filter: NumberRangeColumnFilter,
-      filter: "between",
-    },
-    {
-      // eslint-disable-next-line react/display-name
-      Header: () => (
-        <HeaderCellWithIcon
-          headerName="HP"
-          icon={<HeartIcon width={20} height={20} />}
-        />
-      ),
-      accessor: "totalStatuses.hp",
-      width: 64,
-      Filter: NumberRangeColumnFilter,
-      filter: "between",
-    },
-    {
-      // eslint-disable-next-line react/display-name
-      Header: () => (
-        <HeaderCellWithIcon
-          headerName="物理 攻撃"
-          icon={<SwordIcon width={20} height={20} />}
-        />
-      ),
-      accessor: "totalStatuses.physicalAtk",
-      width: 64,
-      Filter: NumberRangeColumnFilter,
-      filter: "between",
-    },
-    {
-      // eslint-disable-next-line react/display-name
-      Header: () => (
-        <HeaderCellWithIcon
-          headerName="物理 防御"
-          icon={<ShieldIcon width={20} height={20} color="red" />}
-        />
-      ),
-      accessor: "totalStatuses.physicalDef",
-      width: 64,
-      Filter: NumberRangeColumnFilter,
-      filter: "between",
-    },
-    {
-      // eslint-disable-next-line react/display-name
-      Header: () => (
-        <HeaderCellWithIcon
-          headerName="魔法 攻撃"
-          icon={<WandIcon width={20} height={20} />}
-        />
-      ),
-      accessor: "totalStatuses.magicAtk",
-      width: 64,
-      Filter: NumberRangeColumnFilter,
-      filter: "between",
-    },
-    {
-      // eslint-disable-next-line react/display-name
-      Header: () => (
-        <HeaderCellWithIcon
-          headerName="魔法 防御"
-          icon={<ShieldIcon width={20} height={20} color="blue" />}
-        />
-      ),
-      accessor: "totalStatuses.magicDef",
-      width: 64,
-      Filter: NumberRangeColumnFilter,
-      filter: "between",
-    },
-    {
-      Header: "特殊効果",
-      // sort, filter を可能にするため、string に変換
-      accessor: (originalRow) => {
-        return originalRow.mixedSpecialEffects.map((e) => e.rawText).join("\n")
-      },
-      Cell: PreWrapCell,
-      width: 240,
-      Filter: TextColumnFilter,
-      filter: "fuzzyTextFilter",
-    },
-  ]
-}
+    Cell: PreWrapCell,
+    width: 240,
+    Filter: TextColumnFilter,
+    filter: "fuzzyTextFilter",
+  },
+]
 
 const defaultColumn: Partial<ColumnOptionsOverride<CustomizeRecord>> = {
   // defaultCanFilter が必ず true (必ず Filter が描画される) バグがあるっぽい
@@ -181,11 +188,7 @@ const filterTypes: FilterTypes<CustomizeRecord> = {
 }
 
 export const Table: React.FC<OwnProps> = () => {
-  const data = useSelector(customizeSelectors.getCustomizeRecords)
-
-  const columns = useMemo(() => {
-    return createColumnOptionsOuter()
-  }, [])
+  const data = useSelector(customizeSelectors.getCustomizeRecords, isEqualData)
 
   // Use the state and functions returned from useTable to build your UI
   const {
@@ -218,8 +221,8 @@ export const Table: React.FC<OwnProps> = () => {
   // Render the UI for your table
   return (
     <div>
-      <button
-        onClick={() => {
+      <TableActions
+        onClearFilter={() => {
           setAllFilters((filters) => {
             return filters.map(({ id }) => ({
               id,
@@ -227,9 +230,7 @@ export const Table: React.FC<OwnProps> = () => {
             }))
           })
         }}
-      >
-        絞込みリセット
-      </button>
+      />
 
       {/* table */}
       <table {...getTableProps()} css={tableCss}>
@@ -330,6 +331,7 @@ export const Table: React.FC<OwnProps> = () => {
 }
 
 const tableCss = css`
+  margin-top: 2px;
   border: 1px solid black;
 
   thead,

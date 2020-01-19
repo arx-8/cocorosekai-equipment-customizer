@@ -30,7 +30,7 @@ export const EquipmentDetail: React.FC<OwnProps> = ({ eq }) => {
           <Attr />
         </span>
       </div>
-      <table>
+      <table css={tableCss}>
         <tbody>
           <tr>
             <td css={rowDesc}>装備コスト</td>
@@ -97,6 +97,19 @@ const title = css`
 
 const padding = css`
   padding-left: 4px;
+`
+
+const tableCss = css`
+  width: 100%;
+
+  /* セルの線を重ねる */
+  border-collapse: collapse;
+
+  th,
+  td {
+    border: solid 1px;
+    padding: 4px;
+  }
 `
 
 const rowDesc = css`

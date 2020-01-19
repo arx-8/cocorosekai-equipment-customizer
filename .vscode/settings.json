@@ -32,9 +32,12 @@
   "cSpell.ignoreRegExpList": ["[０-９Ａ-Ｚａ-ｚぁ-んァ-ヶ亜-熙纊-黑]+"],
   "cSpell.words": [
     "Interop",
+    "Nums",
     "browserslist",
     "cocorosekai",
     "customizer",
+    "darkgrey",
+    "deserialize",
     "esnext",
     "immer",
     "localstorage",

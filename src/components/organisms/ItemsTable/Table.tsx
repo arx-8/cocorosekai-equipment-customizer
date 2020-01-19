@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
 import React, { Fragment, useCallback, useMemo } from "react"
+import { useSelector } from "react-redux"
 import {
   FilterTypes,
   useBlockLayout,
@@ -20,8 +21,11 @@ import { NumberRangeColumnFilter } from "src/components/molecules/NumberRangeCol
 import { TextColumnFilter } from "src/components/molecules/TextColumnFilter"
 import { CellOfAttrs } from "src/components/organisms/ItemsTable/CellOfAttrs"
 import { CellOfImage } from "src/components/organisms/ItemsTable/CellOfImage"
+import { CellOfStockNum } from "src/components/organisms/ItemsTable/CellOfStockNum"
+import { TableActions } from "src/components/organisms/ItemsTable/TableActions"
 import { Equipment } from "src/domain/model/Equipment"
 import { convertToItemsTable } from "src/gateway/dataGateway"
+import { RootState } from "src/store/store"
 import {
   ColumnInstanceOverride,
   ColumnOptionsOverride,
@@ -43,6 +47,7 @@ type OwnProps = {
  */
 export type ItemsTableRow = Equipment & {
   specialEffectsText: string
+  stockNum: number
 }
 
 const columns: ColumnOptionsOverride<ItemsTableRow>[] = [
@@ -50,6 +55,14 @@ const columns: ColumnOptionsOverride<ItemsTableRow>[] = [
     Header: "ID",
     accessor: "id",
     width: 40,
+  },
+  {
+    Header: "所持数",
+    accessor: "stockNum",
+    Cell: CellOfStockNum,
+    Filter: NumberRangeColumnFilter,
+    filter: "between",
+    width: 56,
   },
   {
     Header: "選択",
@@ -164,10 +177,12 @@ const filterTypes: FilterTypes<ItemsTableRow> = {
   fuzzyTextFilter: fuzzyTextFilter,
 }
 
-// 今は data は不変のため、 memo 化のためにも render の外で宣言する
-const tableData = convertToItemsTable(data)
-
 export const Table: React.FC<OwnProps> = () => {
+  const stockNums = useSelector((state: RootState) => state.userInfo.stockNums)
+  const tableData = useMemo(() => convertToItemsTable(data, stockNums), [
+    stockNums,
+  ])
+
   // Use the state and functions returned from useTable to build your UI
   const {
     getTableBodyProps,
@@ -222,8 +237,8 @@ export const Table: React.FC<OwnProps> = () => {
   // Render the UI for your table
   return (
     <div>
-      <button
-        onClick={() => {
+      <TableActions
+        onClearFilter={() => {
           setAllFilters((filters) => {
             return filters.map(({ id }) => ({
               id,
@@ -231,9 +246,7 @@ export const Table: React.FC<OwnProps> = () => {
             }))
           })
         }}
-      >
-        絞込みリセット
-      </button>
+      />
 
       {/* table */}
       <div
@@ -324,6 +337,7 @@ export const Table: React.FC<OwnProps> = () => {
 }
 
 const tableCss = css`
+  margin-top: 2px;
   border: solid 1px black;
 `
 

@@ -10,6 +10,10 @@ import {
 } from "src/domain/model/Equipment"
 import { RootState } from "src/store/store"
 
+/**
+ * テーブル表示のために、外部 data と redux state を結合・合算して返す
+ * この値が変わるとテーブルの再 render になるため、編成の選択値による計算値とは無関係の値は含めないようにする
+ */
 export const getCustomizeRecords = (
   rootState: RootState
 ): CustomizeRecord[] => {
@@ -18,13 +22,16 @@ export const getCustomizeRecords = (
   const recList = state.records.map((r) => {
     // 存在するものだけで、CustomizeRecord を生成
     const eqList = r.equippedIds
-      .filter((eId): eId is EquipmentId => !!eId)
+      .filter((eId): eId is EquipmentId => eId != null)
       .map((eId) => findEquipmentStrict(eId))
     const record = calcCustomizeRecord(eqList)
 
-    // 未入力 (undefined) の順番保持のため
-    record.equippedIds = r.equippedIds
-    return record
+    return {
+      ...record,
+      // state 内の値と data の結合
+      customizeMemo: r.customizeMemo,
+      equippedIds: r.equippedIds,
+    }
   })
 
   return recList
@@ -55,4 +62,14 @@ export const getCurrentSelectedCellEquipment = (
   }
 
   return findEquipmentStrict(eId)
+}
+
+export const isProtectedRow = (
+  rootState: RootState,
+  rowIndex: number
+): boolean => {
+  const state = rootState.customizeState
+
+  const target = state.records[rowIndex]
+  return target != null && target.isProtected
 }
