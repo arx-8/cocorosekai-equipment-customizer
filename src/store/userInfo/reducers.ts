@@ -18,4 +18,9 @@ export const reducer = reducerWithInitialState(initialState)
       draft.stockNums[payload.equipmentId] = payload.stockNum
     })
   })
+  .case(actions.resetAllStockNums, (state) => {
+    return produce(state, (draft) => {
+      draft.stockNums = {}
+    })
+  })
   .build()

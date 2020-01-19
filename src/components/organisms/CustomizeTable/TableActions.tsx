@@ -9,15 +9,13 @@ type OwnProps = {
   onClearFilter: () => void
 }
 
-export const GlobalActions: React.FC<OwnProps> = ({ onClearFilter }) => {
+export const TableActions: React.FC<OwnProps> = ({ onClearFilter }) => {
   const dispatch = useDispatch()
 
   return (
     <div css={root}>
       <span>
-        <button onClick={() => dispatch(customizeOperations.addRow())}>
-          追加
-        </button>
+        <button onClick={onClearFilter}>絞込みリセット</button>
       </span>
       <span css={separator}>
         <button
@@ -29,7 +27,9 @@ export const GlobalActions: React.FC<OwnProps> = ({ onClearFilter }) => {
         </button>
       </span>
       <span css={separator}>
-        <button onClick={onClearFilter}>絞込みリセット</button>
+        <button onClick={() => dispatch(customizeOperations.addRow())}>
+          追加
+        </button>
       </span>
     </div>
   )

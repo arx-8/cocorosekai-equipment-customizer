@@ -22,6 +22,7 @@ import { TextColumnFilter } from "src/components/molecules/TextColumnFilter"
 import { CellOfAttrs } from "src/components/organisms/ItemsTable/CellOfAttrs"
 import { CellOfImage } from "src/components/organisms/ItemsTable/CellOfImage"
 import { CellOfStockNum } from "src/components/organisms/ItemsTable/CellOfStockNum"
+import { TableActions } from "src/components/organisms/ItemsTable/TableActions"
 import { Equipment } from "src/domain/model/Equipment"
 import { convertToItemsTable } from "src/gateway/dataGateway"
 import { RootState } from "src/store/store"
@@ -236,8 +237,8 @@ export const Table: React.FC<OwnProps> = () => {
   // Render the UI for your table
   return (
     <div>
-      <button
-        onClick={() => {
+      <TableActions
+        onClearFilter={() => {
           setAllFilters((filters) => {
             return filters.map(({ id }) => ({
               id,
@@ -245,9 +246,7 @@ export const Table: React.FC<OwnProps> = () => {
             }))
           })
         }}
-      >
-        絞込みリセット
-      </button>
+      />
 
       {/* table */}
       <div
