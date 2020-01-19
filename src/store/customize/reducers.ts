@@ -100,7 +100,7 @@ export const reducer = reducerWithInitialState(initialState)
       draft.isMinimizedEquipmentDetailModal = !draft.isMinimizedEquipmentDetailModal
     })
   })
-  .case(actions.onChangeCustomizeMemo, (state, payload) => {
+  .case(actions.changeCustomizeMemo, (state, payload) => {
     return produce(state, (draft) => {
       draft.records[payload.rowIndex].customizeMemo = payload.customizeMemo
     })

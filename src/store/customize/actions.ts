@@ -14,7 +14,7 @@ export const ActionTypes = {
   removeEquipment: "customize/removeEquipment",
   toggleIsMinimizedEquipmentDetailModal:
     "customize/toggleIsMinimizedEquipmentDetailModal",
-  onChangeCustomizeMemo: "customize/onChangeCustomizeMemo",
+  changeCustomizeMemo: "customize/changeCustomizeMemo",
 } as const
 
 const create = actionCreatorFactory(APP_NAME)
@@ -49,7 +49,7 @@ export const toggleIsMinimizedEquipmentDetailModal = create(
   ActionTypes.toggleIsMinimizedEquipmentDetailModal
 )
 
-export const onChangeCustomizeMemo = create<{
+export const changeCustomizeMemo = create<{
   customizeMemo: string
   rowIndex: number
-}>(ActionTypes.onChangeCustomizeMemo)
+}>(ActionTypes.changeCustomizeMemo)

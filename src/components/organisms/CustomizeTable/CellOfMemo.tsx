@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
-import React from "react"
+import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { CellProps } from "react-table"
 import { disabledColor } from "src/components/styles/styles"
@@ -25,22 +25,29 @@ type OwnProps = CellProps<CustomizeRecord> & {
  */
 export const CellOfMemo: React.FC<OwnProps> = ({ row }) => {
   const dispatch = useDispatch()
-  const customizeMemo = useSelector(
+  const initialValue = useSelector(
     (state: RootState) => state.customizeState.records[row.index].customizeMemo
   )
   const isProtectedRow = useSelector((state: RootState) =>
     customizeSelectors.isProtectedRow(state, row.index)
   )
 
+  // We need to keep and update the state of the cell normally
+  const [tempValue, setTempValue] = React.useState(initialValue)
+
+  // If the initialValue is changed external, sync it up with our state
+  useEffect(() => {
+    setTempValue(initialValue)
+  }, [initialValue])
+
   return (
     <textarea
       css={[root, isProtectedRow && disabledCss]}
       disabled={isProtectedRow}
-      value={customizeMemo}
-      onChange={(e) => {
-        dispatch(
-          customizeOperations.onChangeCustomizeMemo(row.index, e.target.value)
-        )
+      value={tempValue}
+      onChange={(e) => setTempValue(e.target.value)}
+      onBlur={() => {
+        dispatch(customizeOperations.changeCustomizeMemo(row.index, tempValue))
       }}
     />
   )

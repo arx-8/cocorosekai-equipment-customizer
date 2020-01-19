@@ -53,7 +53,7 @@ export const removeEquipment = (cellIndex: CellIndex): AppThunkAction => {
 export const toggleIsMinimizedEquipmentDetailModal =
   actions.toggleIsMinimizedEquipmentDetailModal
 
-export const onChangeCustomizeMemo = (
+export const changeCustomizeMemo = (
   rowIndex: number,
   customizeMemo: string
 ): AppThunkAction => {
@@ -63,7 +63,7 @@ export const onChangeCustomizeMemo = (
       return
     }
     dispatch(
-      actions.onChangeCustomizeMemo({
+      actions.changeCustomizeMemo({
         rowIndex,
         customizeMemo,
       })
