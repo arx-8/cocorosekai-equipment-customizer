@@ -22,9 +22,11 @@ export const getCustomizeRecords = (
       .map((eId) => findEquipmentStrict(eId))
     const record = calcCustomizeRecord(eqList)
 
-    // 未入力 (undefined) の順番保持のため
-    record.equippedIds = r.equippedIds
-    return record
+    return {
+      ...record,
+      // state 内の値と data の結合
+      equippedIds: r.equippedIds,
+    }
   })
 
   return recList

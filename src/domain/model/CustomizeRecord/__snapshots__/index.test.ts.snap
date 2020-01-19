@@ -2,7 +2,6 @@
 
 exports[`calcCustomizeRecord list length 0 1`] = `
 Object {
-  "equippedIds": Array [],
   "mixedAttributes": Array [],
   "mixedSpecialEffects": Array [],
   "totalEquipCost": 0,
@@ -19,9 +18,6 @@ Object {
 
 exports[`calcCustomizeRecord list length 1 1`] = `
 Object {
-  "equippedIds": Array [
-    0,
-  ],
   "mixedAttributes": Array [
     "light",
   ],
@@ -44,11 +40,6 @@ Object {
 
 exports[`calcCustomizeRecord list some length 1`] = `
 Object {
-  "equippedIds": Array [
-    1,
-    20,
-    300,
-  ],
   "mixedAttributes": Array [
     "darkness",
     "light",

@@ -45,12 +45,11 @@ export type CellIndex = {
 
 export const calcCustomizeRecord = (
   equipments: Equipment[]
-): CustomizeRecord => {
+): Omit<CustomizeRecord, "equippedIds"> => {
   return equipments.reduce(
-    (acc, curr): CustomizeRecord => {
+    (acc, curr) => {
       return {
-        equippedIds: [...acc.equippedIds, curr.id],
-        // TODO 計算ロジックの実装
+        // TODO totalSpecValue の計算ロジックの実装
         totalSpecValue: 0,
         totalEquipCost: (acc.totalEquipCost + curr.equipCost) as EquipCost,
         totalStatuses: {
@@ -74,10 +73,9 @@ export const calcCustomizeRecord = (
       }
     },
     {
-      equippedIds: [],
       totalSpecValue: 0,
       totalEquipCost: 0 as EquipCost,
-      mixedAttributes: [],
+      mixedAttributes: [] as Attribute[],
       totalStatuses: {
         hp: 0 as HitPointNum,
         magicAtk: 0 as MagicAttackNum,
@@ -85,7 +83,7 @@ export const calcCustomizeRecord = (
         physicalAtk: 0 as PhysicalAttackNum,
         physicalDef: 0 as PhysicalDefenseNum,
       },
-      mixedSpecialEffects: [],
-    } as CustomizeRecord
+      mixedSpecialEffects: [] as SpecialEffect[],
+    }
   )
 }
