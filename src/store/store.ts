@@ -10,9 +10,11 @@ import persistState from "redux-localstorage"
 import thunkMiddleWare from "redux-thunk"
 import { isDevelopment } from "src/constants/env"
 import { CustomizeState, customizeReducer } from "src/store/customize"
+import { UserInfoState, userInfoReducer } from "src/store/userInfo"
 
 export type RootState = Readonly<{
   customizeState: CustomizeState
+  userInfo: UserInfoState
 }>
 
 export const configureStore = (
@@ -20,6 +22,7 @@ export const configureStore = (
 ): Store<RootState, AnyAction> => {
   const rootReducer = combineReducers<RootState>({
     customizeState: customizeReducer,
+    userInfo: userInfoReducer,
   })
 
   // Connect Chrome Redux DevTools, if installed.
