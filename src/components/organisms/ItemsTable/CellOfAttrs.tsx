@@ -19,4 +19,6 @@ export const CellOfAttrs: React.FC<OwnProps> = ({ row }) => {
   )
 }
 
-const root = css``
+const root = css`
+  text-align: center;
+`

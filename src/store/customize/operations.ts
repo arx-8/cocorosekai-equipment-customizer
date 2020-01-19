@@ -11,3 +11,6 @@ export const selectEquipmentCell = actions.selectEquipmentCell
 export const selectEquipment = actions.selectEquipment
 
 export const removeEquipment = actions.removeEquipment
+
+export const toggleIsMinimizedEquipmentDetailModal =
+  actions.toggleIsMinimizedEquipmentDetailModal

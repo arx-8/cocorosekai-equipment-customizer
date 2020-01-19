@@ -78,7 +78,7 @@ const createColumnOptionsOuter = (): ColumnOptionsOverride<
       accessor: "mixedAttributes",
       // TODO Array なので sort できない
       Cell: CellOfAttrs,
-      width: 56,
+      width: 48,
       Filter: AttributeColumnFilter,
       filter: "attributeFilter",
     },
@@ -94,7 +94,7 @@ const createColumnOptionsOuter = (): ColumnOptionsOverride<
       Header: () => (
         <HeaderCellWithIcon
           headerName="HP"
-          icon={<HeartIcon width={20} height={20} color="limegreen" />}
+          icon={<HeartIcon width={20} height={20} />}
         />
       ),
       accessor: "totalStatuses.hp",
@@ -107,7 +107,7 @@ const createColumnOptionsOuter = (): ColumnOptionsOverride<
       Header: () => (
         <HeaderCellWithIcon
           headerName="物理 攻撃"
-          icon={<SwordIcon width={20} height={20} color="red" />}
+          icon={<SwordIcon width={20} height={20} />}
         />
       ),
       accessor: "totalStatuses.physicalAtk",
@@ -133,7 +133,7 @@ const createColumnOptionsOuter = (): ColumnOptionsOverride<
       Header: () => (
         <HeaderCellWithIcon
           headerName="魔法 攻撃"
-          icon={<WandIcon width={20} height={20} color="blue" />}
+          icon={<WandIcon width={20} height={20} />}
         />
       ),
       accessor: "totalStatuses.magicAtk",

@@ -14,6 +14,7 @@ type Record = {
 }
 
 export type State = Readonly<{
+  isMinimizedEquipmentDetailModal: boolean
   records: Record[]
   selectedCell: CellIndex
 }>
@@ -23,6 +24,7 @@ const initRecord: Record = {
 }
 
 export const initialState: State = {
+  isMinimizedEquipmentDetailModal: false,
   records: [initRecord],
   selectedCell: {
     rowIndex: 0,
@@ -58,9 +60,13 @@ export const reducer = reducerWithInitialState(initialState)
   })
   .case(actions.selectEquipment, (state, payload) => {
     return produce(state, (draft) => {
-      draft.records[draft.selectedCell.rowIndex].equippedIds[
-        draft.selectedCell.colIndex
-      ] = payload
+      const record = draft.records[draft.selectedCell.rowIndex]
+      // 行削除で選択位置が消えている場合があるため
+      if (record == null) {
+        return
+      }
+
+      record.equippedIds[draft.selectedCell.colIndex] = payload
 
       // 連続選択しやすくするため、隣のセルに移動させる
       if (draft.selectedCell.colIndex !== MAX_EQUIPMENTS_NUM - 1) {
@@ -74,6 +80,11 @@ export const reducer = reducerWithInitialState(initialState)
 
       // 連続選択しやすくするため、削除したセルに移動させる
       draft.selectedCell = payload
+    })
+  })
+  .case(actions.toggleIsMinimizedEquipmentDetailModal, (state) => {
+    return produce(state, (draft) => {
+      draft.isMinimizedEquipmentDetailModal = !draft.isMinimizedEquipmentDetailModal
     })
   })
   .build()
