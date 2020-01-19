@@ -12,6 +12,7 @@ export const ActionTypes = {
   removeEquipment: "customize/removeEquipment",
   toggleIsMinimizedEquipmentDetailModal:
     "customize/toggleIsMinimizedEquipmentDetailModal",
+  onChangeCustomizeMemo: "customize/onChangeCustomizeMemo",
 } as const
 
 const create = actionCreatorFactory(APP_NAME)
@@ -39,3 +40,8 @@ export const removeEquipment = create<CellIndex>(ActionTypes.removeEquipment)
 export const toggleIsMinimizedEquipmentDetailModal = create(
   ActionTypes.toggleIsMinimizedEquipmentDetailModal
 )
+
+export const onChangeCustomizeMemo = create<{
+  customizeMemo: string
+  rowIndex: number
+}>(ActionTypes.onChangeCustomizeMemo)

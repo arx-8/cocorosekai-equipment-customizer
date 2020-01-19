@@ -14,3 +14,5 @@ export const removeEquipment = actions.removeEquipment
 
 export const toggleIsMinimizedEquipmentDetailModal =
   actions.toggleIsMinimizedEquipmentDetailModal
+
+export const onChangeCustomizeMemo = actions.onChangeCustomizeMemo

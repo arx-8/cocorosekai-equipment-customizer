@@ -10,6 +10,7 @@ import { reducerWithInitialState } from "typescript-fsa-reducers"
 import * as actions from "./actions"
 
 type Record = {
+  customizeMemo: string
   equippedIds: SelectedEquipmentIds
 }
 
@@ -20,6 +21,7 @@ export type State = Readonly<{
 }>
 
 const initRecord: Record = {
+  customizeMemo: "",
   equippedIds: range(0, MAX_EQUIPMENTS_NUM).map((_) => undefined),
 }
 
@@ -85,6 +87,11 @@ export const reducer = reducerWithInitialState(initialState)
   .case(actions.toggleIsMinimizedEquipmentDetailModal, (state) => {
     return produce(state, (draft) => {
       draft.isMinimizedEquipmentDetailModal = !draft.isMinimizedEquipmentDetailModal
+    })
+  })
+  .case(actions.onChangeCustomizeMemo, (state, payload) => {
+    return produce(state, (draft) => {
+      draft.records[payload.rowIndex].customizeMemo = payload.customizeMemo
     })
   })
   .build()

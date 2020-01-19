@@ -10,6 +10,10 @@ import {
 } from "src/domain/model/Equipment"
 import { RootState } from "src/store/store"
 
+/**
+ * テーブル表示のために、外部 data と redux state を結合・合算して返す
+ * この値が変わるとテーブルの再 render になるため、編成の選択値による計算値とは無関係の値は含めないようにする
+ */
 export const getCustomizeRecords = (
   rootState: RootState
 ): CustomizeRecord[] => {

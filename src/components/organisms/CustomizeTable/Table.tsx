@@ -21,6 +21,7 @@ import { TextColumnFilter } from "src/components/molecules/TextColumnFilter"
 import { CellOfActions } from "src/components/organisms/CustomizeTable/CellOfActions"
 import { CellOfAttrs } from "src/components/organisms/CustomizeTable/CellOfAttrs"
 import { CellOfCustomize } from "src/components/organisms/CustomizeTable/CellOfCustomize"
+import { CellOfMemo } from "src/components/organisms/CustomizeTable/CellOfMemo"
 import { CustomizeRecord } from "src/domain/model/CustomizeRecord"
 import { findEquipmentStrict } from "src/domain/model/Equipment"
 import { customizeSelectors } from "src/store/customize"
@@ -53,6 +54,13 @@ const createColumnOptionsOuter = (): ColumnOptionsOverride<
       Header: "操作",
       Cell: CellOfActions,
       width: 72,
+    },
+    {
+      // 入力のたび table 全体が render されるのを防ぐため、table data の外 (redux) で管理している
+      // 編成の選択値による計算値とは無関係のため問題ない
+      Header: "メモ",
+      Cell: CellOfMemo,
+      width: 128,
     },
     {
       Header: "装備編成",
