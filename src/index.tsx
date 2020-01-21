@@ -2,6 +2,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import { Provider as ReduxProvider } from "react-redux"
 import { GoogleAnalytics } from "src/components/helpers/GoogleAnalytics"
+import { Initializer } from "src/components/helpers/Initializer"
 import { App } from "src/components/pages/App"
 import { GlobalStyles } from "src/components/styles/GlobalStyles"
 import * as serviceWorker from "src/serviceWorker"
@@ -14,7 +15,9 @@ const Root: React.FC = () => {
     <ReduxProvider store={reduxStore}>
       <GoogleAnalytics />
       <GlobalStyles />
-      <App />
+      <Initializer>
+        <App />
+      </Initializer>
     </ReduxProvider>
   )
 }

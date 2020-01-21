@@ -8,7 +8,7 @@ import {
 } from "redux"
 import persistState from "redux-localstorage"
 import thunkMiddleWare from "redux-thunk"
-import { isDevelopment } from "src/constants/env"
+import { APP_VERSIONS, isDevelopment } from "src/constants/env"
 import { CustomizeState, customizeReducer } from "src/store/customize"
 import { UserInfoState, userInfoReducer } from "src/store/userInfo"
 
@@ -43,7 +43,9 @@ export const configureStore = (
     initialState,
     composeEnhancers(
       applyMiddleware(...middleWares),
-      persistState(["customizeState", "userInfo"])
+      persistState(["customizeState", "userInfo"], {
+        key: APP_VERSIONS[0],
+      })
     )
   )
   return store
