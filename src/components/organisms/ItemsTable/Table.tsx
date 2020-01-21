@@ -54,7 +54,7 @@ const columns: ColumnOptionsOverride<ItemsTableRow>[] = [
   {
     Header: "ID",
     accessor: "id",
-    width: 40,
+    width: 64,
   },
   {
     Header: "所持数",
