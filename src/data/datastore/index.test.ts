@@ -1,7 +1,5 @@
 import { dataSrc } from "src/data/datastore"
 
-const pp = (src: string): number => parseInt(src, 10)
-
 describe("dataSrc", () => {
   it("sorted by id", () => {
     // 適当な代表値をテスト
