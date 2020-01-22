@@ -25,10 +25,10 @@ export const EquipmentDetail: React.FC<OwnProps> = ({ eq }) => {
           src={eq.imageUrl || NoImageImg}
           alt={eq.rawName}
         />
+        <span css={padding}></span>
+        <Attr />
+        <span css={padding}></span>
         <span css={[title, padding]}>{eq.rawName}</span>
-        <span css={padding}>
-          <Attr />
-        </span>
       </div>
       <table css={tableCss}>
         <tbody>
