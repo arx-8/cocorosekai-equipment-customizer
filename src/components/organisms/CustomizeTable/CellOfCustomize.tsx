@@ -12,6 +12,7 @@ import {
 } from "src/domain/model/CustomizeRecord"
 import { findEquipmentStrict } from "src/domain/model/Equipment"
 import { customizeOperations, customizeSelectors } from "src/store/customize"
+import { RootState } from "src/store/store"
 
 type OwnProps = CellProps<CustomizeRecord> & {
   children?: never
@@ -28,6 +29,9 @@ export const CellOfCustomize: React.FC<OwnProps> = ({ row }) => {
   const dispatch = useDispatch()
   const currentSelected = useSelector(
     customizeSelectors.getCurrentSelectedCellIndex
+  )
+  const isProtectedRow = useSelector((state: RootState) =>
+    customizeSelectors.isProtectedRow(state, row.index)
   )
 
   const equippedIds = row.original.equippedIds
@@ -64,19 +68,21 @@ export const CellOfCustomize: React.FC<OwnProps> = ({ row }) => {
               )}
             </button>
 
-            <button
-              css={remove}
-              onClick={() =>
-                dispatch(
-                  customizeOperations.removeEquipment({
-                    colIndex,
-                    rowIndex: row.index,
-                  })
-                )
-              }
-            >
-              ×
-            </button>
+            {!isProtectedRow && (
+              <button
+                css={remove}
+                onClick={() =>
+                  dispatch(
+                    customizeOperations.removeEquipment({
+                      colIndex,
+                      rowIndex: row.index,
+                    })
+                  )
+                }
+              >
+                ×
+              </button>
+            )}
             <div css={name}>{equipment?.rawName}</div>
           </div>
         )
@@ -105,13 +111,15 @@ const imgCss = css`
 
 const btnWrapper = css`
   position: relative;
+  width: 48px;
 `
 
 const remove = css`
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -4px;
+  right: -4px;
 
+  color: red;
   width: 20px;
   height: 20px;
   font-weight: bolder;
