@@ -29,10 +29,12 @@ const root = css`
 
 const plus = css`
   position: absolute;
-  bottom: 0;
+  bottom: 4px;
   right: 0;
 
-  color: #27279f;
+  background: rgba(0, 0, 0, 0.4);
+  color: whitesmoke;
   font-weight: bolder;
-  font-size: x-large;
+  writing-mode: vertical-rl;
+  font-size: larger;
 `

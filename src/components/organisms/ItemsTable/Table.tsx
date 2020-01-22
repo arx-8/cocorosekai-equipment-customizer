@@ -217,13 +217,21 @@ export const Table: React.FC<OwnProps> = () => {
       const row = rows[index]
       prepareRow(row)
 
+      const isEvenRow = index % 2 === 0
+
       return (
-        <div {...row.getRowProps({ style })} css={rowCss}>
+        <div
+          {...row.getRowProps({ style })}
+          css={[rowCss, isEvenRow && evenCss]}
+        >
           {row.cells.map((cell) => {
             const isEvenColumn = cell.column.index % 2 === 0
             return (
               // eslint-disable-next-line react/jsx-key
-              <div {...cell.getCellProps()} css={isEvenColumn && evenColumn}>
+              <div
+                {...cell.getCellProps()}
+                css={[cellCss, isEvenColumn && evenCss]}
+              >
                 {cell.render("Cell")}
               </div>
             )
@@ -288,7 +296,7 @@ export const Table: React.FC<OwnProps> = () => {
                     key={key}
                     style={style}
                     {...rest}
-                    css={[headerCell, isEvenColumn && evenColumn]}
+                    css={[headerCell, isEvenColumn && evenCss]}
                   >
                     {/* TODO どう正しく解消すべきかわからん */}
                     {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
@@ -355,7 +363,7 @@ const headerCellSortable = css`
   cursor: pointer;
 `
 
-const evenColumn = css`
+const evenCss = css`
   background: #eee;
 `
 
@@ -367,4 +375,8 @@ const midHeader = css`
 
 const rowCss = css`
   border-top: solid 1px black;
+`
+
+const cellCss = css`
+  border-left: solid 1px black;
 `

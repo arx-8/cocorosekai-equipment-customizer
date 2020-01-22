@@ -38,7 +38,12 @@ export const EquipmentDetailModal: React.FC<OwnProps> = () => {
             {isMini ? "■" : "－"}
           </button>
         </div>
-        {!isMini && eq && <EquipmentDetail eq={eq} />}
+        {!isMini &&
+          (eq ? (
+            <EquipmentDetail eq={eq} />
+          ) : (
+            <div>(装備を選択してください))</div>
+          ))}
       </div>
     </Draggable>
   )

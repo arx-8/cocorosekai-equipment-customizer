@@ -270,7 +270,7 @@ export const Table: React.FC<OwnProps> = () => {
                     key={key}
                     style={style}
                     {...rest}
-                    css={[thCss, isEvenColumn && evenColumn]}
+                    css={[thCss, isEvenColumn && evenCss]}
                   >
                     {/* TODO どう正しく解消すべきかわからん */}
                     {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
@@ -304,19 +304,18 @@ export const Table: React.FC<OwnProps> = () => {
 
         {/* body */}
         <tbody {...getTableBodyProps()} css={tbodyCss}>
-          {rows.map((row) => {
+          {rows.map((row, index) => {
+            const isEvenRow = index % 2 === 0
             prepareRow(row)
+
             return (
               // eslint-disable-next-line react/jsx-key
-              <tr {...row.getRowProps()}>
+              <tr {...row.getRowProps()} css={isEvenRow && evenCss}>
                 {row.cells.map((cell) => {
                   const isEvenColumn = cell.column.index % 2 === 0
                   return (
                     // eslint-disable-next-line react/jsx-key
-                    <td
-                      {...cell.getCellProps()}
-                      css={isEvenColumn && evenColumn}
-                    >
+                    <td {...cell.getCellProps()} css={isEvenColumn && evenCss}>
                       {cell.render("Cell")}
                     </td>
                   )
@@ -378,6 +377,6 @@ const headerSortCss = css`
   cursor: pointer;
 `
 
-const evenColumn = css`
+const evenCss = css`
   background: #eee;
 `
