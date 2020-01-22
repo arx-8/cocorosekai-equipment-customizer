@@ -1,4 +1,4 @@
-import { data } from "src/assets/data"
+import { dataSrc } from "src/data/datastore"
 import { Brand } from "src/types/tsUtils"
 
 export type Equipment = {
@@ -87,7 +87,7 @@ export type SpecialEffect = SpecialEffect_Other
  * @throws 装備が存在しなかった場合
  */
 export const findEquipmentStrict = (equipmentId: EquipmentId): Equipment => {
-  const found = data.find((e) => e.id === equipmentId)
+  const found = dataSrc.find((e) => e.id === equipmentId)
   if (found == null) {
     throw new Error(`Logic failure. equipmentId: ${equipmentId} not found.`)
   }

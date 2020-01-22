@@ -10,7 +10,6 @@ import {
   useTable,
 } from "react-table"
 import { FixedSizeList, ListChildComponentProps } from "react-window"
-import { data } from "src/assets/data"
 import { HeartIcon } from "src/components/atoms/icons/HeartIcon"
 import { ShieldIcon } from "src/components/atoms/icons/ShieldIcon"
 import { SwordIcon } from "src/components/atoms/icons/SwordIcon"
@@ -23,6 +22,7 @@ import { CellOfAttrs } from "src/components/organisms/ItemsTable/CellOfAttrs"
 import { CellOfImage } from "src/components/organisms/ItemsTable/CellOfImage"
 import { CellOfStockNum } from "src/components/organisms/ItemsTable/CellOfStockNum"
 import { TableActions } from "src/components/organisms/ItemsTable/TableActions"
+import { dataSrc } from "src/data/datastore"
 import { Equipment } from "src/domain/model/Equipment"
 import { convertToItemsTable } from "src/gateway/dataGateway"
 import { RootState } from "src/store/store"
@@ -54,7 +54,7 @@ const columns: ColumnOptionsOverride<ItemsTableRow>[] = [
   {
     Header: "ID",
     accessor: "id",
-    width: 40,
+    width: 64,
   },
   {
     Header: "所持数",
@@ -179,7 +179,7 @@ const filterTypes: FilterTypes<ItemsTableRow> = {
 
 export const Table: React.FC<OwnProps> = () => {
   const stockNums = useSelector((state: RootState) => state.userInfo.stockNums)
-  const tableData = useMemo(() => convertToItemsTable(data, stockNums), [
+  const tableData = useMemo(() => convertToItemsTable(dataSrc, stockNums), [
     stockNums,
   ])
 

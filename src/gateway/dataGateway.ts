@@ -2,7 +2,7 @@ import { ItemsTableRow } from "src/components/organisms/ItemsTable/Table"
 import { Equipment } from "src/domain/model/Equipment"
 
 export const convertToItemsTable = (
-  data: Equipment[],
+  data: readonly Equipment[],
   stockNums: Record<string, number>
 ): ItemsTableRow[] => {
   return data.map((d) => {
