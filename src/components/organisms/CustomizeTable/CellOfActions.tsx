@@ -15,20 +15,28 @@ type OwnProps = CellProps<CustomizeRecord> & {
 
 export const CellOfActions: React.FC<OwnProps> = ({ row }) => {
   const dispatch = useDispatch()
-  const isProtectedRow = useSelector((state: RootState) =>
-    customizeSelectors.isProtectedRow(state, row.index)
+  const { isCheckStock, isProtected } = useSelector((state: RootState) =>
+    customizeSelectors.getRowStatuses(state, row.index)
   )
 
   return (
-    <div css={[root, isProtectedRow && protectedCss]}>
+    <div css={[root, isProtected && protectedCss]}>
       <div>
         <button
           onClick={() =>
             dispatch(customizeOperations.toggleProtectRow(row.index))
           }
         >
-          <EnableLamp enabled={isProtectedRow} />
+          <EnableLamp enabled={isProtected} />
           保護
+        </button>
+        <button
+          onClick={() =>
+            dispatch(customizeOperations.toggleCheckStock(row.index))
+          }
+        >
+          <EnableLamp enabled={isCheckStock} />
+          所持チェック
         </button>
         <button
           onClick={() => dispatch(customizeOperations.copyRow(row.index))}
@@ -38,8 +46,8 @@ export const CellOfActions: React.FC<OwnProps> = ({ row }) => {
       </div>
       <div>
         <button
-          css={!isProtectedRow && deleteBtn}
-          disabled={isProtectedRow}
+          css={!isProtected && deleteBtn}
+          disabled={isProtected}
           onClick={() => dispatch(customizeOperations.deleteRow(row.index))}
         >
           削除

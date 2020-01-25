@@ -8,6 +8,7 @@ export const ActionTypes = {
   copyRow: "customize/copyRow",
   deleteRow: "customize/deleteRow",
   toggleProtectRow: "customize/toggleProtectRow",
+  toggleCheckStock: "customize/toggleCheckStock",
   sortAllCustomizedEquipments: "customize/sortAllCustomizedEquipments",
   selectEquipmentCell: "customize/selectEquipmentCell",
   selectEquipment: "customize/selectEquipment",
@@ -31,7 +32,15 @@ export const copyRow = create<number>(ActionTypes.copyRow)
  */
 export const deleteRow = create<number>(ActionTypes.deleteRow)
 
+/**
+ * @param payload row index
+ */
 export const toggleProtectRow = create<number>(ActionTypes.toggleProtectRow)
+
+/**
+ * @param payload row index
+ */
+export const toggleCheckStock = create<number>(ActionTypes.toggleCheckStock)
 
 export const sortAllCustomizedEquipments = create(
   ActionTypes.sortAllCustomizedEquipments
@@ -51,5 +60,5 @@ export const toggleIsMinimizedEquipmentDetailModal = create(
 
 export const changeCustomizeMemo = create<{
   customizeMemo: string
-  rowIndex: number
+  rowIndex: CellIndex["rowIndex"]
 }>(ActionTypes.changeCustomizeMemo)

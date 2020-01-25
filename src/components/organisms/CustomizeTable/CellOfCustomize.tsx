@@ -30,8 +30,8 @@ export const CellOfCustomize: React.FC<OwnProps> = ({ row }) => {
   const currentSelected = useSelector(
     customizeSelectors.getCurrentSelectedCellIndex
   )
-  const isProtectedRow = useSelector((state: RootState) =>
-    customizeSelectors.isProtectedRow(state, row.index)
+  const { isProtected } = useSelector((state: RootState) =>
+    customizeSelectors.getRowStatuses(state, row.index)
   )
 
   const equippedIds = row.original.equippedIds
@@ -68,7 +68,7 @@ export const CellOfCustomize: React.FC<OwnProps> = ({ row }) => {
               )}
             </button>
 
-            {!isProtectedRow && (
+            {!isProtected && (
               <button
                 css={remove}
                 onClick={() =>
