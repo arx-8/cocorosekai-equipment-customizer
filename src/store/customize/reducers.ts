@@ -37,22 +37,22 @@ export const initialState: State = {
 }
 
 export const reducer = reducerWithInitialState(initialState)
-  .case(actions.addRow, (state) => {
-    return produce(state, (draft) => {
+  .case(actions.addRow, (state) =>
+    produce(state, (draft) => {
       draft.records.push(initRecord)
     })
-  })
-  .case(actions.copyRow, (state, payload) => {
-    return produce(state, (draft) => {
+  )
+  .case(actions.copyRow, (state, payload) =>
+    produce(state, (draft) => {
       const newRecord = produce(draft.records[payload], (record) => {
         record.isProtected = false
       })
 
       draft.records.push(newRecord)
     })
-  })
-  .case(actions.deleteRow, (state, payload) => {
-    return produce(state, (draft) => {
+  )
+  .case(actions.deleteRow, (state, payload) =>
+    produce(state, (draft) => {
       // 必ず 1 件は残す
       if (draft.records.length === 1) {
         return
@@ -60,19 +60,19 @@ export const reducer = reducerWithInitialState(initialState)
 
       draft.records = draft.records.filter((_, index) => index !== payload)
     })
-  })
-  .case(actions.toggleProtectRow, (state, payload) => {
-    return produce(state, (draft) => {
+  )
+  .case(actions.toggleProtectRow, (state, payload) =>
+    produce(state, (draft) => {
       draft.records[payload].isProtected = !draft.records[payload].isProtected
     })
-  })
-  .case(actions.selectEquipmentCell, (state, payload) => {
-    return produce(state, (draft) => {
+  )
+  .case(actions.selectEquipmentCell, (state, payload) =>
+    produce(state, (draft) => {
       draft.selectedCell = payload
     })
-  })
-  .case(actions.selectEquipment, (state, payload) => {
-    return produce(state, (draft) => {
+  )
+  .case(actions.selectEquipment, (state, payload) =>
+    produce(state, (draft) => {
       const record = draft.records[draft.selectedCell.rowIndex]
       // 行削除で選択位置が消えている場合があるため
       if (record == null) {
@@ -86,30 +86,30 @@ export const reducer = reducerWithInitialState(initialState)
         draft.selectedCell.colIndex += 1
       }
     })
-  })
-  .case(actions.removeEquipment, (state, payload) => {
-    return produce(state, (draft) => {
+  )
+  .case(actions.removeEquipment, (state, payload) =>
+    produce(state, (draft) => {
       draft.records[payload.rowIndex].equippedIds[payload.colIndex] = undefined
 
       // 連続選択しやすくするため、削除したセルに移動させる
       draft.selectedCell = payload
     })
-  })
-  .case(actions.toggleIsMinimizedEquipmentDetailModal, (state) => {
-    return produce(state, (draft) => {
+  )
+  .case(actions.toggleIsMinimizedEquipmentDetailModal, (state) =>
+    produce(state, (draft) => {
       draft.isMinimizedEquipmentDetailModal = !draft.isMinimizedEquipmentDetailModal
     })
-  })
-  .case(actions.changeCustomizeMemo, (state, payload) => {
-    return produce(state, (draft) => {
+  )
+  .case(actions.changeCustomizeMemo, (state, payload) =>
+    produce(state, (draft) => {
       draft.records[payload.rowIndex].customizeMemo = payload.customizeMemo
     })
-  })
-  .case(actions.sortAllCustomizedEquipments, (state) => {
-    return produce(state, (draft) => {
+  )
+  .case(actions.sortAllCustomizedEquipments, (state) =>
+    produce(state, (draft) => {
       draft.records.forEach((r) => {
         r.equippedIds.sort()
       })
     })
-  })
+  )
   .build()
