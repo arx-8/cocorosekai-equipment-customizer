@@ -59,6 +59,11 @@ export const reducer = reducerWithInitialState(initialState)
       }
 
       draft.records = draft.records.filter((_, index) => index !== payload)
+
+      // 削除で選択中の行が存在しなくなった場合、1行上へ移動させる
+      if (draft.records.length <= draft.selectedCell.rowIndex) {
+        draft.selectedCell.rowIndex = draft.records.length - 1
+      }
     })
   )
   .case(actions.toggleProtectRow, (state, payload) =>
