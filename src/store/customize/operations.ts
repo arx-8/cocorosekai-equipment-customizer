@@ -12,7 +12,7 @@ export const copyRow = actions.copyRow
 export const deleteRow = (rowIndex: number): AppThunkAction => {
   return (dispatch, getState) => {
     // 保護
-    if (customizeSelectors.isProtectedRow(getState(), rowIndex)) {
+    if (customizeSelectors.getRowStatuses(getState(), rowIndex).isProtected) {
       return
     }
     dispatch(actions.deleteRow(rowIndex))
@@ -20,6 +20,8 @@ export const deleteRow = (rowIndex: number): AppThunkAction => {
 }
 
 export const toggleProtectRow = actions.toggleProtectRow
+
+export const toggleCheckStock = actions.toggleCheckStock
 
 export const sortAllCustomizedEquipments = actions.sortAllCustomizedEquipments
 
@@ -32,7 +34,8 @@ export const selectEquipment = (equipmentId: EquipmentId): AppThunkAction => {
 
     // 保護
     if (
-      customizeSelectors.isProtectedRow(rootState, state.selectedCell.rowIndex)
+      customizeSelectors.getRowStatuses(rootState, state.selectedCell.rowIndex)
+        .isProtected
     ) {
       return
     }
@@ -43,7 +46,10 @@ export const selectEquipment = (equipmentId: EquipmentId): AppThunkAction => {
 export const removeEquipment = (cellIndex: CellIndex): AppThunkAction => {
   return (dispatch, getState) => {
     // 保護
-    if (customizeSelectors.isProtectedRow(getState(), cellIndex.rowIndex)) {
+    if (
+      customizeSelectors.getRowStatuses(getState(), cellIndex.rowIndex)
+        .isProtected
+    ) {
       return
     }
     dispatch(actions.removeEquipment(cellIndex))
@@ -54,12 +60,12 @@ export const toggleIsMinimizedEquipmentDetailModal =
   actions.toggleIsMinimizedEquipmentDetailModal
 
 export const changeCustomizeMemo = (
-  rowIndex: number,
+  rowIndex: CellIndex["rowIndex"],
   customizeMemo: string
 ): AppThunkAction => {
   return (dispatch, getState) => {
     // 保護
-    if (customizeSelectors.isProtectedRow(getState(), rowIndex)) {
+    if (customizeSelectors.getRowStatuses(getState(), rowIndex).isProtected) {
       return
     }
     dispatch(

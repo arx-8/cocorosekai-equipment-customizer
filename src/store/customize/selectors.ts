@@ -8,6 +8,7 @@ import {
   EquipmentId,
   findEquipmentStrict,
 } from "src/domain/model/Equipment"
+import { RawCustomizeRecord } from "src/store/customize/reducers"
 import { RootState } from "src/store/store"
 
 /**
@@ -64,12 +65,15 @@ export const getCurrentSelectedCellEquipment = (
   return findEquipmentStrict(eId)
 }
 
-export const isProtectedRow = (
+export const getRowStatuses = (
   rootState: RootState,
-  rowIndex: number
-): boolean => {
+  rowIndex: CellIndex["rowIndex"]
+): Pick<RawCustomizeRecord, "isCheckStock" | "isProtected"> => {
   const state = rootState.customizeState
 
   const target = state.records[rowIndex]
-  return target != null && target.isProtected
+  return {
+    isCheckStock: target != null && target.isCheckStock,
+    isProtected: target != null && target.isProtected,
+  }
 }

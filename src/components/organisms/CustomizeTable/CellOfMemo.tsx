@@ -14,8 +14,8 @@ type OwnProps = CellProps<CustomizeRecord> & {
 
 export const CellOfMemo: React.FC<OwnProps> = ({ row }) => {
   const dispatch = useDispatch()
-  const isProtectedRow = useSelector((state: RootState) =>
-    customizeSelectors.isProtectedRow(state, row.index)
+  const { isProtected } = useSelector((state: RootState) =>
+    customizeSelectors.getRowStatuses(state, row.index)
   )
 
   const { customizeMemo: initialValue } = row.original
@@ -30,8 +30,8 @@ export const CellOfMemo: React.FC<OwnProps> = ({ row }) => {
 
   return (
     <textarea
-      css={[root, isProtectedRow && disabledCss]}
-      disabled={isProtectedRow}
+      css={[root, isProtected && disabledCss]}
+      disabled={isProtected}
       value={tempValue}
       onChange={(e) => setTempValue(e.target.value)}
       onBlur={() => {
