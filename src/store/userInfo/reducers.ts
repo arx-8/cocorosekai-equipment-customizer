@@ -13,14 +13,14 @@ export const initialState: State = {
 }
 
 export const reducer = reducerWithInitialState(initialState)
-  .case(actions.changeStockNum, (state, payload) => {
-    return produce(state, (draft) => {
+  .case(actions.changeStockNum, (state, payload) =>
+    produce(state, (draft) => {
       draft.stockNums[payload.equipmentId] = payload.stockNum
     })
-  })
-  .case(actions.resetAllStockNums, (state) => {
-    return produce(state, (draft) => {
+  )
+  .case(actions.resetAllStockNums, (state) =>
+    produce(state, (draft) => {
       draft.stockNums = {}
     })
-  })
+  )
   .build()
