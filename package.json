@@ -62,7 +62,8 @@
     "lint:tsc": "tsc --noEmit",
     "lint": "npm-run-all --parallel --continue-on-error lint:eslint lint:tsc",
     "start": "react-scripts start",
-    "test": "react-scripts test"
+    "test": "react-scripts test",
+    "update-all": "npx npm-check-updates --upgrade"
   },
   "eslintConfig": {
     "extends": "react-app"
