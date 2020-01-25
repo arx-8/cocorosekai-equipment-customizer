@@ -5,7 +5,7 @@ import * as actions from "./actions"
 
 export type State = Readonly<{
   /** key is EquipmentId */
-  stockNums: Record<string, number>
+  stockNums: Record<number, number>
 }>
 
 export const initialState: State = {
