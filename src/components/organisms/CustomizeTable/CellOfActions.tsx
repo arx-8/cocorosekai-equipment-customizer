@@ -3,6 +3,7 @@ import { css, jsx } from "@emotion/core"
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { CellProps } from "react-table"
+import { EnableLamp } from "src/components/atoms/EnableLamp"
 import { disabledColor } from "src/components/styles/styles"
 import { CustomizeRecord } from "src/domain/model/CustomizeRecord"
 import { customizeOperations, customizeSelectors } from "src/store/customize"
@@ -26,6 +27,7 @@ export const CellOfActions: React.FC<OwnProps> = ({ row }) => {
             dispatch(customizeOperations.toggleProtectRow(row.index))
           }
         >
+          <EnableLamp enabled={isProtectedRow} />
           保護
         </button>
         <button

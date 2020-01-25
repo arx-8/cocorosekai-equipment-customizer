@@ -32,7 +32,7 @@ const plus = css`
   bottom: 4px;
   right: 0;
 
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.5);
   color: whitesmoke;
   font-weight: bolder;
   writing-mode: vertical-rl;
