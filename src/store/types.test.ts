@@ -1,7 +1,6 @@
 import { toUniq } from "src/utils/arrayUtils"
 
 import { ActionTypes as CustomizeActionTypes } from "./customize/actions"
-import { ActionTypes as NoticeActionTypes } from "./notice/actions"
 import { ActionTypes as UserInfoActionTypes } from "./userInfo/actions"
 
 describe("ActionType", () => {
@@ -10,7 +9,6 @@ describe("ActionType", () => {
     // ## Arrange ##
     const original: string[] = [
       ...Object.values(CustomizeActionTypes),
-      ...Object.values(NoticeActionTypes),
       ...Object.values(UserInfoActionTypes),
     ]
 

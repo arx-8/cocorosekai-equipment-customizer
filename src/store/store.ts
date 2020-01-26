@@ -10,12 +10,10 @@ import persistState from "redux-localstorage"
 import thunkMiddleWare from "redux-thunk"
 import { APP_VERSIONS, isDevelopment } from "src/constants/env"
 import { CustomizeState, customizeReducer } from "src/store/customize"
-import { NoticeState, noticeReducer } from "src/store/notice"
 import { UserInfoState, userInfoReducer } from "src/store/userInfo"
 
 export type RootState = Readonly<{
   customizeState: CustomizeState
-  notice: NoticeState
   userInfo: UserInfoState
 }>
 
@@ -24,7 +22,6 @@ export const configureStore = (
 ): Store<RootState, AnyAction> => {
   const rootReducer = combineReducers<RootState>({
     customizeState: customizeReducer,
-    notice: noticeReducer,
     userInfo: userInfoReducer,
   })
 
