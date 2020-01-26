@@ -1,0 +1,208 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`convertToItemsTable check ON, some stock 1`] = `
+Array [
+  Object {
+    "attribute": "void",
+    "canEquip": false,
+    "enhancementsNum": 2,
+    "equipCost": 64,
+    "id": 896902,
+    "imageUrl": "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/896900.png",
+    "name": "鬼灯鼻・じゅんろく",
+    "rawName": "鬼灯鼻・じゅんろく++",
+    "specialEffects": Array [
+      Object {
+        "rawText": "クリティカル率が35%上昇する。",
+      },
+    ],
+    "specialEffectsText": "クリティカル率が35%上昇する。",
+    "statuses": Object {
+      "hp": 0,
+      "magicAtk": 0,
+      "magicDef": 0,
+      "physicalAtk": 258,
+      "physicalDef": 0,
+    },
+    "stockNum": 1,
+  },
+  Object {
+    "attribute": "void",
+    "canEquip": false,
+    "enhancementsNum": 0,
+    "equipCost": 10,
+    "id": 950000,
+    "imageUrl": "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/950000.png",
+    "name": "ヴィブロブレード",
+    "rawName": "ヴィブロブレード",
+    "specialEffects": Array [],
+    "specialEffectsText": "",
+    "statuses": Object {
+      "hp": 30,
+      "magicAtk": 0,
+      "magicDef": 0,
+      "physicalAtk": 48,
+      "physicalDef": 0,
+    },
+    "stockNum": 0,
+  },
+  Object {
+    "attribute": "void",
+    "canEquip": true,
+    "enhancementsNum": 2,
+    "equipCost": 51,
+    "id": 951602,
+    "imageUrl": "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/951600.png",
+    "name": "傲慢のアラーニェ",
+    "rawName": "傲慢のアラーニェ++",
+    "specialEffects": Array [],
+    "specialEffectsText": "",
+    "statuses": Object {
+      "hp": 0,
+      "magicAtk": 326,
+      "magicDef": 0,
+      "physicalAtk": 326,
+      "physicalDef": 0,
+    },
+    "stockNum": 22,
+  },
+]
+`;
+
+exports[`convertToItemsTable check ON, stock 0 1`] = `
+Array [
+  Object {
+    "attribute": "void",
+    "canEquip": false,
+    "enhancementsNum": 2,
+    "equipCost": 64,
+    "id": 896902,
+    "imageUrl": "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/896900.png",
+    "name": "鬼灯鼻・じゅんろく",
+    "rawName": "鬼灯鼻・じゅんろく++",
+    "specialEffects": Array [
+      Object {
+        "rawText": "クリティカル率が35%上昇する。",
+      },
+    ],
+    "specialEffectsText": "クリティカル率が35%上昇する。",
+    "statuses": Object {
+      "hp": 0,
+      "magicAtk": 0,
+      "magicDef": 0,
+      "physicalAtk": 258,
+      "physicalDef": 0,
+    },
+    "stockNum": 0,
+  },
+  Object {
+    "attribute": "void",
+    "canEquip": false,
+    "enhancementsNum": 0,
+    "equipCost": 10,
+    "id": 950000,
+    "imageUrl": "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/950000.png",
+    "name": "ヴィブロブレード",
+    "rawName": "ヴィブロブレード",
+    "specialEffects": Array [],
+    "specialEffectsText": "",
+    "statuses": Object {
+      "hp": 30,
+      "magicAtk": 0,
+      "magicDef": 0,
+      "physicalAtk": 48,
+      "physicalDef": 0,
+    },
+    "stockNum": 0,
+  },
+  Object {
+    "attribute": "void",
+    "canEquip": false,
+    "enhancementsNum": 2,
+    "equipCost": 51,
+    "id": 951602,
+    "imageUrl": "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/951600.png",
+    "name": "傲慢のアラーニェ",
+    "rawName": "傲慢のアラーニェ++",
+    "specialEffects": Array [],
+    "specialEffectsText": "",
+    "statuses": Object {
+      "hp": 0,
+      "magicAtk": 326,
+      "magicDef": 0,
+      "physicalAtk": 326,
+      "physicalDef": 0,
+    },
+    "stockNum": 0,
+  },
+]
+`;
+
+exports[`convertToItemsTable stock 0 1`] = `
+Array [
+  Object {
+    "attribute": "void",
+    "canEquip": true,
+    "enhancementsNum": 2,
+    "equipCost": 64,
+    "id": 896902,
+    "imageUrl": "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/896900.png",
+    "name": "鬼灯鼻・じゅんろく",
+    "rawName": "鬼灯鼻・じゅんろく++",
+    "specialEffects": Array [
+      Object {
+        "rawText": "クリティカル率が35%上昇する。",
+      },
+    ],
+    "specialEffectsText": "クリティカル率が35%上昇する。",
+    "statuses": Object {
+      "hp": 0,
+      "magicAtk": 0,
+      "magicDef": 0,
+      "physicalAtk": 258,
+      "physicalDef": 0,
+    },
+    "stockNum": 0,
+  },
+  Object {
+    "attribute": "void",
+    "canEquip": true,
+    "enhancementsNum": 0,
+    "equipCost": 10,
+    "id": 950000,
+    "imageUrl": "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/950000.png",
+    "name": "ヴィブロブレード",
+    "rawName": "ヴィブロブレード",
+    "specialEffects": Array [],
+    "specialEffectsText": "",
+    "statuses": Object {
+      "hp": 30,
+      "magicAtk": 0,
+      "magicDef": 0,
+      "physicalAtk": 48,
+      "physicalDef": 0,
+    },
+    "stockNum": 0,
+  },
+  Object {
+    "attribute": "void",
+    "canEquip": true,
+    "enhancementsNum": 2,
+    "equipCost": 51,
+    "id": 951602,
+    "imageUrl": "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/951600.png",
+    "name": "傲慢のアラーニェ",
+    "rawName": "傲慢のアラーニェ++",
+    "specialEffects": Array [],
+    "specialEffectsText": "",
+    "statuses": Object {
+      "hp": 0,
+      "magicAtk": 326,
+      "magicDef": 0,
+      "physicalAtk": 326,
+      "physicalDef": 0,
+    },
+    "stockNum": 0,
+  },
+]
+`;

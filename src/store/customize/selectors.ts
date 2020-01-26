@@ -6,6 +6,8 @@ import {
 import {
   Equipment,
   EquipmentId,
+  EquipmentIdToStockNumPair,
+  countEquipmentIdToStockNumPairReducer,
   findEquipmentStrict,
 } from "src/domain/model/Equipment"
 import { RawCustomizeRecord } from "src/store/customize/reducers"
@@ -76,4 +78,28 @@ export const getRowStatuses = (
     isCheckStock: target != null && target.isCheckStock,
     isProtected: target != null && target.isProtected,
   }
+}
+
+/**
+ * 現在選択中の「編成」が、所持チェックありか？
+ */
+export const isCurrentRowCheckStock = (rootState: RootState): boolean => {
+  const state = rootState.customizeState
+
+  return getRowStatuses(rootState, state.selectedCell.rowIndex).isCheckStock
+}
+
+export const currentEquippedNums = (
+  rootState: RootState
+): EquipmentIdToStockNumPair => {
+  const state = rootState.customizeState
+
+  const maybeRecord = state.records[state.selectedCell.rowIndex]
+  if (maybeRecord == null) {
+    return {}
+  }
+
+  return maybeRecord.equippedIds
+    .filter((id): id is EquipmentId => id != null)
+    .reduce(countEquipmentIdToStockNumPairReducer, {})
 }

@@ -25,6 +25,7 @@ import { TableActions } from "src/components/organisms/ItemsTable/TableActions"
 import { dataSrc } from "src/data/datastore"
 import { Equipment } from "src/domain/model/Equipment"
 import { convertToItemsTable } from "src/gateway/dataGateway"
+import { customizeSelectors } from "src/store/customize"
 import { RootState } from "src/store/store"
 import {
   ColumnInstanceOverride,
@@ -46,6 +47,7 @@ type OwnProps = {
  * filter, sort に都合の悪い型を変換するため、Table用の型を追加している
  */
 export type ItemsTableRow = Equipment & {
+  canEquip: boolean
   specialEffectsText: string
   stockNum: number
 }
@@ -179,9 +181,22 @@ const filterTypes: FilterTypes<ItemsTableRow> = {
 
 export const Table: React.FC<OwnProps> = () => {
   const stockNums = useSelector((state: RootState) => state.userInfo.stockNums)
-  const tableData = useMemo(() => convertToItemsTable(dataSrc, stockNums), [
-    stockNums,
-  ])
+  const isCurrentRowCheckStock = useSelector(
+    customizeSelectors.isCurrentRowCheckStock
+  )
+  const currentEquippedNums = useSelector(
+    customizeSelectors.currentEquippedNums
+  )
+  const tableData = useMemo(
+    () =>
+      convertToItemsTable(
+        dataSrc,
+        stockNums,
+        currentEquippedNums,
+        isCurrentRowCheckStock
+      ),
+    [currentEquippedNums, isCurrentRowCheckStock, stockNums]
+  )
 
   // Use the state and functions returned from useTable to build your UI
   const {
