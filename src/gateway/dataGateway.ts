@@ -1,9 +1,12 @@
 import { ItemsTableRow } from "src/components/organisms/ItemsTable/Table"
-import { Equipment } from "src/domain/model/Equipment"
+import {
+  Equipment,
+  EquipmentIdToStockNumPair,
+} from "src/domain/model/Equipment"
 
 export const convertToItemsTable = (
   data: readonly Equipment[],
-  stockNums: Record<string, number>
+  stockNums: EquipmentIdToStockNumPair
 ): ItemsTableRow[] => {
   return data.map((d) => {
     return {
