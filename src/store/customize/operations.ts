@@ -1,6 +1,7 @@
 import { CellIndex } from "src/domain/model/CustomizeRecord"
 import { EquipmentId } from "src/domain/model/Equipment"
 import { customizeSelectors } from "src/store/customize"
+import { noticeOperations } from "src/store/notice"
 import { AppThunkAction } from "src/types/reduxUtils"
 import { CastAny } from "src/types/tsUtils"
 
@@ -76,7 +77,14 @@ export const selectEquipment = (equipmentId: EquipmentId): AppThunkAction => {
 
       if (outOfStockId != null) {
         // 所持数超過のため装備できない
-        // TODO notice
+        dispatch(
+          noticeOperations.enqueueNotification({
+            message: "所持数が不足しているため装備できません",
+            options: {
+              variant: "warning",
+            },
+          })
+        )
         return
       }
     }

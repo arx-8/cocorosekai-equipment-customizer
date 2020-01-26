@@ -1,8 +1,10 @@
+import { SnackbarProvider } from "notistack"
 import React from "react"
 import ReactDOM from "react-dom"
 import { Provider as ReduxProvider } from "react-redux"
 import { GoogleAnalytics } from "src/components/helpers/GoogleAnalytics"
 import { Initializer } from "src/components/helpers/Initializer"
+import { Notifier } from "src/components/helpers/Notifier"
 import { App } from "src/components/pages/App"
 import { GlobalStyles } from "src/components/styles/GlobalStyles"
 import * as serviceWorker from "src/serviceWorker"
@@ -13,11 +15,14 @@ const reduxStore = configureStore()
 const Root: React.FC = () => {
   return (
     <ReduxProvider store={reduxStore}>
-      <GoogleAnalytics />
-      <GlobalStyles />
-      <Initializer>
-        <App />
-      </Initializer>
+      <SnackbarProvider maxSnack={3}>
+        <Notifier />
+        <GoogleAnalytics />
+        <GlobalStyles />
+        <Initializer>
+          <App />
+        </Initializer>
+      </SnackbarProvider>
     </ReduxProvider>
   )
 }
