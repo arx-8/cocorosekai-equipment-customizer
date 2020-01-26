@@ -1,11 +1,12 @@
 import produce from "immer"
+import { EquipmentIdToStockNumPair } from "src/domain/model/Equipment"
 import { reducerWithInitialState } from "typescript-fsa-reducers"
 
 import * as actions from "./actions"
 
 export type State = Readonly<{
   /** key is EquipmentId */
-  stockNums: Record<string, number>
+  stockNums: EquipmentIdToStockNumPair
 }>
 
 export const initialState: State = {

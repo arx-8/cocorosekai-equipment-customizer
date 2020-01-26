@@ -24,6 +24,11 @@ export type Equipment = {
 /** 装備 ID (内部ロジック用) */
 export type EquipmentId = Brand<number, "EquipmentId">
 
+/**
+ * key is `EquipmentId`
+ */
+export type EquipmentIdToStockNumPair = Record<number, number>
+
 /** 属性 */
 export type Attribute =
   // 無
