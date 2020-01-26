@@ -1,8 +1,10 @@
 import { CellIndex } from "src/domain/model/CustomizeRecord"
-import { EquipmentId } from "src/domain/model/Equipment"
+import {
+  EquipmentId,
+  countEquipmentIdToStockNumPairReducer,
+} from "src/domain/model/Equipment"
 import { customizeSelectors } from "src/store/customize"
 import { AppThunkAction } from "src/types/reduxUtils"
-import { CastAny } from "src/types/tsUtils"
 
 import * as actions from "./actions"
 
@@ -58,13 +60,9 @@ export const selectEquipment = (equipmentId: EquipmentId): AppThunkAction => {
       ]
 
       // ID と装備済みの数のペア
-      const idToNums: Record<number, number> = willEquipIds.reduce(
-        (acc, curr) => {
-          const maybeNum: undefined | number = acc[curr] as CastAny
-          acc[curr] = maybeNum == null ? 1 : maybeNum + 1
-          return acc
-        },
-        {} as Record<number, number>
+      const idToNums = willEquipIds.reduce(
+        countEquipmentIdToStockNumPairReducer,
+        {}
       )
 
       // 「所持数」より多く装備しようとしてるやつを探す

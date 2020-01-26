@@ -1,5 +1,5 @@
 import { dataSrc } from "src/data/datastore"
-import { Brand } from "src/types/tsUtils"
+import { Brand, CastAny } from "src/types/tsUtils"
 
 export type Equipment = {
   attribute: Attribute
@@ -23,6 +23,20 @@ export type Equipment = {
 
 /** 装備 ID (内部ロジック用) */
 export type EquipmentId = Brand<number, "EquipmentId">
+
+/**
+ * key is `EquipmentId`
+ */
+export type EquipmentIdToStockNumPair = Record<number, number>
+
+export const countEquipmentIdToStockNumPairReducer = (
+  acc: EquipmentIdToStockNumPair,
+  curr: EquipmentId
+): EquipmentIdToStockNumPair => {
+  const maybeNum: undefined | number = acc[curr] as CastAny
+  acc[curr] = maybeNum == null ? 1 : maybeNum + 1
+  return acc
+}
 
 /** 属性 */
 export type Attribute =
