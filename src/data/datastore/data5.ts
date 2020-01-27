@@ -4365,6 +4365,339 @@ export const data5: Equipment[] = [
     ],
   },
   {
+    id: 897000,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/897000.png",
+    equipCost: 15,
+    name: "至高のおせち",
+    rawName: "至高のおせち",
+    enhancementsNum: 0,
+    attribute: "darkness",
+    statuses: {
+      hp: 0,
+      magicAtk: 0,
+      magicDef: 0,
+      physicalAtk: 55,
+      physicalDef: 0,
+    },
+    specialEffects: [
+      {
+        rawText: "[闇属性専用]物理攻撃ダメージが10%上昇する。",
+      },
+    ],
+  },
+  {
+    id: 897001,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/897000.png",
+    equipCost: 30,
+    name: "至高のおせち",
+    rawName: "至高のおせち+",
+    enhancementsNum: 1,
+    attribute: "darkness",
+    statuses: {
+      hp: 0,
+      magicAtk: 0,
+      magicDef: 0,
+      physicalAtk: 117,
+      physicalDef: 0,
+    },
+    specialEffects: [
+      {
+        rawText: "[闇属性専用]物理攻撃ダメージが20%上昇する。",
+      },
+    ],
+  },
+  {
+    id: 897002,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/897000.png",
+    equipCost: 45,
+    name: "至高のおせち",
+    rawName: "至高のおせち++",
+    enhancementsNum: 2,
+    attribute: "darkness",
+    statuses: {
+      hp: 0,
+      magicAtk: 0,
+      magicDef: 0,
+      physicalAtk: 179,
+      physicalDef: 0,
+    },
+    specialEffects: [
+      {
+        rawText: "[闇属性専用]物理攻撃ダメージが30%上昇する。",
+      },
+    ],
+  },
+  {
+    id: 897100,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/897100.png",
+    equipCost: 12,
+    name: "究極の寿司",
+    rawName: "究極の寿司",
+    enhancementsNum: 0,
+    attribute: "void",
+    statuses: {
+      hp: 0,
+      magicAtk: 0,
+      magicDef: 0,
+      physicalAtk: 46,
+      physicalDef: 0,
+    },
+    specialEffects: [
+      {
+        rawText: "物理攻撃ダメージが7%上昇する。",
+      },
+    ],
+  },
+  {
+    id: 897101,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/897100.png",
+    equipCost: 24,
+    name: "究極の寿司",
+    rawName: "究極の寿司+",
+    enhancementsNum: 1,
+    attribute: "void",
+    statuses: {
+      hp: 0,
+      magicAtk: 0,
+      magicDef: 0,
+      physicalAtk: 101,
+      physicalDef: 0,
+    },
+    specialEffects: [
+      {
+        rawText: "物理攻撃ダメージが14%上昇する。",
+      },
+    ],
+  },
+  {
+    id: 897102,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/897100.png",
+    equipCost: 36,
+    name: "究極の寿司",
+    rawName: "究極の寿司++",
+    enhancementsNum: 2,
+    attribute: "void",
+    statuses: {
+      hp: 0,
+      magicAtk: 0,
+      magicDef: 0,
+      physicalAtk: 156,
+      physicalDef: 0,
+    },
+    specialEffects: [
+      {
+        rawText: "物理攻撃ダメージが20%上昇する。",
+      },
+    ],
+  },
+  {
+    id: 897200,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/897200.png",
+    equipCost: 23,
+    name: "くまるま＆うさるま",
+    rawName: "くまるま＆うさるま",
+    enhancementsNum: 0,
+    attribute: "void",
+    statuses: {
+      hp: 0,
+      magicAtk: 91,
+      magicDef: 0,
+      physicalAtk: 0,
+      physicalDef: 0,
+    },
+    specialEffects: [
+      {
+        rawText: "ブロック確率が15%上昇する。",
+      },
+    ],
+  },
+  {
+    id: 897201,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/897200.png",
+    equipCost: 45,
+    name: "くまるま＆うさるま",
+    rawName: "くまるま＆うさるま+",
+    enhancementsNum: 1,
+    attribute: "void",
+    statuses: {
+      hp: 0,
+      magicAtk: 181,
+      magicDef: 0,
+      physicalAtk: 0,
+      physicalDef: 0,
+    },
+    specialEffects: [
+      {
+        rawText: "ブロック確率が27%上昇する。",
+      },
+    ],
+  },
+  {
+    id: 897202,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/897200.png",
+    equipCost: 67,
+    name: "くまるま＆うさるま",
+    rawName: "くまるま＆うさるま++",
+    enhancementsNum: 2,
+    attribute: "void",
+    statuses: {
+      hp: 0,
+      magicAtk: 271,
+      magicDef: 0,
+      physicalAtk: 0,
+      physicalDef: 0,
+    },
+    specialEffects: [
+      {
+        rawText: "ブロック確率が40%上昇する。",
+      },
+    ],
+  },
+  {
+    id: 897300,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/897300.png",
+    equipCost: 12,
+    name: "天釣打神鞭",
+    rawName: "天釣打神鞭",
+    enhancementsNum: 0,
+    attribute: "void",
+    statuses: {
+      hp: 50,
+      magicAtk: 0,
+      magicDef: 0,
+      physicalAtk: 46,
+      physicalDef: 0,
+    },
+    specialEffects: [
+      {
+        rawText: "水属性パネルによる攻撃・回復ASの威力を5%強化する。",
+      },
+    ],
+  },
+  {
+    id: 897301,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/897300.png",
+    equipCost: 21,
+    name: "天釣打神鞭",
+    rawName: "天釣打神鞭+",
+    enhancementsNum: 1,
+    attribute: "void",
+    statuses: {
+      hp: 104,
+      magicAtk: 0,
+      magicDef: 0,
+      physicalAtk: 93,
+      physicalDef: 0,
+    },
+    specialEffects: [
+      {
+        rawText: "水属性パネルによる攻撃・回復ASの威力を10%強化する。",
+      },
+    ],
+  },
+  {
+    id: 897302,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/897300.png",
+    equipCost: 30,
+    name: "天釣打神鞭",
+    rawName: "天釣打神鞭++",
+    enhancementsNum: 2,
+    attribute: "void",
+    statuses: {
+      hp: 158,
+      magicAtk: 0,
+      magicDef: 0,
+      physicalAtk: 140,
+      physicalDef: 0,
+    },
+    specialEffects: [
+      {
+        rawText: "水属性パネルによる攻撃・回復ASの威力を15%強化する。",
+      },
+    ],
+  },
+  {
+    id: 897400,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/897400.png",
+    equipCost: 12,
+    name: "海穿打神鞭",
+    rawName: "海穿打神鞭",
+    enhancementsNum: 0,
+    attribute: "water",
+    statuses: {
+      hp: 60,
+      magicAtk: 0,
+      magicDef: 0,
+      physicalAtk: 58,
+      physicalDef: 0,
+    },
+    specialEffects: [
+      {
+        rawText:
+          "[水属性専用]水属性パネルによる攻撃・回復ASの威力を5%強化する。",
+      },
+    ],
+  },
+  {
+    id: 897401,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/897400.png",
+    equipCost: 21,
+    name: "海穿打神鞭",
+    rawName: "海穿打神鞭+",
+    enhancementsNum: 1,
+    attribute: "water",
+    statuses: {
+      hp: 127,
+      magicAtk: 0,
+      magicDef: 0,
+      physicalAtk: 110,
+      physicalDef: 0,
+    },
+    specialEffects: [
+      {
+        rawText:
+          "[水属性専用]水属性パネルによる攻撃・回復ASの威力を10%強化する。",
+      },
+    ],
+  },
+  {
+    id: 897402,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/897400.png",
+    equipCost: 30,
+    name: "海穿打神鞭",
+    rawName: "海穿打神鞭++",
+    enhancementsNum: 2,
+    attribute: "water",
+    statuses: {
+      hp: 194,
+      magicAtk: 0,
+      magicDef: 0,
+      physicalAtk: 162,
+      physicalDef: 0,
+    },
+    specialEffects: [
+      {
+        rawText:
+          "[水属性専用]水属性パネルによる攻撃・回復ASの威力を15%強化する。",
+      },
+    ],
+  },
+  {
     id: 950000,
     imageUrl:
       "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/950000.png",
