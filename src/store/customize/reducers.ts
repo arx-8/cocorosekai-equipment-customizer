@@ -31,8 +31,8 @@ export const initialState: State = {
   isMinimizedEquipmentDetailModal: false,
   records: [initRecord],
   selectedCell: {
-    rowIndex: 0,
     colIndex: 0,
+    rowIndex: 0,
   },
 }
 

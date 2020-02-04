@@ -5,16 +5,16 @@ import actionCreatorFactory from "typescript-fsa"
 
 export const ActionTypes = {
   addRow: "customize/addRow",
+  changeCustomizeMemo: "customize/changeCustomizeMemo",
   copyRow: "customize/copyRow",
   deleteRow: "customize/deleteRow",
-  toggleProtectRow: "customize/toggleProtectRow",
-  sortAllCustomizedEquipments: "customize/sortAllCustomizedEquipments",
-  selectEquipmentCell: "customize/selectEquipmentCell",
-  selectEquipment: "customize/selectEquipment",
   removeEquipment: "customize/removeEquipment",
+  selectEquipment: "customize/selectEquipment",
+  selectEquipmentCell: "customize/selectEquipmentCell",
+  sortAllCustomizedEquipments: "customize/sortAllCustomizedEquipments",
   toggleIsMinimizedEquipmentDetailModal:
     "customize/toggleIsMinimizedEquipmentDetailModal",
-  changeCustomizeMemo: "customize/changeCustomizeMemo",
+  toggleProtectRow: "customize/toggleProtectRow",
 } as const
 
 const create = actionCreatorFactory(APP_NAME)

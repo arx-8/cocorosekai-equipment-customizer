@@ -45,24 +45,26 @@ type OwnProps = {
 
 const columns: ColumnOptionsOverride<CustomizeRecord>[] = [
   {
-    Header: "No.",
     Cell: (p) => p.row.index + 1,
+    Header: "No.",
     width: 40,
   },
   {
-    Header: "操作",
     Cell: CellOfActions,
+    Header: "操作",
     width: 72,
   },
   {
+    Cell: CellOfMemo,
+    Filter: TextColumnFilter,
     Header: "メモ",
     accessor: "customizeMemo",
-    Cell: CellOfMemo,
-    width: 144,
-    Filter: TextColumnFilter,
     filter: "fuzzyTextFilter",
+    width: 144,
   },
   {
+    Cell: CellOfCustomize,
+    Filter: TextColumnFilter,
     Header: "装備編成",
     // sort, filter を可能にするため、string に変換
     // 前と次の名が合体してあいまい検索に引っかかるのを防ぐため、"," で join
@@ -71,10 +73,8 @@ const columns: ColumnOptionsOverride<CustomizeRecord>[] = [
         .map((eId) => eId && findEquipmentStrict(eId).rawName)
         .join(",")
     },
-    width: 336,
-    Cell: CellOfCustomize,
-    Filter: TextColumnFilter,
     filter: "fuzzyTextFilter",
+    width: 336,
   },
   // {
   //   Header: "参考総合値",
@@ -82,22 +82,23 @@ const columns: ColumnOptionsOverride<CustomizeRecord>[] = [
   //   width: 56,
   // },
   {
-    Header: "属性",
-    accessor: "mixedAttributes",
     // TODO Array なので sort できない
     Cell: CellOfAttrs,
-    width: 48,
     Filter: AttributeColumnFilter,
+    Header: "属性",
+    accessor: "mixedAttributes",
     filter: "attributeFilter",
+    width: 48,
   },
   {
+    Filter: NumberRangeColumnFilter,
     Header: "装備コスト",
     accessor: "totalEquipCost",
-    width: 64,
-    Filter: NumberRangeColumnFilter,
     filter: "between",
+    width: 64,
   },
   {
+    Filter: NumberRangeColumnFilter,
     // eslint-disable-next-line react/display-name
     Header: () => (
       <HeaderCellWithIcon
@@ -106,11 +107,11 @@ const columns: ColumnOptionsOverride<CustomizeRecord>[] = [
       />
     ),
     accessor: "totalStatuses.hp",
-    width: 64,
-    Filter: NumberRangeColumnFilter,
     filter: "between",
+    width: 64,
   },
   {
+    Filter: NumberRangeColumnFilter,
     // eslint-disable-next-line react/display-name
     Header: () => (
       <HeaderCellWithIcon
@@ -119,11 +120,11 @@ const columns: ColumnOptionsOverride<CustomizeRecord>[] = [
       />
     ),
     accessor: "totalStatuses.physicalAtk",
-    width: 64,
-    Filter: NumberRangeColumnFilter,
     filter: "between",
+    width: 64,
   },
   {
+    Filter: NumberRangeColumnFilter,
     // eslint-disable-next-line react/display-name
     Header: () => (
       <HeaderCellWithIcon
@@ -132,11 +133,11 @@ const columns: ColumnOptionsOverride<CustomizeRecord>[] = [
       />
     ),
     accessor: "totalStatuses.physicalDef",
-    width: 64,
-    Filter: NumberRangeColumnFilter,
     filter: "between",
+    width: 64,
   },
   {
+    Filter: NumberRangeColumnFilter,
     // eslint-disable-next-line react/display-name
     Header: () => (
       <HeaderCellWithIcon
@@ -145,11 +146,11 @@ const columns: ColumnOptionsOverride<CustomizeRecord>[] = [
       />
     ),
     accessor: "totalStatuses.magicAtk",
-    width: 64,
-    Filter: NumberRangeColumnFilter,
     filter: "between",
+    width: 64,
   },
   {
+    Filter: NumberRangeColumnFilter,
     // eslint-disable-next-line react/display-name
     Header: () => (
       <HeaderCellWithIcon
@@ -158,20 +159,19 @@ const columns: ColumnOptionsOverride<CustomizeRecord>[] = [
       />
     ),
     accessor: "totalStatuses.magicDef",
-    width: 64,
-    Filter: NumberRangeColumnFilter,
     filter: "between",
+    width: 64,
   },
   {
-    Header: "特殊効果",
+    Cell: PreWrapCell,
     // sort, filter を可能にするため、string に変換
+    Filter: TextColumnFilter,
+    Header: "特殊効果",
     accessor: (originalRow) => {
       return originalRow.mixedSpecialEffects.map((e) => e.rawText).join("\n")
     },
-    Cell: PreWrapCell,
-    width: 240,
-    Filter: TextColumnFilter,
     filter: "fuzzyTextFilter",
+    width: 240,
   },
 ]
 
@@ -202,12 +202,12 @@ export const Table: React.FC<OwnProps> = () => {
     setAllFilters,
   } = useTable(
     {
+      autoResetFilters: false,
+      autoResetSortBy: false,
       columns,
       data,
       defaultColumn,
       filterTypes,
-      autoResetFilters: false,
-      autoResetSortBy: false,
     } as TableOptionsOverride<CustomizeRecord>,
     useBlockLayout,
     useFilters,

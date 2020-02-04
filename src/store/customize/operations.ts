@@ -64,8 +64,8 @@ export const changeCustomizeMemo = (
     }
     dispatch(
       actions.changeCustomizeMemo({
-        rowIndex,
         customizeMemo,
+        rowIndex,
       })
     )
   }
