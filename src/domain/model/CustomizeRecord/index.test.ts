@@ -27,10 +27,18 @@ describe("calcCustomizeRecord", () => {
     // ## Arrange ##
     const equipments: Equipment[] = [
       {
+        attribute: "light",
+        enhancementsNum: 0,
+        equipCost: 12 as EquipCost,
         id: 0 as EquipmentId,
+        imageUrl: "https://example.com/",
         name: "羊飼いの杖",
         rawName: "羊飼いの杖",
-        attribute: "light",
+        specialEffects: [
+          {
+            rawText: "受ける魔法ダメージ5%軽減",
+          },
+        ],
         statuses: {
           hp: 72 as HitPointNum,
           magicAtk: 43 as MagicAttackNum,
@@ -38,14 +46,6 @@ describe("calcCustomizeRecord", () => {
           physicalAtk: 14 as PhysicalAttackNum,
           physicalDef: 0 as PhysicalDefenseNum,
         },
-        enhancementsNum: 0,
-        equipCost: 12 as EquipCost,
-        imageUrl: "https://example.com/",
-        specialEffects: [
-          {
-            rawText: "受ける魔法ダメージ5%軽減",
-          },
-        ],
       },
     ]
 
@@ -60,10 +60,18 @@ describe("calcCustomizeRecord", () => {
     // ## Arrange ##
     const equipments: Equipment[] = [
       {
+        attribute: "darkness",
+        enhancementsNum: 1,
+        equipCost: 100_000 as EquipCost,
         id: 1 as EquipmentId,
+        imageUrl: null,
         name: "dummy1",
         rawName: "dummy+",
-        attribute: "darkness",
+        specialEffects: [
+          {
+            rawText: "effect 1",
+          },
+        ],
         statuses: {
           hp: 1 as HitPointNum,
           magicAtk: 10 as MagicAttackNum,
@@ -71,20 +79,16 @@ describe("calcCustomizeRecord", () => {
           physicalAtk: 1_000 as PhysicalAttackNum,
           physicalDef: 10_000 as PhysicalDefenseNum,
         },
-        enhancementsNum: 1,
-        equipCost: 100_000 as EquipCost,
-        imageUrl: null,
-        specialEffects: [
-          {
-            rawText: "effect 1",
-          },
-        ],
       },
       {
+        attribute: "light",
+        enhancementsNum: 2,
+        equipCost: 2_000_000 as EquipCost,
         id: 20 as EquipmentId,
+        imageUrl: null,
         name: "dummy2",
         rawName: "dummy++",
-        attribute: "light",
+        specialEffects: [],
         statuses: {
           hp: 20 as HitPointNum,
           magicAtk: 200 as MagicAttackNum,
@@ -92,16 +96,20 @@ describe("calcCustomizeRecord", () => {
           physicalAtk: 20_000 as PhysicalAttackNum,
           physicalDef: 200_000 as PhysicalDefenseNum,
         },
-        enhancementsNum: 2,
-        equipCost: 2_000_000 as EquipCost,
-        imageUrl: null,
-        specialEffects: [],
       },
       {
+        attribute: "darkness",
+        enhancementsNum: 2,
+        equipCost: 30_000_000 as EquipCost,
         id: 300 as EquipmentId,
+        imageUrl: "https://example.com/",
         name: "dummy3",
         rawName: "dummy++",
-        attribute: "darkness",
+        specialEffects: [
+          {
+            rawText: "effect 300",
+          },
+        ],
         statuses: {
           hp: 300 as HitPointNum,
           magicAtk: 3_000 as MagicAttackNum,
@@ -109,14 +117,6 @@ describe("calcCustomizeRecord", () => {
           physicalAtk: 300_000 as PhysicalAttackNum,
           physicalDef: 3_000_000 as PhysicalDefenseNum,
         },
-        enhancementsNum: 2,
-        equipCost: 30_000_000 as EquipCost,
-        imageUrl: "https://example.com/",
-        specialEffects: [
-          {
-            rawText: "effect 300",
-          },
-        ],
       },
     ]
 

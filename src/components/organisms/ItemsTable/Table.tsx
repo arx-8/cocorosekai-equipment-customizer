@@ -57,41 +57,42 @@ const columns: ColumnOptionsOverride<ItemsTableRow>[] = [
     width: 64,
   },
   {
-    Header: "所持数",
-    accessor: "stockNum",
     Cell: CellOfStockNum,
     Filter: NumberRangeColumnFilter,
+    Header: "所持数",
+    accessor: "stockNum",
     filter: "between",
     width: 56,
   },
   {
-    Header: "選択",
     Cell: CellOfImage,
+    Header: "選択",
     width: 64,
   },
   {
+    Filter: TextColumnFilter,
     Header: "名前",
     accessor: "rawName",
-    width: 240,
-    Filter: TextColumnFilter,
     filter: "fuzzyTextFilter",
+    width: 240,
   },
   {
+    Cell: CellOfAttrs,
+    Filter: AttributeColumnFilter,
     Header: "属性",
     accessor: "attribute",
-    Cell: CellOfAttrs,
-    width: 48,
-    Filter: AttributeColumnFilter,
     filter: "attributeFilter",
+    width: 48,
   },
   {
+    Filter: NumberRangeColumnFilter,
     Header: "装備コスト",
     accessor: "equipCost",
-    width: 64,
-    Filter: NumberRangeColumnFilter,
     filter: "between",
+    width: 64,
   },
   {
+    Filter: NumberRangeColumnFilter,
     // eslint-disable-next-line react/display-name
     Header: () => (
       <HeaderCellWithIcon
@@ -100,11 +101,11 @@ const columns: ColumnOptionsOverride<ItemsTableRow>[] = [
       />
     ),
     accessor: "statuses.hp",
-    width: 64,
-    Filter: NumberRangeColumnFilter,
     filter: "between",
+    width: 64,
   },
   {
+    Filter: NumberRangeColumnFilter,
     // eslint-disable-next-line react/display-name
     Header: () => (
       <HeaderCellWithIcon
@@ -113,11 +114,11 @@ const columns: ColumnOptionsOverride<ItemsTableRow>[] = [
       />
     ),
     accessor: "statuses.physicalAtk",
-    width: 64,
-    Filter: NumberRangeColumnFilter,
     filter: "between",
+    width: 64,
   },
   {
+    Filter: NumberRangeColumnFilter,
     // eslint-disable-next-line react/display-name
     Header: () => (
       <HeaderCellWithIcon
@@ -126,11 +127,11 @@ const columns: ColumnOptionsOverride<ItemsTableRow>[] = [
       />
     ),
     accessor: "statuses.physicalDef",
-    width: 64,
-    Filter: NumberRangeColumnFilter,
     filter: "between",
+    width: 64,
   },
   {
+    Filter: NumberRangeColumnFilter,
     // eslint-disable-next-line react/display-name
     Header: () => (
       <HeaderCellWithIcon
@@ -139,11 +140,11 @@ const columns: ColumnOptionsOverride<ItemsTableRow>[] = [
       />
     ),
     accessor: "statuses.magicAtk",
-    width: 64,
-    Filter: NumberRangeColumnFilter,
     filter: "between",
+    width: 64,
   },
   {
+    Filter: NumberRangeColumnFilter,
     // eslint-disable-next-line react/display-name
     Header: () => (
       <HeaderCellWithIcon
@@ -152,16 +153,15 @@ const columns: ColumnOptionsOverride<ItemsTableRow>[] = [
       />
     ),
     accessor: "statuses.magicDef",
-    width: 64,
-    Filter: NumberRangeColumnFilter,
     filter: "between",
+    width: 64,
   },
   {
+    Filter: TextColumnFilter,
     Header: "特殊効果",
     accessor: "specialEffectsText",
-    width: 240,
-    Filter: TextColumnFilter,
     filter: "fuzzyTextFilter",
+    width: 240,
   },
 ]
 
@@ -195,12 +195,12 @@ export const Table: React.FC<OwnProps> = () => {
     totalColumnsWidth,
   } = useTable(
     {
+      autoResetFilters: false,
+      autoResetSortBy: false,
       columns,
       data: tableData,
       defaultColumn,
       filterTypes,
-      autoResetFilters: false,
-      autoResetSortBy: false,
     } as TableOptionsOverride<ItemsTableRow>,
     useBlockLayout,
     useFilters,

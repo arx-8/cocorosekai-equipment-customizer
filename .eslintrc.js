@@ -21,6 +21,7 @@ module.exports = {
     // CI で warn も検知可能にするため、全て error にする
     "only-error",
     "typescript-sort-keys",
+    "sort-keys-fix",
   ],
   rules: {
     "import/no-default-export": "error",
@@ -49,6 +50,7 @@ module.exports = {
       },
     ],
     "react/void-dom-elements-no-children": "error",
+    "sort-keys-fix/sort-keys-fix": "error",
 
     // prettier
     "prettier/prettier": [

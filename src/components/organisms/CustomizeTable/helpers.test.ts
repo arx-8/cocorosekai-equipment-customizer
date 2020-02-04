@@ -77,16 +77,16 @@ describe("isEqualData", () => {
       const prev = [
         createObj(),
         createObj({
-          totalEquipCost: 11 as EquipCost,
           equippedIds: [1, 2, 0] as EquipmentId[],
+          totalEquipCost: 11 as EquipCost,
         }),
         createObj(),
       ]
       const next = [
         createObj(),
         createObj({
-          totalEquipCost: 12 as EquipCost,
           equippedIds: [1, 2, 0] as EquipmentId[],
+          totalEquipCost: 12 as EquipCost,
         }),
         createObj(),
       ]

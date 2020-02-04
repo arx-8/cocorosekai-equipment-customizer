@@ -45,12 +45,12 @@ export type Attribute =
   | "darkness"
 
 export const AttributeValues: Readonly<Record<Attribute, Attribute>> = {
-  void: "void",
+  darkness: "darkness",
   fire: "fire",
+  light: "light",
+  void: "void",
   water: "water",
   wind: "wind",
-  light: "light",
-  darkness: "darkness",
 }
 
 /** 装備のためのコスト */

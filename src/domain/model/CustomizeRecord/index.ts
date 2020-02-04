@@ -51,8 +51,15 @@ export const calcCustomizeRecord = (
     (acc, curr) => {
       return {
         // TODO totalSpecValue の計算ロジックの実装
-        totalSpecValue: 0,
+        mixedAttributes: toUniq([...acc.mixedAttributes, curr.attribute]),
+        mixedSpecialEffects: toUniq([
+          ...acc.mixedSpecialEffects.map((e) => e.rawText),
+          ...curr.specialEffects.map((e) => e.rawText),
+        ]).map((rawText) => {
+          return { rawText }
+        }),
         totalEquipCost: (acc.totalEquipCost + curr.equipCost) as EquipCost,
+        totalSpecValue: 0,
         totalStatuses: {
           hp: (acc.totalStatuses.hp + curr.statuses.hp) as HitPointNum,
           magicAtk: (acc.totalStatuses.magicAtk +
@@ -64,19 +71,13 @@ export const calcCustomizeRecord = (
           physicalDef: (acc.totalStatuses.physicalDef +
             curr.statuses.physicalDef) as PhysicalDefenseNum,
         },
-        mixedAttributes: toUniq([...acc.mixedAttributes, curr.attribute]),
-        mixedSpecialEffects: toUniq([
-          ...acc.mixedSpecialEffects.map((e) => e.rawText),
-          ...curr.specialEffects.map((e) => e.rawText),
-        ]).map((rawText) => {
-          return { rawText }
-        }),
       }
     },
     {
-      totalSpecValue: 0,
-      totalEquipCost: 0 as EquipCost,
       mixedAttributes: [] as Attribute[],
+      mixedSpecialEffects: [] as SpecialEffect[],
+      totalEquipCost: 0 as EquipCost,
+      totalSpecValue: 0,
       totalStatuses: {
         hp: 0 as HitPointNum,
         magicAtk: 0 as MagicAttackNum,
@@ -84,7 +85,6 @@ export const calcCustomizeRecord = (
         physicalAtk: 0 as PhysicalAttackNum,
         physicalDef: 0 as PhysicalDefenseNum,
       },
-      mixedSpecialEffects: [] as SpecialEffect[],
     }
   )
 }
