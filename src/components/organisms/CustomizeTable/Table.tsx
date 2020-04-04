@@ -192,7 +192,7 @@ export const Table: React.FC<OwnProps> = () => {
 
   // Use the state and functions returned from useTable to build your UI
   const {
-    flatColumns,
+    allColumns,
     getTableBodyProps,
     getTableProps,
     headerGroups,
@@ -296,7 +296,7 @@ export const Table: React.FC<OwnProps> = () => {
 
           {/* mid header */}
           <tr>
-            <th colSpan={flatColumns.length} css={recordsCounter}>
+            <th colSpan={allColumns.length} css={recordsCounter}>
               Hits: {rows.length} / {maxRowsCount}
             </th>
           </tr>
@@ -357,7 +357,7 @@ const recordsCounter = css`
 
   /* 
   ヘッダのスクロール固定のため、blockにしている
-  そのせいで、<th colSpan={flatColumns.length} が効かない
+  そのせいで、<th colSpan={allColumns.length} が効かない
   そのため、ここだけ特別扱い
    */
   border: unset !important;
