@@ -14,7 +14,7 @@ export const EquipmentImg: React.FC<OwnProps> = ({ equipment, imgCss }) => {
   return (
     <div css={root}>
       <img
-        css={imgCss}
+        css={[imgCssBase, imgCss]}
         src={equipment.imageUrl || NoImageImg}
         alt={equipment.rawName}
       />
@@ -25,6 +25,11 @@ export const EquipmentImg: React.FC<OwnProps> = ({ equipment, imgCss }) => {
 
 const root = css`
   position: relative;
+`
+
+const imgCssBase = css`
+  /** 画像なし代替テキストの文字は他で読める・レイアウト崩れになるため、十分小さい方がよい */
+  font-size: xx-small;
 `
 
 const plus = css`
