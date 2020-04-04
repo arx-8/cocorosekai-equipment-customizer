@@ -4700,6 +4700,531 @@ export const data5: Equipment[] = [
   {
     attribute: "void",
     enhancementsNum: 0,
+    equipCost: 12,
+    id: 897500,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/897500.png",
+    name: "絢のトリュフチョコ",
+    rawName: "絢のトリュフチョコ",
+    specialEffects: [
+      {
+        rawText: "物理・魔法ダメージが3%上昇する。",
+      },
+    ],
+    statuses: {
+      hp: 0,
+      magicAtk: 35,
+      magicDef: 0,
+      physicalAtk: 35,
+      physicalDef: 0,
+    },
+  },
+  {
+    attribute: "void",
+    enhancementsNum: 1,
+    equipCost: 23,
+    id: 897501,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/897500.png",
+    name: "絢のトリュフチョコ",
+    rawName: "絢のトリュフチョコ+",
+    specialEffects: [
+      {
+        rawText: "物理・魔法ダメージが10%上昇する。",
+      },
+    ],
+    statuses: {
+      hp: 0,
+      magicAtk: 80,
+      magicDef: 0,
+      physicalAtk: 80,
+      physicalDef: 0,
+    },
+  },
+  {
+    attribute: "void",
+    enhancementsNum: 2,
+    equipCost: 34,
+    id: 897502,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/897500.png",
+    name: "絢のトリュフチョコ",
+    rawName: "絢のトリュフチョコ++",
+    specialEffects: [
+      {
+        rawText: "物理・魔法ダメージが18%上昇する。",
+      },
+    ],
+    statuses: {
+      hp: 0,
+      magicAtk: 125,
+      magicDef: 0,
+      physicalAtk: 125,
+      physicalDef: 0,
+    },
+  },
+  {
+    attribute: "void",
+    enhancementsNum: 0,
+    equipCost: 15,
+    id: 897600,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/897600.png",
+    name: "千恵のマフィン",
+    rawName: "千恵のマフィン",
+    specialEffects: [
+      {
+        rawText: "味方全体のHPが毎ターン1%前後回復することがある。",
+      },
+    ],
+    statuses: {
+      hp: 0,
+      magicAtk: 36,
+      magicDef: 0,
+      physicalAtk: 36,
+      physicalDef: 0,
+    },
+  },
+  {
+    attribute: "void",
+    enhancementsNum: 1,
+    equipCost: 29,
+    id: 897601,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/897600.png",
+    name: "千恵のマフィン",
+    rawName: "千恵のマフィン+",
+    specialEffects: [
+      {
+        rawText: "味方全体のHPが毎ターン3%前後回復することがある。",
+      },
+    ],
+    statuses: {
+      hp: 0,
+      magicAtk: 87,
+      magicDef: 0,
+      physicalAtk: 87,
+      physicalDef: 0,
+    },
+  },
+  {
+    attribute: "void",
+    enhancementsNum: 2,
+    equipCost: 43,
+    id: 897602,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/897600.png",
+    name: "千恵のマフィン",
+    rawName: "千恵のマフィン++",
+    specialEffects: [
+      {
+        rawText: "味方全体のHPが毎ターン5%前後回復することがある。",
+      },
+    ],
+    statuses: {
+      hp: 0,
+      magicAtk: 138,
+      magicDef: 0,
+      physicalAtk: 138,
+      physicalDef: 0,
+    },
+  },
+  {
+    attribute: "void",
+    enhancementsNum: 0,
+    equipCost: 10,
+    id: 897700,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/897700.png",
+    name: "ひかりチョコケーキ",
+    rawName: "ひかりチョコケーキ",
+    specialEffects: [
+      {
+        rawText: "クリティカル・ブロック率が5%上昇する。",
+      },
+    ],
+    statuses: {
+      hp: 0,
+      magicAtk: 32,
+      magicDef: 0,
+      physicalAtk: 32,
+      physicalDef: 0,
+    },
+  },
+  {
+    attribute: "void",
+    enhancementsNum: 1,
+    equipCost: 20,
+    id: 897701,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/897700.png",
+    name: "ひかりチョコケーキ",
+    rawName: "ひかりチョコケーキ+",
+    specialEffects: [
+      {
+        rawText: "クリティカル・ブロック率が12%上昇する。",
+      },
+    ],
+    statuses: {
+      hp: 0,
+      magicAtk: 76,
+      magicDef: 0,
+      physicalAtk: 76,
+      physicalDef: 0,
+    },
+  },
+  {
+    attribute: "void",
+    enhancementsNum: 2,
+    equipCost: 30,
+    id: 897702,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/897700.png",
+    name: "ひかりチョコケーキ",
+    rawName: "ひかりチョコケーキ++",
+    specialEffects: [
+      {
+        rawText: "クリティカル・ブロック率が20%上昇する。",
+      },
+    ],
+    statuses: {
+      hp: 0,
+      magicAtk: 120,
+      magicDef: 0,
+      physicalAtk: 120,
+      physicalDef: 0,
+    },
+  },
+  {
+    attribute: "void",
+    enhancementsNum: 0,
+    equipCost: null,
+    id: 897800,
+    imageUrl: null,
+    name: "KUMAHO UCHO-X",
+    rawName: "KUMAHO UCHO-X",
+    specialEffects: [
+      {
+        rawText: "受ける物理・魔法攻撃ダメージを4%軽減する",
+      },
+    ],
+    statuses: {
+      hp: 0,
+      magicAtk: 50,
+      magicDef: 0,
+      physicalAtk: 50,
+      physicalDef: 0,
+    },
+  },
+  {
+    attribute: "void",
+    enhancementsNum: 1,
+    equipCost: 18,
+    id: 897801,
+    imageUrl: null,
+    name: "KUMAHO UCHO-X",
+    rawName: "KUMAHO UCHO-X+",
+    specialEffects: [
+      {
+        rawText: "受ける物理・魔法攻撃ダメージを8%軽減する",
+      },
+    ],
+    statuses: {
+      hp: 0,
+      magicAtk: 128,
+      magicDef: 0,
+      physicalAtk: 128,
+      physicalDef: 0,
+    },
+  },
+  {
+    attribute: "void",
+    enhancementsNum: 2,
+    equipCost: 36,
+    id: 897802,
+    imageUrl: null,
+    name: "KUMAHO UCHO-X",
+    rawName: "KUMAHO UCHO-X++",
+    specialEffects: [
+      {
+        rawText: "受ける物理・魔法攻撃ダメージを12%軽減する",
+      },
+    ],
+    statuses: {
+      hp: 0,
+      magicAtk: 206,
+      magicDef: 0,
+      physicalAtk: 206,
+      physicalDef: 0,
+    },
+  },
+  {
+    attribute: "wind",
+    enhancementsNum: 0,
+    equipCost: null,
+    id: 897900,
+    imageUrl: null,
+    name: "花連錫杖・恋長唄",
+    rawName: "花連錫杖・恋長唄",
+    specialEffects: [
+      {
+        rawText:
+          "[風属性専用]風属性パネルによる攻撃・回復ASの威力を5%強化する。",
+      },
+    ],
+    statuses: {
+      hp: 60,
+      magicAtk: 58,
+      magicDef: 0,
+      physicalAtk: 0,
+      physicalDef: 0,
+    },
+  },
+  {
+    attribute: "wind",
+    enhancementsNum: 1,
+    equipCost: 12,
+    id: 897901,
+    imageUrl: null,
+    name: "花連錫杖・恋長唄",
+    rawName: "花連錫杖・恋長唄+",
+    specialEffects: [
+      {
+        rawText:
+          "[風属性専用]風属性パネルによる攻撃・回復ASの威力を10%強化する。",
+      },
+    ],
+    statuses: {
+      hp: 127,
+      magicAtk: 110,
+      magicDef: 0,
+      physicalAtk: 0,
+      physicalDef: 0,
+    },
+  },
+  {
+    attribute: "wind",
+    enhancementsNum: 2,
+    equipCost: 21,
+    id: 897902,
+    imageUrl: null,
+    name: "花連錫杖・恋長唄",
+    rawName: "花連錫杖・恋長唄++",
+    specialEffects: [
+      {
+        rawText:
+          "[風属性専用]風属性パネルによる攻撃・回復ASの威力を15%強化する。",
+      },
+    ],
+    statuses: {
+      hp: 194,
+      magicAtk: 162,
+      magicDef: 0,
+      physicalAtk: 0,
+      physicalDef: 0,
+    },
+  },
+  {
+    attribute: "void",
+    enhancementsNum: 0,
+    equipCost: 12,
+    id: 898000,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/898000.png",
+    name: "珠連錫杖・花浅葱",
+    rawName: "珠連錫杖・花浅葱",
+    specialEffects: [
+      {
+        rawText: "風属性パネルによる攻撃・回復ASの威力を5%強化する。",
+      },
+    ],
+    statuses: {
+      hp: 50,
+      magicAtk: 46,
+      magicDef: 0,
+      physicalAtk: 0,
+      physicalDef: 0,
+    },
+  },
+  {
+    attribute: "void",
+    enhancementsNum: 1,
+    equipCost: 21,
+    id: 898001,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/898000.png",
+    name: "珠連錫杖・花浅葱",
+    rawName: "珠連錫杖・花浅葱+",
+    specialEffects: [
+      {
+        rawText: "風属性パネルによる攻撃・回復ASの威力を10%強化する。",
+      },
+    ],
+    statuses: {
+      hp: 104,
+      magicAtk: 93,
+      magicDef: 0,
+      physicalAtk: 0,
+      physicalDef: 0,
+    },
+  },
+  {
+    attribute: "void",
+    enhancementsNum: 2,
+    equipCost: 30,
+    id: 898002,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/898000.png",
+    name: "珠連錫杖・花浅葱",
+    rawName: "珠連錫杖・花浅葱++",
+    specialEffects: [
+      {
+        rawText: "風属性パネルによる攻撃・回復ASの威力を15%強化する。",
+      },
+    ],
+    statuses: {
+      hp: 158,
+      magicAtk: 140,
+      magicDef: 0,
+      physicalAtk: 0,
+      physicalDef: 0,
+    },
+  },
+  {
+    attribute: "wind",
+    enhancementsNum: 0,
+    equipCost: 13,
+    id: 898100,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/898100.png",
+    name: "プリニー千本ノック",
+    rawName: "プリニー千本ノック",
+    specialEffects: [
+      {
+        rawText: "[風属性専用]パネルブースト「攻撃UP」の効果が7%上昇する。",
+      },
+    ],
+    statuses: {
+      hp: 68,
+      magicAtk: 0,
+      magicDef: 0,
+      physicalAtk: 56,
+      physicalDef: 0,
+    },
+  },
+  {
+    attribute: "wind",
+    enhancementsNum: 1,
+    equipCost: 24,
+    id: 898101,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/898100.png",
+    name: "プリニー千本ノック",
+    rawName: "プリニー千本ノック+",
+    specialEffects: [
+      {
+        rawText: "[風属性専用]パネルブースト「攻撃UP」の効果が14%上昇する。",
+      },
+    ],
+    statuses: {
+      hp: 139,
+      magicAtk: 0,
+      magicDef: 0,
+      physicalAtk: 121,
+      physicalDef: 0,
+    },
+  },
+  {
+    attribute: "wind",
+    enhancementsNum: 2,
+    equipCost: 35,
+    id: 898102,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/898100.png",
+    name: "プリニー千本ノック",
+    rawName: "プリニー千本ノック++",
+    specialEffects: [
+      {
+        rawText: "[風属性専用]パネルブースト「攻撃UP」の効果が20%上昇する。",
+      },
+    ],
+    statuses: {
+      hp: 210,
+      magicAtk: 0,
+      magicDef: 0,
+      physicalAtk: 186,
+      physicalDef: 0,
+    },
+  },
+  {
+    attribute: "void",
+    enhancementsNum: 0,
+    equipCost: 11,
+    id: 898200,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/898200.png",
+    name: "風祭フーカセット",
+    rawName: "風祭フーカセット",
+    specialEffects: [
+      {
+        rawText: "パネルブースト「攻撃UP」の効果が5%上昇する。",
+      },
+    ],
+    statuses: {
+      hp: 54,
+      magicAtk: 0,
+      magicDef: 0,
+      physicalAtk: 41,
+      physicalDef: 0,
+    },
+  },
+  {
+    attribute: "void",
+    enhancementsNum: 1,
+    equipCost: 21,
+    id: 898201,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/898200.png",
+    name: "風祭フーカセット",
+    rawName: "風祭フーカセット+",
+    specialEffects: [
+      {
+        rawText: "パネルブースト「攻撃UP」の効果が10%上昇する。",
+      },
+    ],
+    statuses: {
+      hp: 105,
+      magicAtk: 0,
+      magicDef: 0,
+      physicalAtk: 89,
+      physicalDef: 0,
+    },
+  },
+  {
+    attribute: "void",
+    enhancementsNum: 2,
+    equipCost: 31,
+    id: 898202,
+    imageUrl:
+      "https://raw.githubusercontent.com/arx-8/cocorosekai-equipment-customizer/master/src/assets/equipments/898200.png",
+    name: "風祭フーカセット",
+    rawName: "風祭フーカセット++",
+    specialEffects: [
+      {
+        rawText: "パネルブースト「攻撃UP」の効果が15%上昇する。",
+      },
+    ],
+    statuses: {
+      hp: 156,
+      magicAtk: 0,
+      magicDef: 0,
+      physicalAtk: 137,
+      physicalDef: 0,
+    },
+  },
+  {
+    attribute: "void",
+    enhancementsNum: 0,
     equipCost: 10,
     id: 950000,
     imageUrl:
